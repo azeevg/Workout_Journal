@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:weightSum="1" android:background="#ffffff">
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp" android:layout_gravity="center_horizontal"
+            android:id="@+id/frameLayout" android:background="#ffa500">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="Тренировки"
+                android:id="@+id/textView" android:layout_gravity="left|center_vertical" android:textColor="#ffffff"
+                android:textSize="30dp" android:layout_marginLeft="20dp"/>
+        <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton" android:layout_gravity="right|center_vertical"
+
+                android:src="@drawable/ic_history_white_24dp_big" android:layout_marginRight="15dp"
+                android:background="#00ff2234"/>
+    </FrameLayout>
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#f6f9fb">
+
+
+        <ListView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/trainList" android:layout_gravity="right|bottom"
+                tools:listitem="@android:layout/simple_list_item_1" android:divider="#dedede"
+                android:dividerHeight="1dp" />
+        <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:background="@drawable/button"
+                android:src="@drawable/ic_add_white_24dp_xxhd"
+                android:id="@+id/button"
+                android:layout_gravity="right|bottom"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:textSize="50dp"
+                android:textColor="#ffffff"/>
+
+    </FrameLayout>
+</LinearLayout>
+

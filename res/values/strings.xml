@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Дневник тренировок</string>
+    <string name="main_window_title">Тренировки</string>
+
+    <string-array name="trainings">
+        <item>Тренировка 1</item>
+        <item>Тренировка 2</item>
+        <item>Тренировка 3</item>
+        <item>Тренировка 4</item>
+        <item>Тренировка 5</item>
+        <item>Тренировка 6</item>
+        <item>Тренировка 7</item>
+        <item>Тренировка 8</item>
+        <item>Тренировка 9</item>
+        <item>Тренировка 10</item>
+        <item>Тренировка 11</item>
+        <item>Тренировка 12</item>
+    </string-array>
+</resources>
