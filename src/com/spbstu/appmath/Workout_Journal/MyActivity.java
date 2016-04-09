@@ -2,9 +2,8 @@ package com.spbstu.appmath.Workout_Journal;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Switch;
+import android.view.View;
+import android.widget.*;
 
 public class MyActivity extends Activity {
     /**
@@ -16,8 +15,17 @@ public class MyActivity extends Activity {
         setContentView(R.layout.main);
         String[] trainings = getResources().getStringArray(R.array.trainings);
         ListView listView = (ListView) findViewById(R.id.trainList);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,	R.layout.list_item, trainings);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.list_item, trainings);
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                CheckedTextView textView = (CheckedTextView) view.findViewById(view.getId());
+                textView.setChecked(!textView.isChecked());
+//                for (View view : parent.get)
+            }
+        });
+
 //        setContentView(R.layout.not_main);
     }
 }
