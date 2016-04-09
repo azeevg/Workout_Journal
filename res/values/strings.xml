@@ -17,4 +17,21 @@
         <item>Тренировка 11</item>
         <item>Тренировка 12</item>
     </string-array>
+    
+    <string-array name="exercises">
+        <item>Упражнение 1</item>
+        <item>Упражнение 2</item>
+        <item>Упражнение 3</item>
+        <item>Упражнение 4</item>
+        <item>Упражнение 5</item>
+        <item>Упражнение 6</item>
+        <item>Упражнение 7</item>
+        <item>Упражнение 8</item>
+        <item>Упражнение 9</item>
+        <item>Упражнение 10</item>
+        <item>Упражнение 11</item>
+        <item>Упражнение 12</item>
+        <item>Упражнение 13</item>
+    </string-array>
+
 </resources>
