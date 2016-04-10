@@ -9,6 +9,10 @@
     <string name="n">0</string>
     <string name="workoutName">Тренировка</string>
     <string name="main_title">Тренировки</string>
+    <string name="dlg_workout_name">Название тренировки</string>
+    <string name="dlg_set">Подход</string>
+    <string name="dlg_kg">Килограмм</string>
+    <string name="dlg_reps">Раз</string>
 
     <string-array name="trainings">
         <item>Тренировка 1</item>

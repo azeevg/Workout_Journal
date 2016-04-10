@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" android:background="@color/light_grey">
+
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:background="#ffa500">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/dlg_workout_name"
+                android:id="@+id/textView2" android:layout_gravity="left|center"
+                android:elegantTextHeight="false" android:layout_marginTop="15dp" android:textSize="25dp"
+                android:layout_marginLeft="20dp" android:layout_marginRight="5dp" android:layout_marginBottom="15dp"
+        />
+    </FrameLayout>
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_gravity="center_horizontal">
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText" android:layout_gravity="center_horizontal" android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp" android:autoText="false" android:editable="false"
+                android:inputType="text" android:maxLength="50" android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp" android:nestedScrollingEnabled="true" android:hint="Введите название"/>
+    </FrameLayout>
+</LinearLayout>
