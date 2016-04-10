@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="0dp"
+        android:layout_margin="0dp"
+        android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+        >
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:layout_gravity="start|center_vertical"
+            >
+
+            <TextView
+                    android:id="@+id/historyItemName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
+                    android:textSize="20sp"
+                    android:ellipsize="start"
+                    android:text="@string/history_list_item_name"
+                    />
+            <TextView
+                    android:id="@+id/historyItemDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15dp"
+                    android:textSize="15sp"
+                    android:textAlignment="center"
+                    android:text="@string/history_list_item_date"
+                    />
+    </LinearLayout>
+
+    <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:id="@+id/checkBox"
+            android:layout_gravity="end|center_vertical"
+            android:button="@drawable/check_selector"
+            android:checked="false"
+            android:text="@string/empty_string"
+            />
+
+</FrameLayout>

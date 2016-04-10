@@ -43,9 +43,9 @@
 
         <ListView
                 android:layout_width="fill_parent"
-                android:layout_height="441dp"
+                android:layout_height="match_parent"
                 android:id="@+id/trainList"
-                android:layout_gravity="start|top"
+                android:layout_gravity="left|top"
                 tools:listitem="@layout/list_item"
                 android:divider="#dedede"
                 android:dividerHeight="1dp"/>
@@ -56,13 +56,24 @@
                 android:textAlignment="center"
                 android:background="@drawable/button_add"
                 android:src="@drawable/ic_add_white_24dp_xxhd"
-                android:id="@+id/button"
+                android:id="@+id/button_add"
                 android:layout_gravity="right|bottom"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="20dp"
                 android:textSize="50dp"
                 android:textColor="#ffffff"/>
-
+        <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:background="@drawable/button_delete"
+                android:src="@drawable/ic_delete_white_24dp_xxhdpi"
+                android:id="@+id/button_delete"
+                android:layout_gravity="left|bottom"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="20dp"
+                android:textSize="50dp"
+                android:textColor="#f00"/>
     </FrameLayout>
 </LinearLayout>
 

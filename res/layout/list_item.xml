@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--<CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"-->
+                 <!--android:id="@android:id/text1"-->
+                 <!--android:layout_width="match_parent"-->
+                 <!--android:layout_height="?android:attr/listPreferredItemHeightSmall"-->
+                 <!--android:textAppearance="?android:attr/textAppearanceListItemSmall"-->
+                 <!--android:gravity="center_vertical"-->
+                 <!--android:checkMark="@drawable/check_selector"-->
+
+                 <!--android:paddingStart="?android:attr/listPreferredItemPaddingStart"-->
+                 <!--android:paddingEnd="15dp"-->
+                 <!--android:textColor="#000000"-->
+
+        <!--/>-->
 <CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
                  android:id="@android:id/text1"
                  android:layout_width="match_parent"
@@ -6,9 +19,6 @@
                  android:textAppearance="?android:attr/textAppearanceListItemSmall"
                  android:gravity="center_vertical"
                  android:checkMark="@drawable/check_selector"
-
                  android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-                 android:paddingEnd="15dp"
-                 android:textColor="#000000"
-
-        />
+                 android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+                 android:textColor="#000000"/>
