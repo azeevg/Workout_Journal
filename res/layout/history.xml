@@ -32,9 +32,9 @@
 
 
         <ListView
+                android:id="@+id/historyListView"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/historyListView"
                 android:layout_gravity="center_horizontal|top"
                 tools:listitem="@layout/history_list_item"
                 android:divider="#dedede"

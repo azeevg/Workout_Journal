@@ -3,16 +3,14 @@
 <FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:padding="0dp"
-        android:layout_margin="0dp"
-        android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+        android:layout_height="60dp"
+        android:paddingStart="6dp"
+        android:paddingEnd="6dp"
         >
 
     <LinearLayout
             android:orientation="vertical"
-            android:layout_width="350dp"
+            android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:layout_gravity="start|center_vertical"
             >
@@ -21,9 +19,10 @@
                     android:id="@+id/historyItemName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="5dp"
+                    android:paddingStart="6dp"
+                    android:paddingEnd="6dp"
                     android:textSize="20sp"
+                    android:textColor="#000"
                     android:ellipsize="start"
                     android:text="@string/history_list_item_name"
                     />
@@ -31,21 +30,25 @@
                     android:id="@+id/historyItemDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="15dp"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="5dp"
                     android:textSize="15sp"
                     android:textAlignment="center"
+                    android:textColor="#000"
                     android:text="@string/history_list_item_date"
+
                     />
     </LinearLayout>
 
     <CheckBox
+            android:id="@+id/historyCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:id="@+id/checkBox"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
             android:layout_gravity="end|center_vertical"
             android:button="@drawable/check_selector"
             android:checked="false"
-            android:text="@string/empty_string"
             />
 
 </FrameLayout>
