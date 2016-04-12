@@ -23,7 +23,7 @@
 
         <ListView
                 android:layout_width="fill_parent"
-                android:layout_height="391dp"
+                android:layout_height="370dp"
                 android:id="@+id/trainList" android:layout_gravity="center_horizontal|top"
                 tools:listitem="@layout/list_item" android:divider="#dedede"
                 android:dividerHeight="1dp" />

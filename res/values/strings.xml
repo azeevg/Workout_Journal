@@ -6,8 +6,7 @@
     <string name="history_list_item_name">Название тренировки</string>
     <string name="history_list_item_date">дд.мм.гггг</string>
     <string name="empty_string"/>
-    <string name="n">0</string>
-    <string name="workoutName">Тренировка</string>
+    <string name="workout_name">Тренировка</string>
     <string name="main_title">Тренировки</string>
     <string name="dlg_workout_name">Название тренировки</string>
     <string name="dlg_set">Подход</string>

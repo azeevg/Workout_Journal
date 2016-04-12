@@ -31,15 +31,18 @@
             android:background="#f6f9fb">
 
 
-        <ListView
-                android:id="@+id/historyListView"
+        <ExpandableListView
+                android:id="@+id/historyExpandableListView"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal|top"
-                tools:listitem="@layout/history_list_item"
                 android:divider="#dedede"
+                android:childDivider="#dedede"
                 android:dividerHeight="1dp"
+                tools:listitem="@layout/history_detailed_list_item"
+                android:background="@color/light_grey1"
+                android:groupIndicator="@drawable/expandable_list_indicator"
+
                 />
     </FrameLayout>
 </LinearLayout>
-

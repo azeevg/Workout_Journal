@@ -29,11 +29,14 @@
 
 
         <ListView
+                android:id="@+id/trainList"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/trainList" android:layout_gravity="right|bottom"
-                tools:listitem="@layout/list_item" android:divider="#dedede"
-                android:dividerHeight="1dp" />
+                android:layout_height="match_parent"
+                android:layout_gravity="start|top"
+                tools:listitem="@layout/list_item"
+                android:divider="#dedede"
+                android:dividerHeight="1dp"/>
+
         <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -41,11 +44,11 @@
                 android:background="@drawable/button_add"
                 android:src="@drawable/ic_add_white_24dp_xxhd"
                 android:id="@+id/button"
-                android:layout_gravity="right|bottom"
-                android:layout_marginRight="20dp"
+                android:layout_gravity="end|bottom"
+                android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
-                android:textSize="50dp"
-                android:textColor="#ffffff"/>
+                android:textSize="50sp"
+                android:textColor="#fff"/>
 
     </FrameLayout>
 </LinearLayout>
