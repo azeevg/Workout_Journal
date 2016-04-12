@@ -38,12 +38,12 @@
 
     <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="#f6f9fb">
 
 
         <ListView
-                android:id="@+id/mainTrainList"
+                android:id="@+id/trainList"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="start|top"
@@ -64,6 +64,7 @@
                 android:textSize="50sp"
                 android:textColor="#fff"/>
 
+
         <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -76,6 +77,8 @@
                 android:layout_marginBottom="20dp"
                 android:textSize="50sp"
                 android:textColor="#f00"/>
+
     </FrameLayout>
+
 </LinearLayout>
 
