@@ -11,7 +11,7 @@
     <string name="main_title">Тренировки</string>
     <string name="dlg_workout_name">Название тренировки</string>
     <string name="dlg_set">Подход</string>
-    <string name="dlg_kg">Килограмм</string>
+    <string name="dlg_kg">Вес</string>
     <string name="dlg_reps">Раз</string>
 
     <string-array name="trainings">

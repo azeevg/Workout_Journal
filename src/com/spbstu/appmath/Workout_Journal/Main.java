@@ -19,7 +19,9 @@ public class Main extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.history_removing);
+        setContentView(R.layout.dialog_set_weight);
+
+        /*setContentView(R.layout.history_removing);
         ListView listView = (ListView) findViewById(R.id.historyListView);
         final ArrayList<HashMap<String, String>> historyItems = new ArrayList<>();
         HashMap<String, String> hm;
@@ -37,7 +39,7 @@ public class Main extends Activity {
                 new int[]{R.id.historyItemName, R.id.historyItemDate});
 
         listView.setAdapter(adapter);
-
+*/
 //        String[] trainings = getResources().getStringArray(R.array.exercises);
 
         /*String[] trainings = getResources().getStringArray(R.array.trainings);
