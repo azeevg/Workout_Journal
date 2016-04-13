@@ -12,6 +12,10 @@
     <string name="dlg_set">Подход</string>
     <string name="dlg_kg">Вес</string>
     <string name="dlg_reps">Раз</string>
+    <string name="reiterations">Повторений:</string>
+    <string name="kg">кг</string>
+    <string name="times">раз</string>
+    <string name="weight">Вес:</string>
 
     <string-array name="trainings">
         <item>Тренировка 1</item>

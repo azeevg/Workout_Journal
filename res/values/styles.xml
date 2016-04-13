@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="ListView" parent="@android:style/Widget.ListView">
-        <item name="android:background">@color/light_grey1</item>
+        <item name="android:background">@color/light_grey_1</item>
         <item name="android:cacheColorHint">@android:color/transparent</item>
         <item name="android:divider">@android:color/transparent</item>
         <item name="android:dividerHeight">0dp</item>
         <item name="android:listSelector">@drawable/list_item_selector</item>
     </style>
-    <color name="light_grey1">#f6f9fb</color>
-    <color name="light_grey2">#f2f5f7</color>
+    <color name="light_grey_1">#f6f9fb</color>
+    <color name="light_grey_2">#f2f5f7</color>
+    <color name="main_orange">#ffa500</color>
+    <color name="green">#02d600</color>
+    <color name="red">#f40000</color>
 </resources>
 

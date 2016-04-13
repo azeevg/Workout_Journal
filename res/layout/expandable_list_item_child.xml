@@ -1,4 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:paddingBottom="5dp"
+              android:paddingTop="5dp"
+              android:textColor="#000"
+              android:paddingStart="50dp"
+              android:background="@color/light_grey_2">
+
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/weight"
+            android:textSize="15sp"
+            android:textColor="#000"
+            />
+
+    <TextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewWeight"
+            android:hint="@string/kg"
+            android:layout_marginStart="5dp"
+            android:textSize="15sp"
+            android:textColor="#000"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/reiterations"
+            android:textSize="15sp"
+            android:layout_marginStart="30dp"
+            android:textColor="#000"
+
+            />
+
+
+    <TextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewReiterations"
+            android:hint="@string/times"
+            android:text="@string/empty_string"
+            android:layout_gravity="start"
+            android:layout_marginStart="5dp"
+            android:textSize="15sp"
+            android:textColor="#000"/>
+
+    <!--
+<?xml version="1.0" encoding="utf-8"?>
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
           android:id="@+id/text1"
           android:layout_width="match_parent"
@@ -6,6 +58,7 @@
           android:paddingBottom="5dp"
           android:paddingTop="5dp"
           android:textColor="#000"
-          android:paddingStart="70dp"
-          android:background="@color/light_grey2"
-        />
+          android:paddingStart="50dp"
+          android:background="@color/light_grey_2"
+        />-->
+</LinearLayout>
