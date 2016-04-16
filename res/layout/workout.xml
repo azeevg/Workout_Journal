@@ -11,7 +11,7 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:text="@string/workout_creation"
+                android:text="Название тренировки"
                 android:id="@+id/textView" android:layout_gravity="left|center_vertical" android:textColor="#ffffff"
                 android:textSize="30dp" android:layout_marginLeft="20dp"/>
     </FrameLayout>
@@ -25,21 +25,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/trainList" android:layout_gravity="center_horizontal|top"
-                tools:listitem="@layout/list_item_exercises" android:divider="#dedede"
+                tools:listitem="@layout/list_item_exercises_without_removing" android:divider="#dedede"
                 android:dividerHeight="1dp" android:choiceMode="singleChoice"/>
-        <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:background="@drawable/round_button"
-                android:src="@drawable/ic_add_white_24dp_xxhd"
-                android:id="@+id/button"
-                android:layout_gravity="right|bottom"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="20dp"
-                android:textSize="50dp"
-                android:textColor="#ffffff"/>
 
     </FrameLayout>
 </LinearLayout>
-

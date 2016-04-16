@@ -7,6 +7,8 @@
     <string name="history_list_item_date">дд.мм.гггг</string>
     <string name="empty_string"/>
     <string name="workout_name">Тренировка</string>
+    <string name="workout_creation">Создание тренировки</string>
+    <string name="exercise_name">Упражнение</string>
     <string name="main_title">Тренировки</string>
     <string name="dlg_workout_name">Введите название</string>
     <string name="dlg_set">Введите параметры</string>
@@ -40,12 +42,12 @@
     </string-array>
 
     <string-array name="trainings_part2">
-    <item>Тренировка 1</item>
-    <item>Тренировка 2</item>
-    <item>Тренировка 3</item>
-    <item>Тренировка 4</item>
-    <item>Тренировка 5</item>
-</string-array>
+        <item>Тренировка 1</item>
+        <item>Тренировка 2</item>
+        <item>Тренировка 3</item>
+        <item>Тренировка 4</item>
+        <item>Тренировка 5</item>
+    </string-array>
 
     <string-array name="exercises">
         <item>Упражнение 1</item>
