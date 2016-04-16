@@ -51,8 +51,7 @@
                 android:layout_gravity="start|bottom"
                 android:layout_marginStart="20dp"
                 android:layout_marginBottom="20dp"
-                android:textSize="50sp"
-                android:textColor="#f00"/>
+                android:textSize="50sp"/>
     </FrameLayout>
 </LinearLayout>
 

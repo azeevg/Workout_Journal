@@ -2,45 +2,65 @@ package com.spbstu.appmath.Workout_Journal;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.ExpandableListView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.SimpleExpandableListAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 
 public class Main extends Activity {
 
     public static final String NAME = "name";
     public static final String DATE = "date";
+    public static final String WEIGHT = "weight";
+    public static final String REITERATIONS = "reiterations";
+    final String[] exercises = new String[]{"Упражнение длинное название 1", "Упражнение покороче 2", "Упражнение 3", "Упражнение 4"};
+    final String[][] attributes = new String[][]{{"80", "7"}, {"80", "7"}, {"80", "6"}, {"80", "5"}};
+    final String[] weights = new String[]{"100", "110", "100", "100", "90"};
+    final String[] reiterations = new String[]{"6", "6", "5", "3", "2"};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.history_detailed);
+        setContentView(R.layout.workout_started);
 
-        final String[] groupsArray = new String[] {"Упражнение 1", "Упражнение 2", "Упражнение 3", "Упражнение 4"};
-        final String[] elements = new String[] {"80 кг 7 раз", "80 кг 7 раз", "80 кг 5 раз", "80 кг 4 раза"};
+        ListView listView = (ListView) findViewById(R.id.exercisesList);
+        final ArrayList<HashMap<String, String>> exercisesList = new ArrayList<>();
+        HashMap<String, String> hm;
+
+
+        for (int i = 0; i < 5; i++) {
+            hm = new HashMap<>();
+//            hm.put(WEIGHT, weights[i]);
+//            hm.put(REITERATIONS, reiterations[i]);
+            exercisesList.add(hm);
+        }
+
+        SimpleAdapter adapter = new SimpleAdapter(this, exercisesList,
+                R.layout.exercise_list_item, new String[]{},
+                new int[]{});
+
+        listView.setAdapter(adapter);
+        // // // // // //
+        /*setContentView(R.layout.history_detailed);
 
         Map<String, String> map;
 
         ArrayList<Map<String, String>> groupDataList = new ArrayList<>();
         // заполняем коллекцию групп из массива с названиями групп
 
-        for (String group : groupsArray) {
-            // заполняем список атрибутов для каждой группы
+        for (String group : exercises) {
             map = new HashMap<>();
-            map.put("groupName", group); // время года
+            map.put("groupName", group);
             groupDataList.add(map);
         }
 
         // список атрибутов групп для чтения
-        String groupFrom[] = new String[] { "groupName" };
+        String groupFrom[] = new String[]{"groupName"};
         // список ID view-элементов, в которые будет помещены атрибуты групп
-        int groupTo[] = new int[] { android.R.id.text1 };
+        int groupTo[] = new int[]{R.id.textViewWeight, R.id.textViewReiterations};
 
         // создаем общую коллекцию для коллекций элементов
         ArrayList<ArrayList<Map<String, String>>> сhildDataList = new ArrayList<>();
@@ -48,48 +68,26 @@ public class Main extends Activity {
         // в итоге получится сhildDataList = ArrayList<сhildDataItemList>
 
         // создаем коллекцию элементов для первой группы
-        ArrayList<Map<String, String>> сhildDataItemList = new ArrayList<>();
+        ArrayList<Map<String, String>> сhildDataItemList = null;
         // заполняем список атрибутов для каждого элемента
-        for (String month : elements) {
-            map = new HashMap<>();
-            map.put("monthName", month); // название месяца
-            сhildDataItemList.add(map);
-        }
-        // добавляем в коллекцию коллекций
-        сhildDataList.add(сhildDataItemList);
+        for (String exercise : exercises) {
+            сhildDataItemList = new ArrayList<>();
 
-        // создаем коллекцию элементов для второй группы
-        сhildDataItemList = new ArrayList<>();
-        for (String month : elements) {
-            map = new HashMap<>();
-            map.put("monthName", month);
-            сhildDataItemList.add(map);
+            for (String[] pair : attributes) {
+                map = new HashMap<>();
+                map.put(WEIGHT, pair[0]);
+                map.put(REITERATIONS, pair[1]);
+                сhildDataItemList.add(map);
+            }
+            // добавляем в коллекцию коллекций
+            сhildDataList.add(сhildDataItemList);
         }
-        сhildDataList.add(сhildDataItemList);
-
-        // создаем коллекцию элементов для третьей группы
-        сhildDataItemList = new ArrayList<>();
-        for (String month : elements) {
-            map = new HashMap<>();
-            map.put("monthName", month);
-            сhildDataItemList.add(map);
-        }
-        сhildDataList.add(сhildDataItemList);
-
-        // создаем коллекцию элементов для четвертой группы
-        сhildDataItemList = new ArrayList<>();
-        for (String month : elements) {
-            map = new HashMap<>();
-            map.put("monthName", month);
-            сhildDataItemList.add(map);
-        }
-        сhildDataList.add(сhildDataItemList);
 
         // список атрибутов элементов для чтения
-        String childFrom[] = new String[] { "monthName" };
+        String childFrom[] = new String[]{WEIGHT, REITERATIONS};
         // список ID view-элементов, в которые будет помещены атрибуты
         // элементов
-        int childTo[] = new int[] { R.id.text1 };
+        int childTo[] = new int[]{R.id.textViewWeight, R.id.textViewReiterations};
 
         SimpleExpandableListAdapter adapter = new SimpleExpandableListAdapter(
                 this, groupDataList,
@@ -98,7 +96,7 @@ public class Main extends Activity {
                 childFrom, childTo);
 
         ExpandableListView expandableListView = (ExpandableListView) findViewById(R.id.historyExpandableListView);
-        expandableListView.setAdapter(adapter);
+        expandableListView.setAdapter(adapter);*/
 
         //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //
         /*    setContentView(R.layout.history);

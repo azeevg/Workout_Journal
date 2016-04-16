@@ -8,10 +8,14 @@
     <string name="empty_string"/>
     <string name="workout_name">Тренировка</string>
     <string name="main_title">Тренировки</string>
-    <string name="dlg_workout_name">Название тренировки</string>
-    <string name="dlg_set">Подход</string>
+    <string name="dlg_workout_name">Введите название</string>
+    <string name="dlg_set">Введите параметры</string>
     <string name="dlg_kg">Вес</string>
-    <string name="dlg_reps">Раз</string>
+    <string name="dlg_reps">Повторения</string>
+    <string name="reiterations">Повторений:</string>
+    <string name="kg">кг</string>
+    <string name="times">раз</string>
+    <string name="weight">Вес:</string>
 
     <string-array name="trainings">
         <item>Тренировка 1</item>
