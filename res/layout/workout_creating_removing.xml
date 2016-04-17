@@ -31,14 +31,19 @@
             android:background="#f6f9fb">
 
 
-        <ListView
+        <ExpandableListView
+                android:id="@+id/workoutExpandableListView"
                 android:layout_width="fill_parent"
-                android:layout_height="371dp"
-                android:id="@+id/trainList"
+                android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal|top"
-                tools:listitem="@layout/list_item"
                 android:divider="#dedede"
-                android:dividerHeight="1dp"/>
+                android:childDivider="#dedede"
+                android:dividerHeight="1dp"
+                tools:listitem="@android:layout/simple_list_item_checked"
+                android:background="@color/light_grey_1"
+                android:groupIndicator="@drawable/expandable_list_indicator"
+
+                />
 
         <ImageButton
                 android:layout_width="wrap_content"
