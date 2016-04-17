@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:weightSum="1" android:background="#ffffff">
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp" android:layout_gravity="center_horizontal"
+            android:id="@+id/frameLayout" android:background="#ffa500">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="@string/exercise_name"
+                android:id="@+id/textView" android:layout_gravity="start|center_vertical" android:textColor="#ffffff"
+                android:textSize="30sp" android:layout_marginStart="20dp"/>
+    </FrameLayout>
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Информация об упражнении"
+            android:id="@+id/textView3" android:layout_gravity="center_horizontal" android:textColor="#000000"
+            android:textSize="20sp" android:layout_marginLeft="10dp" android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp" android:layout_marginBottom="10dp"/>
+</LinearLayout>
+

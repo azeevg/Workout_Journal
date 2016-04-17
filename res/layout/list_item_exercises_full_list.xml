@@ -17,7 +17,7 @@
             android:src="@drawable/ic_add_orange_36dp"
             android:id="@+id/button"
             android:layout_gravity="end|center"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="30dp"
             android:layout_marginBottom="0dp"
             android:textSize="30sp"
             android:textColor="#ffffff"/>
