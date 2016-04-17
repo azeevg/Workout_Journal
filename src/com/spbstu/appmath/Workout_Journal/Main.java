@@ -2,10 +2,9 @@ package com.spbstu.appmath.Workout_Journal;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ExpandableListView;
-import android.widget.SimpleExpandableListAdapter;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,17 +17,40 @@ public class Main extends Activity {
     public static final String DATE = "date";
     public static final String WEIGHT = "weight";
     public static final String INNER_LIST = "inner_list";
-    public static final String REITERATIONS = "reiterations";
+    public static final String REPS = "reps";
     final String[] exercises = new String[]{"Упражнение длинное название 1", "Упражнение покороче 2", "Упражнение 3", "Упражнение 4"};
     final String[][] attributes = new String[][]{{"80", "7"}, {"80", "7"}, {"80", "6"}, {"80", "5"}};
     final String[] weights = new String[]{"100", "110", "100", "100", "90"};
-    final String[] reiterations = new String[]{"6", "6", "5", "3", "2"};
+    final String[] reps = new String[]{"6", "6", "5", "3", "2"};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.workout_creating);
+
+       /* setContentView(R.layout.exercise_creating);
+
+        Map<String, String> setParameters;
+
+        ArrayList<Map<String, String>> setsList = new ArrayList<>();
+
+        for (String[] pair : attributes) {
+            setParameters = new HashMap<>();
+            setParameters.put(WEIGHT, pair[0]);
+            setParameters.put(REPS, pair[1]);
+            setsList.add(setParameters);
+        }
+
+        String from[] = new String[]{WEIGHT, REPS};
+        int to[] = new int[]{R.id.textViewWeight, R.id.textViewReiterations};
+
+        SimpleAdapter adapter = new SimpleAdapter(this, setsList, R.layout.sets_list_item, from, to);
+
+        ListView listView = (ListView) findViewById(R.id.setsList);
+        listView.setAdapter(adapter);*/
+
+
+/*        setContentView(R.layout.workout_creating);
         Map<String, String> map;
 
         ArrayList<Map<String, String>> groupDataList = new ArrayList<>();
@@ -51,14 +73,14 @@ public class Main extends Activity {
             for (String[] pair : attributes) {
                 map = new HashMap<>();
                 map.put(WEIGHT, pair[0]);
-                map.put(REITERATIONS, pair[1]);
+                map.put(REPS, pair[1]);
                 сhildDataItemList.add(map);
             }
 
             сhildDataList.add(сhildDataItemList);
         }
 
-        String childFrom[] = new String[]{WEIGHT, REITERATIONS};
+        String childFrom[] = new String[]{WEIGHT, REPS};
         int childTo[] = new int[]{R.id.textViewWeight, R.id.textViewReiterations};
 
         SimpleExpandableListAdapter adapter = new SimpleExpandableListAdapter(this,
@@ -67,7 +89,7 @@ public class Main extends Activity {
 
         ExpandableListView expandableListView = (ExpandableListView) findViewById(R.id.workoutExpandableListView);
 
-        expandableListView.setAdapter(adapter);
+        expandableListView.setAdapter(adapter);*/
 
       /*  setContentView(R.layout.workout_started);
 
@@ -79,7 +101,7 @@ public class Main extends Activity {
         for (int i = 0; i < 5; i++) {
             hm = new HashMap<>();
 //            hm.put(WEIGHT, weights[i]);
-//            hm.put(REITERATIONS, reiterations[i]);
+//            hm.put(REPS, reps[i]);
             exercisesList.add(hm);
         }
 
@@ -122,7 +144,7 @@ public class Main extends Activity {
             for (String[] pair : attributes) {
                 map = new HashMap<>();
                 map.put(WEIGHT, pair[0]);
-                map.put(REITERATIONS, pair[1]);
+                map.put(REPS, pair[1]);
                 сhildDataItemList.add(map);
             }
             // добавляем в коллекцию коллекций
@@ -130,7 +152,7 @@ public class Main extends Activity {
         }
 
         // список атрибутов элементов для чтения
-        String childFrom[] = new String[]{WEIGHT, REITERATIONS};
+        String childFrom[] = new String[]{WEIGHT, REPS};
         // список ID view-элементов, в которые будет помещены атрибуты
         // элементов
         int childTo[] = new int[]{R.id.textViewWeight, R.id.textViewReiterations};
@@ -179,5 +201,19 @@ public class Main extends Activity {
                 new String[]{NAME}, new int[]{R.id.listItem});
         listView.setAdapter(adapter);*/
 
+
+        setContentView(R.layout.main_removing);
+        String[] trainings = getResources().getStringArray(R.array.trainings);
+        HashMap<String, String> hm = null;
+        ArrayList<Map<String, String>> workouts = new ArrayList<>();
+        for (String workout : trainings) {
+            hm = new HashMap<>();
+            hm.put(NAME, workout);
+            workouts.add(hm);
+        }
+        ListView listView = (ListView) findViewById(R.id.trainList);
+        SimpleAdapter adapter = new SimpleAdapter(this, workouts, R.layout.list_item,
+                new String[]{NAME}, new int[]{R.id.listItem});
+        listView.setAdapter(adapter);
     }
 }
