@@ -2,11 +2,14 @@ package com.spbstu.appmath.Workout_Journal;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ExpandableListView;
+import android.widget.SimpleExpandableListAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 
 public class Main extends Activity {
@@ -14,6 +17,7 @@ public class Main extends Activity {
     public static final String NAME = "name";
     public static final String DATE = "date";
     public static final String WEIGHT = "weight";
+    public static final String INNER_LIST = "inner_list";
     public static final String REITERATIONS = "reiterations";
     final String[] exercises = new String[]{"Упражнение длинное название 1", "Упражнение покороче 2", "Упражнение 3", "Упражнение 4"};
     final String[][] attributes = new String[][]{{"80", "7"}, {"80", "7"}, {"80", "6"}, {"80", "5"}};
@@ -23,7 +27,49 @@ public class Main extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.workout_started);
+
+        setContentView(R.layout.workout_creating);
+        Map<String, String> map;
+
+        ArrayList<Map<String, String>> groupDataList = new ArrayList<>();
+
+        for (String group : exercises) {
+            map = new HashMap<>();
+            map.put(NAME, group);
+            groupDataList.add(map);
+        }
+
+        String groupFrom[] = new String[]{NAME};
+        int groupTo[] = new int[]{R.id.exerciseName};
+
+        ArrayList<ArrayList<Map<String, String>>> сhildDataList = new ArrayList<>();
+        ArrayList<Map<String, String>> сhildDataItemList = null;
+
+        for (String exercise : exercises) {
+            сhildDataItemList = new ArrayList<>();
+
+            for (String[] pair : attributes) {
+                map = new HashMap<>();
+                map.put(WEIGHT, pair[0]);
+                map.put(REITERATIONS, pair[1]);
+                сhildDataItemList.add(map);
+            }
+
+            сhildDataList.add(сhildDataItemList);
+        }
+
+        String childFrom[] = new String[]{WEIGHT, REITERATIONS};
+        int childTo[] = new int[]{R.id.textViewWeight, R.id.textViewReiterations};
+
+        SimpleExpandableListAdapter adapter = new SimpleExpandableListAdapter(this,
+                groupDataList, R.layout.expandable_list_item_removable, groupFrom, groupTo,
+                сhildDataList, R.layout.expandable_list_item_child_removable, childFrom, childTo);
+
+        ExpandableListView expandableListView = (ExpandableListView) findViewById(R.id.workoutExpandableListView);
+
+        expandableListView.setAdapter(adapter);
+
+      /*  setContentView(R.layout.workout_started);
 
         ListView listView = (ListView) findViewById(R.id.exercisesList);
         final ArrayList<HashMap<String, String>> exercisesList = new ArrayList<>();
@@ -41,7 +87,8 @@ public class Main extends Activity {
                 R.layout.exercise_list_item, new String[]{},
                 new int[]{});
 
-        listView.setAdapter(adapter);
+        listView.setAdapter(adapter);*/
+
         // // // // // //
         /*setContentView(R.layout.history_detailed);
 
@@ -98,7 +145,7 @@ public class Main extends Activity {
         expandableListView.setAdapter(adapter);*/
 
         //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //
-        /*    setContentView(R.layout.history);
+/*            setContentView(R.layout.history);
         ListView listView = (ListView) findViewById(R.id.historyListView);
         final ArrayList<HashMap<String, String>> historyItems = new ArrayList<>();
         HashMap<String, String> hm;
@@ -119,7 +166,7 @@ public class Main extends Activity {
 //        String[] trainings = getResources().getStringArray(R.array.exercises);
 
         /*setContentView(R.layout.workout_creating_removing);
-        String[] trainings = getResources().getStringArray(R.array.trainings);
+        String[] trainings = getResources().getStringArray(R.array.exercises);
         HashMap<String, String> hm = null;
         ArrayList<Map<String, String>> workouts = new ArrayList<>();
         for (String workout : trainings) {
