@@ -40,7 +40,7 @@
                 android:childDivider="#dedede"
                 android:dividerHeight="1dp"
                 tools:listitem="@layout/history_detailed_list_item"
-                android:background="@color/light_grey_1"
+                android:background="@color/light_gray_1"
                 android:groupIndicator="@drawable/expandable_list_indicator"
 
                 />
