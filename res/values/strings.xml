@@ -20,6 +20,7 @@
     <string name="kg">кг</string>
     <string name="times">раз</string>
     <string name="weight">Вес:</string>
+    <string name="help_title">Помощь</string>
 
     <string-array name="trainings">
         <item>Тренировка 1</item>
