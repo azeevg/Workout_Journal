@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.List;
+
 
 public class Main extends Activity {
 
@@ -17,12 +19,12 @@ public class Main extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.main);
-        final CopyOnWriteArrayList<Training> trainList = displayListView();
+        final List<Training> trainList = displayListView();
 
     }
 
-    private CopyOnWriteArrayList<Training> displayListView() {
-        final CopyOnWriteArrayList<Training> plannedTrains = PlannedTrains.getAll();
+    private List<Training> displayListView() {
+        final List<Training> plannedTrains = PlannedTrains.getAll();
         ListView listView = (ListView) findViewById(R.id.trainList);
 
         listView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);

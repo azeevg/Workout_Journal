@@ -8,14 +8,15 @@ import android.view.ViewGroup;
 import android.widget.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class MainListAdapter extends ArrayAdapter<Training> {
 
-    final private CopyOnWriteArrayList<Training> trainings;
+    final private List<Training> trainings;
     final ListView listView;
 
-    public MainListAdapter(Context context, int resource, CopyOnWriteArrayList<Training> trains, ListView listView) {
+    public MainListAdapter(Context context, int resource, List<Training> trains, final ListView listView) {
         super(context, resource, trains);
 //        this.trainings = new CopyOnWriteArrayList<>();
 //        this.trainings.addAll(trains);
@@ -59,9 +60,10 @@ public class MainListAdapter extends ArrayAdapter<Training> {
                         public void onClick(View v) {
                             for (Training t : trainings) {
                                 if (t.isChecked()) {
-                                    trainings.remove(t);
-                                    notifyDataSetChanged();
-                                    // TODO: 07.06.2016 DataBase: удаление из базы данных
+                                    if (PlannedTrains.deleteInstance(t)) {
+                                        trainings.remove(t);
+                                        notifyDataSetChanged();
+                                    }
                                 }
                             }
 
