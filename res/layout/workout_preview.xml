@@ -17,7 +17,7 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:text="@string/history_title"
+                android:text="@string/workout_name"
                 android:id="@+id/textView"
                 android:layout_gravity="left|center_vertical"
                 android:textColor="#ffffff"
@@ -32,7 +32,7 @@
 
 
         <ExpandableListView
-                android:id="@+id/historyExpandableListView"
+                android:id="@+id/previewExpandableListView"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal|top"
@@ -45,6 +45,16 @@
 
                 />
 
-
+        <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:background="@drawable/button_end"
+                android:src="@drawable/ic_arrow_forward_white_24dp"
+                android:id="@+id/finishButton"
+                android:layout_gravity="end|bottom"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:textSize="50sp"/>
     </FrameLayout>
 </LinearLayout>

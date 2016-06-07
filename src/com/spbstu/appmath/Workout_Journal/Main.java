@@ -2,13 +2,11 @@ package com.spbstu.appmath.Workout_Journal;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.ExpandableListView;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class Main extends Activity {
@@ -91,7 +89,7 @@ public class Main extends Activity {
 
         expandableListView.setAdapter(adapter);*/
 
-      /*  setContentView(R.layout.workout_started);
+      /*  setContentView(R.layout.workout_first_exercise);
 
         ListView listView = (ListView) findViewById(R.id.exercisesList);
         final ArrayList<HashMap<String, String>> exercisesList = new ArrayList<>();
@@ -112,7 +110,7 @@ public class Main extends Activity {
         listView.setAdapter(adapter);*/
 
         // // // // // //
-        /*setContentView(R.layout.history_detailed);
+    /*    setContentView(R.layout.workout_preview);
 
         Map<String, String> map;
 
@@ -121,12 +119,12 @@ public class Main extends Activity {
 
         for (String group : exercises) {
             map = new HashMap<>();
-            map.put("groupName", group);
+            map.put(NAME, group);
             groupDataList.add(map);
         }
 
         // список атрибутов групп для чтения
-        String groupFrom[] = new String[]{"groupName"};
+        String groupFrom[] = new String[]{NAME};
         // список ID view-элементов, в которые будет помещены атрибуты групп
         int groupTo[] = new int[]{R.id.textViewWeight, R.id.textViewReiterations};
 
@@ -163,28 +161,27 @@ public class Main extends Activity {
                 groupTo, сhildDataList, R.layout.expandable_list_item_child,
                 childFrom, childTo);
 
-        ExpandableListView expandableListView = (ExpandableListView) findViewById(R.id.historyExpandableListView);
-        expandableListView.setAdapter(adapter);*/
-
+        ExpandableListView expandableListView = (ExpandableListView) findViewById(R.id.previewExpandableListView);
+        expandableListView.setAdapter(adapter);
+*/
         //  //  //  //  //  //  //  //  //  //  //  //  //  //  //  //
-/*            setContentView(R.layout.history);
-        ListView listView = (ListView) findViewById(R.id.historyListView);
-        final ArrayList<HashMap<String, String>> historyItems = new ArrayList<>();
-        HashMap<String, String> hm;
+        setContentView(R.layout.main);
 
-        for (int i = 1; i < 10; i++) {
-            hm = new HashMap<>();
-            hm.put(NAME, "Название тренировки " + i);
-            hm.put(DATE, "1" + i + ".04.2016");
-            historyItems.add(hm);
-            System.out.println(hm);
-        }
+        final ArrayList<Training> plannedTrains = PlannedTrains.getAll();
+        ListView listView = (ListView) findViewById(R.id.trainList);
 
-        SimpleAdapter adapter = new SimpleAdapter(this, historyItems,
-                R.layout.history_list_item, new String[]{NAME, DATE},
-                new int[]{R.id.historyItemName, R.id.historyItemDate});
+        listView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
+        listView.setAdapter(new MainListAdapter(this, R.layout.list_item, plannedTrains, listView));
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getApplicationContext(),
+                        "Clicked on Row: " + position,
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
 
-        listView.setAdapter(adapter);*/
+
 //        String[] trainings = getResources().getStringArray(R.array.exercises);
 
         /*setContentView(R.layout.workout_creating_removing);
@@ -202,7 +199,7 @@ public class Main extends Activity {
         listView.setAdapter(adapter);*/
 
 
-        setContentView(R.layout.main_removing);
+       /* setContentView(R.layout.main_removing);
         String[] trainings = getResources().getStringArray(R.array.trainings);
         HashMap<String, String> hm = null;
         ArrayList<Map<String, String>> workouts = new ArrayList<>();
@@ -214,6 +211,6 @@ public class Main extends Activity {
         ListView listView = (ListView) findViewById(R.id.trainList);
         SimpleAdapter adapter = new SimpleAdapter(this, workouts, R.layout.list_item,
                 new String[]{NAME}, new int[]{R.id.listItem});
-        listView.setAdapter(adapter);
+        listView.setAdapter(adapter);*/
     }
 }

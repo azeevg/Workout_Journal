@@ -19,7 +19,6 @@
                 android:text="@string/dlg_set"
                 android:id="@+id/textView2"
                 android:layout_gravity="center"
-                android:elegantTextHeight="false"
                 android:textSize="30sp"
                 />
     </FrameLayout>
