@@ -8,16 +8,18 @@ import android.view.ViewGroup;
 import android.widget.*;
 
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class MainListAdapter extends ArrayAdapter<Training> {
 
-    final private ArrayList<Training> trainings;
+    final private CopyOnWriteArrayList<Training> trainings;
     final ListView listView;
 
-    public MainListAdapter(Context context, int resource, ArrayList<Training> trains, ListView listView) {
+    public MainListAdapter(Context context, int resource, CopyOnWriteArrayList<Training> trains, ListView listView) {
         super(context, resource, trains);
-        this.trainings = new ArrayList<>();
-        this.trainings.addAll(trains);
+//        this.trainings = new CopyOnWriteArrayList<>();
+//        this.trainings.addAll(trains);
+        this.trainings = trains;
         this.listView = listView;
     }
 
@@ -43,15 +45,28 @@ public class MainListAdapter extends ArrayAdapter<Training> {
 
             final View finalConvertView = convertView;
             holder.checked.setOnClickListener(new View.OnClickListener() {
+
                 public void onClick(View v) {
                     CheckBox cb = (CheckBox) v;
                     cb.setChecked(cb.isChecked());
                     Training training = (Training) cb.getTag();
                     training.setChecked(cb.isChecked());
 
-
                     final ImageButton button = (ImageButton) finalConvertView.getRootView().findViewById(R.id.button_delete);
                     button.setVisibility(View.VISIBLE);
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            for (Training t : trainings) {
+                                if (t.isChecked()) {
+                                    trainings.remove(t);
+                                    notifyDataSetChanged();
+                                    // TODO: 07.06.2016 DataBase: удаление из базы данных
+                                }
+                            }
+
+                        }
+                    });
 
                     if (cb.isChecked()) {
                         button.setVisibility(View.VISIBLE);

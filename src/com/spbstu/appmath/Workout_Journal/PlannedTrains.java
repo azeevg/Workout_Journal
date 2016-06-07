@@ -1,10 +1,10 @@
 package com.spbstu.appmath.Workout_Journal;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class PlannedTrains {
-    public static ArrayList<Training> getAll() {
-        final ArrayList<Training> plannedTrains = new ArrayList<>();
+    public static CopyOnWriteArrayList<Training> getAll() {
+        final CopyOnWriteArrayList<Training> plannedTrains = new CopyOnWriteArrayList<>();
 
         for (int i = 1; i < 10; i++) {
             Training training = new Training("Название тренировки " + i);
