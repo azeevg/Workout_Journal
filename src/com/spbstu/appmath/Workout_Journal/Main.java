@@ -1,6 +1,8 @@
 package com.spbstu.appmath.Workout_Journal;
 
 import android.app.Activity;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,15 +22,15 @@ public class Main extends Activity {
 
         setContentView(R.layout.main);
         final List<Training> trainList = displayListView();
-
     }
 
     private List<Training> displayListView() {
-        final List<Training> plannedTrains = PlannedTrains.getAll();
+        DBHelper db = new DBHelper(this);
+        final List<Training> plannedTrains = db.getAllPlannedTrainings();
         ListView listView = (ListView) findViewById(R.id.trainList);
 
         listView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
-        listView.setAdapter(new MainListAdapter(this, R.layout.list_item, plannedTrains, listView));
+        listView.setAdapter(new MainListAdapter(this, R.layout.list_item, plannedTrains, listView, db));
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

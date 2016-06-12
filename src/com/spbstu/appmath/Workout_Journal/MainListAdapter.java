@@ -15,13 +15,16 @@ public class MainListAdapter extends ArrayAdapter<Training> {
 
     final private List<Training> trainings;
     final ListView listView;
+    final DBHelper db;
 
-    public MainListAdapter(Context context, int resource, List<Training> trains, final ListView listView) {
+    public MainListAdapter(Context context, int resource, List<Training> trains,
+                           final ListView listView, final DBHelper db) {
         super(context, resource, trains);
 //        this.trainings = new CopyOnWriteArrayList<>();
 //        this.trainings.addAll(trains);
         this.trainings = trains;
         this.listView = listView;
+        this.db = db;
     }
 
     private class ViewHolder {
@@ -60,7 +63,7 @@ public class MainListAdapter extends ArrayAdapter<Training> {
                         public void onClick(View v) {
                             for (Training t : trainings) {
                                 if (t.isChecked()) {
-                                    if (PlannedTrains.deleteInstance(t)) {
+                                    if (db.deletePlannedTraining(t)) {
                                         trainings.remove(t);
                                         notifyDataSetChanged();
                                     }
