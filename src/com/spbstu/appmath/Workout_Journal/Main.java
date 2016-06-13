@@ -1,13 +1,13 @@
 package com.spbstu.appmath.Workout_Journal;
 
 import android.app.Activity;
+import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -21,6 +21,9 @@ public class Main extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.main);
+        //String p = this.getFilesDir().getPath() + "workout_journal.dblite";
+        //SQLiteDatabase db = SQLiteDatabase.openDatabase(p, null, SQLiteDatabase.OPEN_READONLY);
+        //Cursor res = db.query("exercises", null, null, null, null, null, null);
         final List<Training> trainList = displayListView();
     }
 
