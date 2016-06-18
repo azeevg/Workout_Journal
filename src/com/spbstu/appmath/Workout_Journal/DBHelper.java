@@ -28,8 +28,9 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
 
     public List<Training> getAllPlannedTrainings() {
+
         final List<Training> plannedTrains = new CopyOnWriteArrayList<>();
-        SQLiteDatabase db = this.getReadableDatabase();
+        /*SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM '" + DBContract.WorkoutsPlan.TABLE + "'", null);
         res.moveToFirst();
         while(!res.isAfterLast()) {
@@ -37,12 +38,20 @@ public class DBHelper extends SQLiteOpenHelper {
             plannedTrains.add(new Training(workoutName));
             res.moveToNext();
         }
-        res.close();
+        res.close();*/
+
+        // mock
+        for (int i = 1; i < 10; i++) {
+            Training training = new Training("Название тренировки " + i);
+            plannedTrains.add(training);
+        }
+        //
+
         return plannedTrains;
     }
 
     public boolean deletePlannedTraining(final Training training) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        /*SQLiteDatabase db = this.getWritableDatabase();
         if (training.date == null)
             db.execSQL("DELETE FROM " + DBContract.WorkoutsPlan.TABLE + " WHERE " +
                     DBContract.WorkoutsPlan.COLUMN_NAME + " = " + training.name);
@@ -50,6 +59,7 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("DELETE FROM " + DBContract.WorkoutsDone.TABLE + " WHERE " +
                     DBContract.WorkoutsDone.COLUMN_NAME + " = '" + training.name + "' AND " +
                     DBContract.WorkoutsDone.COLUMN_DATE + " = '" + training.date + "'");
-        return false;
+        return false;*/
+        return true;
     }
 }

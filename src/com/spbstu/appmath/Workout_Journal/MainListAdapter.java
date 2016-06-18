@@ -1,15 +1,15 @@
 package com.spbstu.appmath.Workout_Journal;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class MainListAdapter extends ArrayAdapter<Training> {
 
@@ -56,9 +56,9 @@ public class MainListAdapter extends ArrayAdapter<Training> {
                     Training training = (Training) cb.getTag();
                     training.setChecked(cb.isChecked());
 
-                    final ImageButton button = (ImageButton) finalConvertView.getRootView().findViewById(R.id.button_delete);
-                    button.setVisibility(View.VISIBLE);
-                    button.setOnClickListener(new View.OnClickListener() {
+                    final ImageButton deleteButton = (ImageButton) finalConvertView.getRootView().findViewById(R.id.button_delete);
+                    deleteButton.setVisibility(View.VISIBLE);
+                    deleteButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             for (Training t : trainings) {
@@ -69,12 +69,11 @@ public class MainListAdapter extends ArrayAdapter<Training> {
                                     }
                                 }
                             }
-
                         }
                     });
 
                     if (cb.isChecked()) {
-                        button.setVisibility(View.VISIBLE);
+                        deleteButton.setVisibility(View.VISIBLE);
 
                     } else {
                         boolean isAnyChecked = false;
@@ -85,7 +84,7 @@ public class MainListAdapter extends ArrayAdapter<Training> {
                             }
                         }
                         if (!isAnyChecked) {
-                            button.setVisibility(View.INVISIBLE);
+                            deleteButton.setVisibility(View.INVISIBLE);
                         }
                     }
                 }

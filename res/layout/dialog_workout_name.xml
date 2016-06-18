@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
-              android:layout_width="wrap_content"
+              android:layout_width="fill_parent"
               android:layout_height="wrap_content"
               android:background="@color/light_gray_1"
               android:weightSum="1"
               android:baselineAligned="false">
 
     <FrameLayout
-            android:layout_width="300dp"
+            android:layout_width="fill_parent"
             android:layout_height="60dp"
             android:background="#ffa500">
 
         <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/dlg_workout_name"
                 android:id="@+id/textView2"
-                android:layout_gravity="center"
+                android:gravity="center"
                 android:textSize="30sp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
                 />
     </FrameLayout>
 
@@ -45,40 +47,15 @@
             <EditText
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal"
+                    android:inputType="text"
                     android:id="@+id/editName"
                     style="@style/EditTextAppTheme"
-                    android:text="Это название тренировки"
-                    android:layout_gravity="top|center"
+                    android:hint="@string/training_name"
+                    android:textAlignment="center"
+                    android:gravity="center_horizontal"
                     />
         </LinearLayout>
 
-        <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginTop="20dp">
-
-            <Button
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content"
-                    android:text="OK"
-                    android:id="@+id/button2"
-                    android:layout_row="2"
-                    android:layout_column="0"
-                    android:layout_gravity="left|bottom"
-                    />
-
-            <Button
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content"
-                    android:text="Отмена"
-                    android:id="@+id/button3"
-                    android:layout_row="2"
-                    android:layout_column="1"
-                    android:layout_marginLeft="10dp"/>
-        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>
