@@ -1,12 +1,11 @@
 package com.spbstu.appmath.Workout_Journal;
 
-import android.app.Dialog;
 import android.content.Context;
+import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.*;
 
 import java.util.List;
@@ -69,24 +68,17 @@ public class MainListAdapter extends ArrayAdapter<Training> {
                                     }
                                 }
                             }
+                            checkSelections(deleteButton);
                         }
                     });
 
                     if (cb.isChecked()) {
                         deleteButton.setVisibility(View.VISIBLE);
-
                     } else {
-                        boolean isAnyChecked = false;
-                        for (Training t : trainings) {
-                            if (t.isChecked()) {
-                                isAnyChecked = true;
-                                break;
-                            }
-                        }
-                        if (!isAnyChecked) {
-                            deleteButton.setVisibility(View.INVISIBLE);
-                        }
+                        checkSelections(deleteButton);
                     }
+
+
                 }
             });
         } else {
@@ -99,5 +91,18 @@ public class MainListAdapter extends ArrayAdapter<Training> {
         holder.checked.setTag(training);
 
         return convertView;
+    }
+
+    private void checkSelections(final ImageButton deleteButton) {
+        boolean isAnyChecked = false;
+        for (Training t : trainings) {
+            if (t.isChecked()) {
+                isAnyChecked = true;
+                break;
+            }
+        }
+        if (!isAnyChecked) {
+            deleteButton.setVisibility(View.INVISIBLE);
+        }
     }
 }
