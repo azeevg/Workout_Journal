@@ -72,6 +72,15 @@ public class MainActivity extends Activity {
                 dialog.show();
             }
         });
+
+        final ImageButton historyButton = (ImageButton) findViewById(R.id.historyButton);
+        historyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private List<Training> displayListView() {

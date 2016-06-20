@@ -46,6 +46,10 @@ public class Training {
             return name;
         }
 
+        public TextView getDate() {
+            return date;
+        }
+
         public void setName(TextView name) {
             this.name = name;
         }

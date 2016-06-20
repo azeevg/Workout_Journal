@@ -17,7 +17,7 @@
             android:paddingEnd="5dp"
             android:layout_gravity="end|center_vertical"
             android:button="@drawable/check_selector"
-            android:checkBox="false"
+            android:checked="false"
     />
 
     <TextView

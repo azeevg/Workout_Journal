@@ -79,28 +79,50 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
 
     public List<Training> getAllPlannedTrainings() {
-        final List<Training> plannedTrains = new CopyOnWriteArrayList<>();
+        final List<Training> trainings = new CopyOnWriteArrayList<>();
         SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_PATH_NAME, null, SQLiteDatabase.OPEN_READONLY);
         Cursor res = db.rawQuery("SELECT * FROM '" + DBContract.WorkoutsPlan.TABLE + "'", null);
         res.moveToFirst();
         while(!res.isAfterLast()) {
-            String workoutName = res.getString(res.getColumnIndex(DBContract.WorkoutsPlan.COLUMN_NAME));
-            plannedTrains.add(new Training(workoutName));
+            String name = res.getString(res.getColumnIndex(DBContract.WorkoutsPlan.COLUMN_NAME));
+            trainings.add(new Training(name));
             res.moveToNext();
         }
         res.close();
-        return plannedTrains;
+        return trainings;
+    }
+
+    public List<Training> getAllDoneTrainings() {
+        final List<Training> trainings = new CopyOnWriteArrayList<>();
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_PATH_NAME, null, SQLiteDatabase.OPEN_READONLY);
+        Cursor res = db.rawQuery("SELECT * FROM '" + DBContract.WorkoutsDone.TABLE + "'", null);
+        res.moveToFirst();
+        while(!res.isAfterLast()) {
+            String name = res.getString(res.getColumnIndex(DBContract.WorkoutsDone.COLUMN_NAME));
+            String date = res.getString(res.getColumnIndex(DBContract.WorkoutsDone.COLUMN_DATE));
+            trainings.add(new Training(name, date));
+            res.moveToNext();
+        }
+        res.close();
+        return trainings;
     }
 
     public boolean deletePlannedTraining(final Training training) {
         SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_PATH_NAME, null, SQLiteDatabase.OPEN_READWRITE);
-        if (training.date == null)
+        if (training.date == null) {
             db.execSQL("DELETE FROM " + DBContract.WorkoutsPlan.TABLE + " WHERE " +
                     DBContract.WorkoutsPlan.COLUMN_NAME + " = " + training.name);
-        else
+        }
+        return false;
+    }
+
+    public boolean deleteDoneTraining(final Training training) {
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_PATH_NAME, null, SQLiteDatabase.OPEN_READWRITE);
+        if (training.date != null) {
             db.execSQL("DELETE FROM " + DBContract.WorkoutsDone.TABLE + " WHERE " +
                     DBContract.WorkoutsDone.COLUMN_NAME + " = '" + training.name + "' AND " +
                     DBContract.WorkoutsDone.COLUMN_DATE + " = '" + training.date + "'");
+        }
         return false;
     }
 }
