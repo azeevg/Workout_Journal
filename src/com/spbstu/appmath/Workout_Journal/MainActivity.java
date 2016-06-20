@@ -3,6 +3,7 @@ package com.spbstu.appmath.Workout_Journal;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,9 @@ import java.io.IOException;
 import java.util.List;
 
 
-public class Main extends Activity {
+public class MainActivity extends Activity {
+
+    private static final String EXTRA_MESSAGE = "com.spbstu.appmath.Workout_Journal";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,8 +54,9 @@ public class Main extends Activity {
                         .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                final EditText editText = (EditText) dialogView.findViewById(R.id.editName);
-                                Toast.makeText(getApplicationContext(), editText.getText().toString(), Toast.LENGTH_SHORT).show();
+                                /*final EditText editText = (EditText) dialogView.findViewById(R.id.editName);
+                                Toast.makeText(getApplicationContext(), editText.getText().toString(), Toast.LENGTH_SHORT).show();*/
+                                createNewTraining(dialogView);
                             }
                         });
                 builder.setCancelable(true);
@@ -80,6 +84,8 @@ public class Main extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // TODO: 19.06.2016 TrainingActivity
+                        
                 Toast.makeText(getApplicationContext(),
                         "Clicked on Row: " + position,
                         Toast.LENGTH_SHORT).show();
@@ -87,5 +93,12 @@ public class Main extends Activity {
         });
 
         return plannedTrains;
+    }
+
+    private void createNewTraining(final View view) {
+        final Intent intent = new Intent(this, TrainingCreatingActivity.class);
+        final EditText editText = (EditText) view.findViewById(R.id.editName);
+        intent.putExtra(EXTRA_MESSAGE, editText.getText().toString());
+        startActivity(intent);
     }
 }

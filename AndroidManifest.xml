@@ -6,12 +6,24 @@
     <uses-sdk android:minSdkVersion="22"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <application android:theme="@android:style/Theme.NoTitleBar">
-        <activity android:name=".Main"
+        <activity android:name=".MainActivity"
                   android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+
+        <activity android:name=".TrainingCreatingActivity"
+                  android:theme="@android:style/Theme.NoTitleBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                       android:value=".MainActivity"></meta-data>
+        </activity>
+
+        <activity android:name=".ExerciseChoosingActivity"
+                  android:theme="@android:style/Theme.NoTitleBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                       android:value=".TrainingCreatingActivity"></meta-data>
         </activity>
     </application>
 </manifest>

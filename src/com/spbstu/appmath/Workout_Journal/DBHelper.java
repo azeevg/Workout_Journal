@@ -23,7 +23,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private String DB_PATH_NAME = null;
     private final Context context;
 
-    public DBHelper(Context _context) {
+    public DBHelper(final Context _context) {
         super(_context, DB_NAME, null, DB_VERSION);
         this.context = _context;
         DB_PATH = context.getFilesDir().getPath() + "/";
@@ -32,13 +32,15 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void createDataBase() throws IOException {
         boolean dbExist = checkDataBase();
-        if(!dbExist){
+        if (!dbExist) {
             this.getReadableDatabase();
             try {
                 copyDataBase();
             } catch (IOException e) {
                 throw new Error("Error copying database");
             }
+        } else {
+            return;
         }
     }
 

@@ -1,20 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
-              android:weightSum="1" android:background="#ffffff">
+              android:weightSum="1"
+              android:background="#ffffff">
+
     <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="70dp" android:layout_gravity="center_horizontal"
-            android:id="@+id/frameLayout" android:background="#ffa500">
+            android:layout_height="70dp"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/frameLayout"
+            android:background="#ffa500">
+
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:text="@string/exercises_list"
-                android:id="@+id/textView" android:layout_gravity="left|center_vertical" android:textColor="#ffffff"
-                android:textSize="30dp" android:layout_marginLeft="20dp"/>
+                android:id="@+id/textView"
+                android:layout_gravity="left|center_vertical"
+                android:textColor="#ffffff"
+                android:textSize="30dp"
+                android:layout_marginLeft="20dp"/>
     </FrameLayout>
+
     <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -24,9 +34,12 @@
         <ListView
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/trainList" android:layout_gravity="center_horizontal|top"
-                tools:listitem="@layout/list_item_exercises_full_list" android:divider="#dedede"
-                android:dividerHeight="1dp" android:choiceMode="singleChoice"/>
+                android:id="@+id/trainList"
+                android:layout_gravity="center_horizontal|top"
+                tools:listitem="@layout/list_item_exercises_full_list"
+                android:divider="#dedede"
+                android:dividerHeight="1dp"
+                android:choiceMode="singleChoice"/>
 
     </FrameLayout>
 </LinearLayout>

@@ -53,7 +53,7 @@
                 android:paddingStart="5dp"
                 android:paddingEnd="5dp"
                 android:button="@drawable/check_selector"
-                android:checked="false"
+                android:checkBox="false"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 />

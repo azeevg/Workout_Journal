@@ -72,7 +72,7 @@
                 android:layout_height="fill_parent"
                 android:gravity="center_horizontal"
                 android:button="@drawable/check_selector"
-                android:checked="false"
+                android:checkBox="false"
                 />
 
     </LinearLayout>

@@ -4,7 +4,8 @@ package com.spbstu.appmath.Workout_Journal;
 import android.provider.BaseColumns;
 
 public class DBContract {
-    public DBContract() {}
+    public DBContract() {
+    }
 
     /* exercises table */
     public static abstract class Exercises implements BaseColumns {
