@@ -3,8 +3,13 @@ package com.spbstu.appmath.Workout_Journal;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -13,12 +18,56 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class DBHelper extends SQLiteOpenHelper {
 
     public static final int DB_VERSION = 1;
-    public static final String DB_NAME = "workout_journal.dblite";
+    public static final String DB_NAME = "workout_journal.db";
     private String DB_PATH = null;
+    private String DB_PATH_NAME = null;
+    private final Context context;
 
-    public DBHelper(Context context) {
-        super(context, context.getFilesDir().getPath()+DB_NAME, null, DB_VERSION);
-        DB_PATH = context.getFilesDir().getPath();
+    public DBHelper(Context _context) {
+        super(_context, DB_NAME, null, DB_VERSION);
+        this.context = _context;
+        DB_PATH = context.getFilesDir().getPath() + "/";
+        DB_PATH_NAME = DB_PATH + DB_NAME;
+    }
+
+    public void createDataBase() throws IOException {
+        boolean dbExist = checkDataBase();
+        if(!dbExist){
+            this.getReadableDatabase();
+            try {
+                copyDataBase();
+            } catch (IOException e) {
+                throw new Error("Error copying database");
+            }
+        }
+    }
+
+    private boolean checkDataBase(){
+        SQLiteDatabase checkDB = null;
+        try{
+            checkDB = SQLiteDatabase.openDatabase(DB_PATH_NAME, null, SQLiteDatabase.OPEN_READONLY);
+        }catch(SQLiteException e){
+            //database does't exist yet.
+        }
+        if(checkDB != null){
+            checkDB.close();
+        }
+        return checkDB != null;
+    }
+
+    private void copyDataBase() throws IOException {
+        InputStream input = context.getAssets().open(DB_NAME);
+        OutputStream output = new FileOutputStream(DB_PATH_NAME);
+
+        byte[] buffer = new byte[1024];
+        int length;
+        while ((length = input.read(buffer)) > 0){
+            output.write(buffer, 0, length);
+        }
+
+        output.flush();
+        output.close();
+        input.close();
     }
 
     @Override
@@ -29,7 +78,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public List<Training> getAllPlannedTrainings() {
         final List<Training> plannedTrains = new CopyOnWriteArrayList<>();
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_PATH_NAME, null, SQLiteDatabase.OPEN_READONLY);
         Cursor res = db.rawQuery("SELECT * FROM '" + DBContract.WorkoutsPlan.TABLE + "'", null);
         res.moveToFirst();
         while(!res.isAfterLast()) {
@@ -42,7 +91,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public boolean deletePlannedTraining(final Training training) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_PATH_NAME, null, SQLiteDatabase.OPEN_READWRITE);
         if (training.date == null)
             db.execSQL("DELETE FROM " + DBContract.WorkoutsPlan.TABLE + " WHERE " +
                     DBContract.WorkoutsPlan.COLUMN_NAME + " = " + training.name);

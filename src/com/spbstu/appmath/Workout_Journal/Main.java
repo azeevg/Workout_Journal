@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -21,9 +22,15 @@ public class Main extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.main);
-        //String p = this.getFilesDir().getPath() + "workout_journal.dblite";
-        //SQLiteDatabase db = SQLiteDatabase.openDatabase(p, null, SQLiteDatabase.OPEN_READONLY);
-        //Cursor res = db.query("exercises", null, null, null, null, null, null);
+
+        // create db in app's folder if not exist
+        DBHelper dbHelper = new DBHelper(this);
+        try {
+            dbHelper.createDataBase();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         final List<Training> trainList = displayListView();
     }
 
