@@ -15,7 +15,7 @@
             android:textAlignment="center"
             android:background="@drawable/round_button_small"
             android:src="@drawable/ic_add_orange_36dp"
-            android:id="@+id/button"
+            android:id="@+id/button_add"
             android:layout_gravity="end|center"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="0dp"

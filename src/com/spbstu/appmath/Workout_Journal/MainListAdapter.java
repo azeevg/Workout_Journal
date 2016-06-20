@@ -1,15 +1,14 @@
 package com.spbstu.appmath.Workout_Journal;
 
 import android.content.Context;
+import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class MainListAdapter extends ArrayAdapter<Training> {
 
@@ -56,9 +55,9 @@ public class MainListAdapter extends ArrayAdapter<Training> {
                     Training training = (Training) cb.getTag();
                     training.setChecked(cb.isChecked());
 
-                    final ImageButton button = (ImageButton) finalConvertView.getRootView().findViewById(R.id.button_delete);
-                    button.setVisibility(View.VISIBLE);
-                    button.setOnClickListener(new View.OnClickListener() {
+                    final ImageButton deleteButton = (ImageButton) finalConvertView.getRootView().findViewById(R.id.button_delete);
+                    deleteButton.setVisibility(View.VISIBLE);
+                    deleteButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             for (Training t : trainings) {
@@ -69,25 +68,17 @@ public class MainListAdapter extends ArrayAdapter<Training> {
                                     }
                                 }
                             }
-
+                            checkSelections(deleteButton);
                         }
                     });
 
                     if (cb.isChecked()) {
-                        button.setVisibility(View.VISIBLE);
-
+                        deleteButton.setVisibility(View.VISIBLE);
                     } else {
-                        boolean isAnyChecked = false;
-                        for (Training t : trainings) {
-                            if (t.isChecked()) {
-                                isAnyChecked = true;
-                                break;
-                            }
-                        }
-                        if (!isAnyChecked) {
-                            button.setVisibility(View.INVISIBLE);
-                        }
+                        checkSelections(deleteButton);
                     }
+
+
                 }
             });
         } else {
@@ -100,5 +91,18 @@ public class MainListAdapter extends ArrayAdapter<Training> {
         holder.checked.setTag(training);
 
         return convertView;
+    }
+
+    private void checkSelections(final ImageButton deleteButton) {
+        boolean isAnyChecked = false;
+        for (Training t : trainings) {
+            if (t.isChecked()) {
+                isAnyChecked = true;
+                break;
+            }
+        }
+        if (!isAnyChecked) {
+            deleteButton.setVisibility(View.INVISIBLE);
+        }
     }
 }
