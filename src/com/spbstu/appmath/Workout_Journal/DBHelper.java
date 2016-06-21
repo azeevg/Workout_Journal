@@ -33,14 +33,12 @@ public class DBHelper extends SQLiteOpenHelper {
     public void createDataBase() throws IOException {
         boolean dbExist = checkDataBase();
         if (!dbExist) {
-            this.getReadableDatabase();
+            //this.getReadableDatabase();
             try {
                 copyDataBase();
             } catch (IOException e) {
                 throw new Error("Error copying database");
             }
-        } else {
-            return;
         }
     }
 
@@ -110,19 +108,25 @@ public class DBHelper extends SQLiteOpenHelper {
     public boolean deletePlannedTraining(final Training training) {
         SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_PATH_NAME, null, SQLiteDatabase.OPEN_READWRITE);
         if (training.date == null) {
-            db.execSQL("DELETE FROM " + DBContract.WorkoutsPlan.TABLE + " WHERE " +
-                    DBContract.WorkoutsPlan.COLUMN_NAME + " = " + training.name);
+            db.delete(DBContract.WorkoutsPlan.TABLE,
+                    DBContract.WorkoutsPlan.COLUMN_NAME + " = '" + training.name + "'", null);
+            db.close();
+            return true;
         }
+        db.close();
         return false;
     }
 
     public boolean deleteDoneTraining(final Training training) {
         SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_PATH_NAME, null, SQLiteDatabase.OPEN_READWRITE);
         if (training.date != null) {
-            db.execSQL("DELETE FROM " + DBContract.WorkoutsDone.TABLE + " WHERE " +
+            db.delete(DBContract.WorkoutsDone.TABLE,
                     DBContract.WorkoutsDone.COLUMN_NAME + " = '" + training.name + "' AND " +
-                    DBContract.WorkoutsDone.COLUMN_DATE + " = '" + training.date + "'");
+                    DBContract.WorkoutsDone.COLUMN_DATE + " = '" + training.date + "'", null);
+            db.close();
+            return true;
         }
+        db.close();
         return false;
     }
 }
