@@ -107,10 +107,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public boolean deletePlannedTraining(final Training training) {
         SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_PATH_NAME, null, SQLiteDatabase.OPEN_READWRITE);
-        //SQLiteDatabase db = this.getWritableDatabase();
         if (training.date == null) {
-            db.execSQL("DELETE FROM '" + DBContract.WorkoutsPlan.TABLE + "' WHERE '" +
-                    DBContract.WorkoutsPlan.COLUMN_NAME + "' = '" + training.name + "'");
+            db.delete(DBContract.WorkoutsPlan.TABLE,
+                    DBContract.WorkoutsPlan.COLUMN_NAME + " = '" + training.name + "'", null);
             db.close();
             return true;
         }
@@ -121,9 +120,9 @@ public class DBHelper extends SQLiteOpenHelper {
     public boolean deleteDoneTraining(final Training training) {
         SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_PATH_NAME, null, SQLiteDatabase.OPEN_READWRITE);
         if (training.date != null) {
-            db.execSQL("DELETE FROM '" + DBContract.WorkoutsDone.TABLE + "' WHERE '" +
-                    DBContract.WorkoutsDone.COLUMN_NAME + "' = '" + training.name + "' AND '" +
-                    DBContract.WorkoutsDone.COLUMN_DATE + "' = '" + training.date + "'");
+            db.delete(DBContract.WorkoutsDone.TABLE,
+                    DBContract.WorkoutsDone.COLUMN_NAME + " = '" + training.name + "' AND " +
+                    DBContract.WorkoutsDone.COLUMN_DATE + " = '" + training.date + "'", null);
             db.close();
             return true;
         }
