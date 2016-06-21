@@ -16,20 +16,25 @@
 
         <activity android:name=".TrainingCreatingActivity"
                   android:theme="@android:style/Theme.NoTitleBar">
-            <meta-data android:name="android.support.PARENT_ACTIVITY"
-                       android:value=".MainActivity"></meta-data>
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".MainActivity"/>
         </activity>
 
         <activity android:name=".HistoryActivity"
                   android:theme="@android:style/Theme.NoTitleBar">
-            <meta-data android:name="android.support.PARENT_ACTIVITY"
-                       android:value=".MainActivity"></meta-data>
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".MainActivity"/>
         </activity>
 
         <activity android:name=".ExerciseChoosingActivity"
                   android:theme="@android:style/Theme.NoTitleBar">
-            <meta-data android:name="android.support.PARENT_ACTIVITY"
-                       android:value=".TrainingCreatingActivity"></meta-data>
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".TrainingCreatingActivity"/>
         </activity>
+
+
     </application>
 </manifest>

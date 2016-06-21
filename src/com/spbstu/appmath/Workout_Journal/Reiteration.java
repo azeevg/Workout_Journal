@@ -42,6 +42,26 @@ public class Reiteration {
         public CheckBox getCheckBox() {
             return checkBox;
         }
+
+        public void setCheckBox(CheckBox checkBox) {
+            this.checkBox = checkBox;
+        }
+
+        public TextView getTimes() {
+            return times;
+        }
+
+        public void setTimes(TextView times) {
+            this.times = times;
+        }
+
+        public TextView getWeight() {
+            return weight;
+        }
+
+        public void setWeight(TextView weight) {
+            this.weight = weight;
+        }
     }
 
     public Reiteration(final Exercise exercise, final int weight, final int times) {

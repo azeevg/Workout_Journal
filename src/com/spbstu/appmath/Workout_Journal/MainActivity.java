@@ -16,7 +16,7 @@ import java.util.List;
 
 public class MainActivity extends Activity {
 
-    private static final String EXTRA_MESSAGE = "com.spbstu.appmath.Workout_Journal";
+    public static final String EXTRA_MESSAGE = "com.spbstu.appmath.Workout_Journal";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

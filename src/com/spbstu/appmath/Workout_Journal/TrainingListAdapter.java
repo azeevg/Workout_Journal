@@ -177,9 +177,17 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
                 }
             });
 
+        } else {
+            holder = (Reiteration.ViewHolder) convertView.getTag();
         }
 
-        // TODO: 20.06.2016 HOLDERS
+        final Reiteration reiteration = groups.get(groupPosition).get(childPosition);
+        holder.getWeight().setText(reiteration.getWeight());
+        holder.getTimes().setText(reiteration.getTimes());
+        holder.getCheckBox().setChecked(reiteration.isChecked());
+        holder.getCheckBox().setTag(reiteration);
+
+
         return convertView;
     }
 
@@ -198,7 +206,6 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
             }
         }
         deleteButton.setVisibility(View.INVISIBLE);
-
     }
 
     private int areSame(List<Reiteration> list) {
