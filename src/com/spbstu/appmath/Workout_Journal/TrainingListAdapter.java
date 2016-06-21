@@ -178,6 +178,8 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
             });
 
         }
+
+        // TODO: 20.06.2016 HOLDERS
         return convertView;
     }
 
@@ -191,11 +193,12 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
         for (List<Reiteration> reiterationList : groups) {
             for (Reiteration r : reiterationList) {
                 if (r.isChecked()) {
-                    deleteButton.setVisibility(View.INVISIBLE);
-                    break;
+                    return;
                 }
             }
         }
+        deleteButton.setVisibility(View.INVISIBLE);
+
     }
 
     private int areSame(List<Reiteration> list) {

@@ -89,9 +89,10 @@ public class HistoryListAdapter extends ArrayAdapter<Training> {
     private void checkSelections(final ImageButton deleteButton) {
         for (Training t : trainings) {
             if (t.isChecked()) {
-                deleteButton.setVisibility(View.INVISIBLE);
-                break;
+                return;
             }
         }
+        deleteButton.setVisibility(View.INVISIBLE);
+
     }
 }
