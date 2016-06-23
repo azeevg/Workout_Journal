@@ -18,6 +18,10 @@ public class Exercise {
         this.isChecked = checked;
     }
 
+    public ViewHolder newViewHolder(final TextView name) {
+        return new ViewHolder(name, null, null);
+    }
+
     class ViewHolder {
         TextView name;
         TextView description;
@@ -32,6 +36,10 @@ public class Exercise {
 
         public View getCheckBox() {
             return checkBox;
+        }
+
+        public TextView getName() {
+            return name;
         }
     }
 

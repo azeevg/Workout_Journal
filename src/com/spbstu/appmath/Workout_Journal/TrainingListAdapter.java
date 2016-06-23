@@ -111,6 +111,8 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
                     }
                 }
             });
+        } else {
+            holder = (Exercise.ViewHolder) convertView.getTag();
         }
 
         return convertView;
