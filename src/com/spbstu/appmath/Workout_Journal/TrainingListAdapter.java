@@ -23,18 +23,6 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
         this.listView = listView;
         this.isRemovable = isRemovable;
         this.exercises = TrainingPreviewActivity.getExerciseList(groups);
-
-        System.out.println("Training list adapter");
-
-        for (List<Reiteration> reiterations : groups) {
-            for (Reiteration reiteration : reiterations) {
-                System.out.println(reiteration);
-            }
-        }
-
-        for (Exercise exercise : exercises) {
-            System.out.println(exercise.getName());
-        }
     }
 
     @Override

@@ -16,8 +16,11 @@ public class TrainingPreviewActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.workout_preview);
 
+        final Bundle extras = getIntent().getExtras();
+        final int id = extras.getInt(MainActivity.TRAINING_ID);
+
         try {
-            displayExpandableList();
+            displayExpandableList(id);
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
@@ -25,7 +28,7 @@ public class TrainingPreviewActivity extends Activity {
         }
     }
 
-    private List<List<Reiteration>> displayExpandableList() throws InstantiationException, IllegalAccessException {
+    private List<List<Reiteration>> displayExpandableList(final int id) throws InstantiationException, IllegalAccessException {
         // TODO: 25.06.2016 DATABASE: вытащить из БД все подходы
         final List<Reiteration> reiterationList = new ArrayList<>();
         reiterationList.add(new Reiteration(new Exercise("Упражнение 1", 1), 50, 4));
