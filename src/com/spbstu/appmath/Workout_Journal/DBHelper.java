@@ -4,8 +4,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
-import android.database.sqlite.SQLiteOpenHelper;
-
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,26 +12,21 @@ import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 
+public class DBHelper {
 
-public class DBHelper extends SQLiteOpenHelper {
-
-    public static final int DB_VERSION = 1;
     public static final String DB_NAME = "workout_journal.db";
-    private String DB_PATH = null;
     private String DB_PATH_NAME = null;
     private final Context context;
 
     public DBHelper(final Context _context) {
-        super(_context, DB_NAME, null, DB_VERSION);
         this.context = _context;
-        DB_PATH = context.getFilesDir().getPath() + "/";
+        String DB_PATH = context.getFilesDir().getPath() + "/";
         DB_PATH_NAME = DB_PATH + DB_NAME;
     }
 
     public void createDataBase() throws IOException {
         boolean dbExist = checkDataBase();
         if (!dbExist) {
-            //this.getReadableDatabase();
             try {
                 copyDataBase();
             } catch (IOException e) {
@@ -71,16 +64,10 @@ public class DBHelper extends SQLiteOpenHelper {
         input.close();
     }
 
-    @Override
-    public void onCreate(SQLiteDatabase db) {}
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
-
     public List<Training> getAllPlannedTrainings() {
         final List<Training> trainings = new CopyOnWriteArrayList<>();
         SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_PATH_NAME, null, SQLiteDatabase.OPEN_READONLY);
-        Cursor res = db.rawQuery("SELECT * FROM '" + DBContract.WorkoutsPlan.TABLE + "'", null);
+        Cursor res = db.rawQuery("SELECT * FROM " + DBContract.WorkoutsPlan.TABLE, null);
         res.moveToFirst();
         while(!res.isAfterLast()) {
             String name = res.getString(res.getColumnIndex(DBContract.WorkoutsPlan.COLUMN_NAME));
@@ -94,7 +81,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public List<Training> getAllDoneTrainings() {
         final List<Training> trainings = new CopyOnWriteArrayList<>();
         SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_PATH_NAME, null, SQLiteDatabase.OPEN_READONLY);
-        Cursor res = db.rawQuery("SELECT * FROM '" + DBContract.WorkoutsDone.TABLE + "'", null);
+        Cursor res = db.rawQuery("SELECT * FROM " + DBContract.WorkoutsDone.TABLE, null);
         res.moveToFirst();
         while(!res.isAfterLast()) {
             String name = res.getString(res.getColumnIndex(DBContract.WorkoutsDone.COLUMN_NAME));
@@ -134,12 +121,14 @@ public class DBHelper extends SQLiteOpenHelper {
     public List<Exercise> getExercises() {
         List<Exercise> exercises = new ArrayList<>();
         SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_PATH_NAME, null, SQLiteDatabase.OPEN_READONLY);
-        Cursor res = db.query(DBContract.Exercises.TABLE, null, null, null, null, null, null);
+        Cursor res = db.query(DBContract.Exercises.TABLE,
+                new String[]{DBContract.Exercises.COLUMN_NAME},
+                null, null, null, null, null);
         res.moveToFirst();
         while(!res.isAfterLast()) {
             String name = res.getString(res.getColumnIndex(DBContract.Exercises.COLUMN_NAME));
-            String description = res.getString(res.getColumnIndex(DBContract.Exercises.COLUMN_DESCRIPTION));
-            exercises.add(new Exercise(name, description, false));
+            //String description = res.getString(res.getColumnIndex(DBContract.Exercises.COLUMN_DESCRIPTION));
+            exercises.add(new Exercise(name, /*description, */false));
             res.moveToNext();
         }
         res.close();
@@ -154,7 +143,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 null, null, null, null);
         res.moveToFirst();
         String description = res.getString(res.getColumnIndex(DBContract.Exercises.COLUMN_DESCRIPTION));
-        assert(res.isAfterLast());
         res.close();
         return description;
     }

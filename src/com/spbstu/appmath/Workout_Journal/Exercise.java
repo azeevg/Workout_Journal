@@ -6,13 +6,13 @@ import android.widget.TextView;
 
 public class Exercise {
     private final String name;
-    private final String description;
+    //private final String description;
     private boolean isChecked;
     private int id;
 
     public Exercise() {
         this.name = null;
-        this.description = null;
+        //this.description = null;
     }
 
     public Exercise(final String name) {
@@ -82,15 +82,15 @@ public class Exercise {
     }
 
 
-    public Exercise(final String name, final String description, final boolean isChecked) {
-        this.description = description;
+    public Exercise(final String name, /*final String description, */final boolean isChecked) {
+        //this.description = description;
         this.name = name;
         this.isChecked = isChecked;
     }
 
-    public String getDescription() {
+    /*public String getDescription() {
         return description;
-    }
+    }*/
 
     public String getName() {
         return name;

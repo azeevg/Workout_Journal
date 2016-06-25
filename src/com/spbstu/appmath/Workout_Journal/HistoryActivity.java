@@ -18,10 +18,10 @@ public class HistoryActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.history);
-        final List<Training> trainList = displayHistoryTrainings();
+        displayHistoryTrainings();
     }
 
-    private List<Training> displayHistoryTrainings() {
+    private void displayHistoryTrainings() {
         DBHelper db = new DBHelper(this);
         final List<Training> historyTrains = db.getAllDoneTrainings();
         ListView listView = (ListView) findViewById(R.id.historyListView);
@@ -38,6 +38,6 @@ public class HistoryActivity extends Activity {
                         Toast.LENGTH_SHORT).show();
             }
         });
-        return historyTrains;
+        //return historyTrains;
     }
 }
