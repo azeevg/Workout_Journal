@@ -14,7 +14,7 @@ public class ExerciseInfoActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.exercise_info);
         Intent intent = getIntent();
-        final TextView titleText = (TextView) findViewById(R.id.titleText);
+        final TextView titleText = (TextView) findViewById(R.id.exerciseTitle);
         titleText.setText(intent.getStringExtra("name"));
         final TextView descriptionText = (TextView) findViewById(R.id.descriptionText);
         descriptionText.setText(intent.getStringExtra("description"));
