@@ -43,5 +43,12 @@
         </activity>
 
 
+        <activity android:name=".TrainingPreviewActivity"
+                  android:theme="@android:style/Theme.NoTitleBar">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".MainActivity"/>
+        </activity>
+
     </application>
 </manifest>

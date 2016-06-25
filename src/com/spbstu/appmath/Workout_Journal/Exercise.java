@@ -8,10 +8,40 @@ public class Exercise {
     private final String name;
     private final String description;
     private boolean isChecked;
+    private int id;
 
     public Exercise() {
         this.name = null;
         this.description = null;
+    }
+
+    public Exercise(final String name) {
+        this.name = name;
+        this.description = null;
+    }
+
+    public Exercise(final String name, final int id) {
+        this.name = name;
+        this.description = null;
+        this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Exercise exercise = (Exercise) o;
+
+        if (id != exercise.id) return false;
+        return name.equals(exercise.name);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name.hashCode();
+        result = 31 * result + id;
+        return result;
     }
 
     public void setChecked(boolean checked) {

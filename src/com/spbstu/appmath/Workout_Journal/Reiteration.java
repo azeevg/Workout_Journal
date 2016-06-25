@@ -8,7 +8,6 @@ public class Reiteration {
     private final Exercise exercise;
     private final int weight;
     private final int times;
-    private boolean isChecked;
     private boolean checked;
 
     public ViewHolder newViewHolder(final TextView weight, final TextView times, final CheckBox checkBox) {
@@ -90,5 +89,15 @@ public class Reiteration {
 
     public int getWeight() {
         return weight;
+    }
+
+    @Override
+    public String toString() {
+        return "Reiteration{" +
+                "checked=" + checked +
+                ", exercise=" + exercise.getName() +
+                ", weight=" + weight +
+                ", times=" + times +
+                '}';
     }
 }

@@ -17,6 +17,7 @@ import java.util.List;
 public class MainActivity extends Activity {
 
     public static final String EXTRA_MESSAGE = "com.spbstu.appmath.Workout_Journal";
+    public static final String TRAINING_ID = "training_id";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,7 @@ public class MainActivity extends Activity {
             e.printStackTrace();
         }
 
-        final List<Training> trainList = displayTrainings();
+        final List<Training> trainingList = displayTrainings();
 
         final ImageButton addButton = (ImageButton) findViewById(R.id.button_add);
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -93,11 +94,9 @@ public class MainActivity extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // TODO: 19.06.2016 TrainingActivity
-                        
-                Toast.makeText(getApplicationContext(),
-                        "Clicked on Row: " + position,
-                        Toast.LENGTH_SHORT).show();
+                final Intent intent = new Intent(getApplicationContext(), TrainingPreviewActivity.class);
+                intent.putExtra(TRAINING_ID, plannedTrains.get(position).getId());
+                startActivity(intent);
             }
         });
 
