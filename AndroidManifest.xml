@@ -35,6 +35,13 @@
                     android:value=".TrainingCreatingActivity"/>
         </activity>
 
+        <activity android:name=".ExerciseInfoActivity"
+                  android:theme="@android:style/Theme.NoTitleBar">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".ExerciseChoosingActivity"/>
+        </activity>
+
 
     </application>
 </manifest>

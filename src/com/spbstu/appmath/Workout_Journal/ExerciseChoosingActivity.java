@@ -1,6 +1,7 @@
 package com.spbstu.appmath.Workout_Journal;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,20 +24,28 @@ public class ExerciseChoosingActivity extends Activity {
     }
 
     private List<Exercise> displayExercises() {
-        // TODO: 21.06.2016 DATABASE: вернуть все упражнения из БД
-//        final List<Exercise> exercises = db.blabla();
-        final List<Exercise> exercises = mockGetExercises();
-        ListView listView = (ListView) findViewById(R.id.trainList);
+        final DBHelper dbHelper = new DBHelper(this);
+        final List<Exercise> exercises = dbHelper.getExercises();
+        final ListView listView = (ListView) findViewById(R.id.trainList);
 
-        System.out.println(exercises);
+        //System.out.println(exercises);
         listView.setAdapter(new ExerciseListAdapter(this, exercises, listView));
         listView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(),
+                // TODO: ExerciseDescriptionActivity
+                Intent intent = new Intent(ExerciseChoosingActivity.this, ExerciseInfoActivity.class);
+                Exercise exercise = (Exercise) listView.getAdapter().getItem(position);
+                //String description = dbHelper.getExerciseInfo(exercise);
+                String description = exercise.getDescription();
+                String name = exercise.getName();
+                intent.putExtra("name", name);
+                intent.putExtra("description", description);
+                startActivity(intent);
+                /*Toast.makeText(getApplicationContext(),
                         "Clicked on exercise: " + position,
-                        Toast.LENGTH_SHORT).show();
+                        Toast.LENGTH_SHORT).show();*/
             }
         });
         return exercises;

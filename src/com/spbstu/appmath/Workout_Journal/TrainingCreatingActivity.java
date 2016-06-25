@@ -45,6 +45,11 @@ public class TrainingCreatingActivity extends Activity {
 
     private void chooseExercise(final View view) {
         final Intent intent = new Intent(this, ExerciseChoosingActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
     }
 }

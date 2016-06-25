@@ -18,10 +18,10 @@ public class HistoryActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.history);
-        final List<Training> trainList = displayListView();
+        final List<Training> trainList = displayHistoryTrainings();
     }
 
-    private List<Training> displayListView() {
+    private List<Training> displayHistoryTrainings() {
         DBHelper db = new DBHelper(this);
         final List<Training> historyTrains = db.getAllDoneTrainings();
         ListView listView = (ListView) findViewById(R.id.historyListView);

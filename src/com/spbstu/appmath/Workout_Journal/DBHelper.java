@@ -10,7 +10,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 
@@ -128,5 +128,33 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         db.close();
         return false;
+    }
+
+    public List<Exercise> getExercises() {
+        List<Exercise> exercises = new ArrayList<>();
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_PATH_NAME, null, SQLiteDatabase.OPEN_READONLY);
+        Cursor res = db.query(DBContract.Exercises.TABLE, null, null, null, null, null, null);
+        res.moveToFirst();
+        while(!res.isAfterLast()) {
+            String name = res.getString(res.getColumnIndex(DBContract.Exercises.COLUMN_NAME));
+            String description = res.getString(res.getColumnIndex(DBContract.Exercises.COLUMN_DESCRIPTION));
+            exercises.add(new Exercise(name, description, false));
+            res.moveToNext();
+        }
+        res.close();
+        return exercises;
+    }
+
+    public String getExerciseInfo(Exercise exercise) {
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_PATH_NAME, null, SQLiteDatabase.OPEN_READONLY);
+        Cursor res = db.query(DBContract.Exercises.TABLE,
+                new String[]{DBContract.Exercises.COLUMN_DESCRIPTION},
+                DBContract.Exercises.COLUMN_NAME + "='" + exercise.getName() + "'",
+                null, null, null, null);
+        res.moveToFirst();
+        String description = res.getString(res.getColumnIndex(DBContract.Exercises.COLUMN_DESCRIPTION));
+        assert(res.isAfterLast());
+        res.close();
+        return description;
     }
 }

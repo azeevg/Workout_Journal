@@ -34,7 +34,7 @@ public class MainActivity extends Activity {
             e.printStackTrace();
         }
 
-        final List<Training> trainList = displayListView();
+        final List<Training> trainList = displayTrainings();
 
         final ImageButton addButton = (ImageButton) findViewById(R.id.button_add);
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +83,7 @@ public class MainActivity extends Activity {
         });
     }
 
-    private List<Training> displayListView() {
+    private List<Training> displayTrainings() {
         DBHelper db = new DBHelper(this);
         final List<Training> plannedTrains = db.getAllPlannedTrainings();
         ListView listView = (ListView) findViewById(R.id.trainList);

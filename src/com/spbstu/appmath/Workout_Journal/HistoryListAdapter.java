@@ -69,8 +69,6 @@ public class HistoryListAdapter extends ArrayAdapter<Training> {
                     } else {
                         checkSelections(deleteButton);
                     }
-
-
                 }
             });
         } else {
@@ -93,6 +91,5 @@ public class HistoryListAdapter extends ArrayAdapter<Training> {
             }
         }
         deleteButton.setVisibility(View.INVISIBLE);
-
     }
 }
