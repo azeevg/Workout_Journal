@@ -12,17 +12,17 @@ public class Exercise {
 
     public Exercise() {
         this.name = null;
-        //this.description = null;
+//        this.description = null;
     }
 
     public Exercise(final String name) {
         this.name = name;
-        this.description = null;
+//        this.description = null;
     }
 
     public Exercise(final String name, final int id) {
         this.name = name;
-        this.description = null;
+//        this.description = null;
         this.id = id;
     }
 
