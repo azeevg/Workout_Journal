@@ -52,7 +52,8 @@ public class DBHelper extends SQLiteOpenHelper {
         if(checkDB != null){
             checkDB.close();
         }
-        return checkDB != null;
+        //return checkDB != null;
+        return false;
     }
 
     private void copyDataBase() throws IOException {

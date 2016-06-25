@@ -34,7 +34,6 @@ public class ExerciseChoosingActivity extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // TODO: ExerciseDescriptionActivity
                 Intent intent = new Intent(ExerciseChoosingActivity.this, ExerciseInfoActivity.class);
                 Exercise exercise = (Exercise) listView.getAdapter().getItem(position);
                 //String description = dbHelper.getExerciseInfo(exercise);
@@ -43,9 +42,6 @@ public class ExerciseChoosingActivity extends Activity {
                 intent.putExtra("name", name);
                 intent.putExtra("description", description);
                 startActivity(intent);
-                /*Toast.makeText(getApplicationContext(),
-                        "Clicked on exercise: " + position,
-                        Toast.LENGTH_SHORT).show();*/
             }
         });
         return exercises;
