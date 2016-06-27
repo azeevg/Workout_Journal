@@ -9,15 +9,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SetsCreatingActivity extends Activity {
+
+    private ArrayList<Set> sets = new ArrayList<Set>();
+    ArrayAdapter<Set> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +25,11 @@ public class SetsCreatingActivity extends Activity {
         setContentView(R.layout.sets_creating);
 
         Intent intent = getIntent();
-        List<Set> sets = new ArrayList<>();
+        ListView listView = (ListView) findViewById(R.id.setsListView);
+        adapter = new SetsListAdapter(this, R.layout.set_list_item, sets, listView);
+        listView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
+        listView.setAdapter(adapter);
+        //displaySets();
 
         final ImageButton addButton = (ImageButton) findViewById(R.id.button_add);
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -46,7 +50,9 @@ public class SetsCreatingActivity extends Activity {
                             public void onClick(DialogInterface dialog, int which) {
                                 final EditText editReps = (EditText) dialogView.findViewById(R.id.editReps);
                                 final EditText editWeight = (EditText) dialogView.findViewById(R.id.editWeight);
-                                //sets.add(new Set(editReps.getText()))
+                                sets.add(new Set(Integer.parseInt(editReps.getText().toString()),
+                                        Integer.parseInt(editWeight.getText().toString())));
+                                adapter.notifyDataSetChanged();
                             }
                         });
                 builder.setCancelable(true);
@@ -62,7 +68,6 @@ public class SetsCreatingActivity extends Activity {
                 dialog.show();
             }
         });
-        displaySets(sets);
     }
 
     /*@Override
@@ -70,9 +75,10 @@ public class SetsCreatingActivity extends Activity {
         displaySets();
     }*/
 
-    private void displaySets(List<Set> sets) {
+    private void displaySets() {
         ListView listView = (ListView) findViewById(R.id.setsListView);
-
+        listView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
+        listView.setAdapter(new SetsListAdapter(this, R.layout.set_list_item, sets, listView));
     }
 
 }
