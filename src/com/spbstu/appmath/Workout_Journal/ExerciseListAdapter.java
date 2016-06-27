@@ -1,6 +1,7 @@
 package com.spbstu.appmath.Workout_Journal;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.DataSetObserver;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,6 +67,17 @@ public class ExerciseListAdapter implements ListAdapter {
 
         final Exercise exercise = exercises.get(position);
         holder.getName().setText(exercise.getName());
+
+        final int pos = position;
+        ImageButton addExercise = (ImageButton) convertView.findViewById(R.id.button_add);
+        addExercise.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent intent = new Intent(v.getContext(), SetsCreatingActivity.class);
+                intent.putExtra("exerciseName", exercises.get(pos).getName());
+                v.getContext().startActivity(intent);
+            }
+        });
 
         return convertView;
     }

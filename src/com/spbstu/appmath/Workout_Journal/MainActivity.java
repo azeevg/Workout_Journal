@@ -16,15 +16,11 @@ import java.util.List;
 
 public class MainActivity extends Activity {
 
-    public static final String EXTRA_MESSAGE = "com.spbstu.appmath.Workout_Journal";
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        final Activity activity = this;
-
         setContentView(R.layout.main);
+        final Activity activity = this;
 
         // create db in app's folder if not exist
         DBHelper dbHelper = new DBHelper(this);
@@ -34,7 +30,7 @@ public class MainActivity extends Activity {
             e.printStackTrace();
         }
 
-        final List<Training> trainList = displayTrainings();
+        displayTrainings();
 
         final ImageButton addButton = (ImageButton) findViewById(R.id.button_add);
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -45,7 +41,6 @@ public class MainActivity extends Activity {
                 final View dialogView = inflater.inflate(R.layout.dialog_workout_name, null);
 
                 builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -54,8 +49,6 @@ public class MainActivity extends Activity {
                         .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                /*final EditText editText = (EditText) dialogView.findViewById(R.id.editName);
-                                Toast.makeText(getApplicationContext(), editText.getText().toString(), Toast.LENGTH_SHORT).show();*/
                                 createNewTraining(dialogView);
                             }
                         });
@@ -81,9 +74,18 @@ public class MainActivity extends Activity {
                 startActivity(intent);
             }
         });
+
+        final ImageButton helpButton = (ImageButton) findViewById(R.id.helpButton);
+        helpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent intent = new Intent(MainActivity.this, HelpActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
-    private List<Training> displayTrainings() {
+    private void displayTrainings() {
         DBHelper db = new DBHelper(this);
         final List<Training> plannedTrains = db.getAllPlannedTrainings();
         ListView listView = (ListView) findViewById(R.id.trainList);
@@ -94,20 +96,17 @@ public class MainActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // TODO: 19.06.2016 TrainingActivity
-                        
                 Toast.makeText(getApplicationContext(),
                         "Clicked on Row: " + position,
                         Toast.LENGTH_SHORT).show();
             }
         });
-
-        return plannedTrains;
     }
 
     private void createNewTraining(final View view) {
         final Intent intent = new Intent(this, TrainingCreatingActivity.class);
         final EditText editText = (EditText) view.findViewById(R.id.editName);
-        intent.putExtra(EXTRA_MESSAGE, editText.getText().toString());
+        intent.putExtra("trainingName", editText.getText().toString());
         startActivity(intent);
     }
 }

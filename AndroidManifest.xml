@@ -42,6 +42,19 @@
                     android:value=".ExerciseChoosingActivity"/>
         </activity>
 
+        <activity android:name=".SetsCreatingActivity"
+                  android:theme="@android:style/Theme.NoTitleBar">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".ExerciseChoosingActivity"/>
+        </activity>
+
+        <activity android:name=".HelpActivity"
+                  android:theme="@android:style/Theme.NoTitleBar">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".MainActivity"/>
+        </activity>
 
     </application>
 </manifest>
