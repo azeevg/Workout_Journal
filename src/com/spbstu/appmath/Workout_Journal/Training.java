@@ -4,9 +4,11 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 public class Training {
+ //    final int id;
     final String name;
     final String date;
     boolean checked;
+    private int id;
 
     public Training() {
         name = null;
@@ -19,6 +21,10 @@ public class Training {
 
     public ViewHolder getViewHolder(CheckBox checkBox, TextView name) {
         return getViewHolder(name, null, checkBox);
+    }
+
+    public int getId() {
+        return id;
     }
 
 

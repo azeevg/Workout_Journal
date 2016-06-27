@@ -38,7 +38,7 @@ public class TrainingCreatingActivity extends Activity {
         final ExpandableListView listView = (ExpandableListView) findViewById(R.id.workoutExpandableListView);
         listView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
 
-        listView.setAdapter(new TrainingListAdapter(this, groups, listView));
+        listView.setAdapter(new TrainingListAdapter(this, groups, listView, true));
 
         return groups;
     }
