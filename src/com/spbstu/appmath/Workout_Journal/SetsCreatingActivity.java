@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,15 +25,16 @@ public class SetsCreatingActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sets_creating);
 
-        Intent intent = getIntent();
         ListView listView = (ListView) findViewById(R.id.setsListView);
         adapter = new SetsListAdapter(this, R.layout.set_list_item, sets, listView);
         listView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
         listView.setAdapter(adapter);
-        //displaySets();
 
-        final ImageButton addButton = (ImageButton) findViewById(R.id.button_add);
-        addButton.setOnClickListener(new View.OnClickListener() {
+        Intent intent = getIntent();
+        final Exercise exercise = (Exercise)intent.getExtras().getSerializable("exercise");
+
+        final ImageButton buttonAdd = (ImageButton) findViewById(R.id.button_add);
+        buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final AlertDialog.Builder builder = new AlertDialog.Builder(SetsCreatingActivity.this);
@@ -50,9 +52,12 @@ public class SetsCreatingActivity extends Activity {
                             public void onClick(DialogInterface dialog, int which) {
                                 final EditText editReps = (EditText) dialogView.findViewById(R.id.editReps);
                                 final EditText editWeight = (EditText) dialogView.findViewById(R.id.editWeight);
-                                sets.add(new Set(Integer.parseInt(editReps.getText().toString()),
-                                        Integer.parseInt(editWeight.getText().toString())));
+                                sets.add(new Set(exercise, Double.parseDouble(editWeight.getText().toString()),
+                                        Integer.parseInt(editReps.getText().toString())));
                                 adapter.notifyDataSetChanged();
+                                ImageButton buttonEnd = (ImageButton) findViewById(R.id.button_end);
+                                if (buttonEnd.getVisibility() == View.INVISIBLE)
+                                    buttonEnd.setVisibility(View.VISIBLE);
                             }
                         });
                 builder.setCancelable(true);
@@ -68,17 +73,21 @@ public class SetsCreatingActivity extends Activity {
                 dialog.show();
             }
         });
-    }
 
-    /*@Override
-    protected void onResume() {
-        displaySets();
-    }*/
-
-    private void displaySets() {
-        ListView listView = (ListView) findViewById(R.id.setsListView);
-        listView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
-        listView.setAdapter(new SetsListAdapter(this, R.layout.set_list_item, sets, listView));
+        final ImageButton buttonEnd = (ImageButton) findViewById(R.id.button_end);
+        buttonEnd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (sets.size() > 0) {
+                    Intent intent = new Intent();
+                    intent.putExtra("exerciseSets", (Serializable) sets);
+                    setResult(RESULT_OK, intent);
+                }
+                else
+                    setResult(RESULT_CANCELED);
+                finish();
+            }
+        });
     }
 
 }

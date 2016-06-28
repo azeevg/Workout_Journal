@@ -7,10 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ExerciseChoosingActivity extends Activity {
+
+    private String chosenExerciseName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,14 @@ public class ExerciseChoosingActivity extends Activity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Intent intent = new Intent();
+        intent.putExtra("exerciseSets", data.getExtras().getSerializable("exerciseSets"));
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
 }

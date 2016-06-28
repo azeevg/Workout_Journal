@@ -10,15 +10,6 @@ import java.util.List;
 
 public class ExerciseParcelable implements Parcelable{
 
-    class Set {
-        double weight;
-        int reps;
-        public Set(int _reps, double _weight) {
-            reps = _reps;
-            weight = _weight;
-        }
-    }
-
     private List<Set> sets;
 
     public List<Set> getSets() {
@@ -35,7 +26,7 @@ public class ExerciseParcelable implements Parcelable{
         for (int i = 0; i < count; ++i) {
             int reps = in.readInt();
             double weight = in.readDouble();
-            sets.add(new Set(reps, weight));
+            //sets.add(new Set(reps, weight));
         }
     }
 
@@ -61,8 +52,8 @@ public class ExerciseParcelable implements Parcelable{
         int count = sets.size();
         dest.writeInt(count);
         for (Set set: sets) {
-            dest.writeInt(set.reps);
-            dest.writeDouble(set.weight);
+            dest.writeInt(set.getTimes());
+            dest.writeDouble(set.getWeight());
         }
     }
 }

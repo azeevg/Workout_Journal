@@ -7,46 +7,45 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class TrainingCreatingActivity extends Activity {
 
+    List<List<Set>> exercises = new ArrayList<>();
+    TrainingListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.workout_creating);
 
-        final List<List<Set>> reiterations = displayExpandableList();
-        final ImageButton addButton = (ImageButton) findViewById(R.id.button_add);
+        displayExpandableList();
 
+        final ImageButton addButton = (ImageButton) findViewById(R.id.button_add);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                chooseExercise(v);
+                final Intent intent = new Intent(TrainingCreatingActivity.this,
+                        ExerciseChoosingActivity.class);
+                startActivityForResult(intent, 1);
             }
         });
     }
 
 
-    private List<List<Set>> displayExpandableList() {
-        final List<List<Set>> groups = new CopyOnWriteArrayList<>();
+    private void displayExpandableList() {
         final ExpandableListView listView = (ExpandableListView) findViewById(R.id.workoutExpandableListView);
         listView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
-
-        listView.setAdapter(new TrainingListAdapter(this, groups, listView, true));
-
-        return groups;
-    }
-
-    private void chooseExercise(final View view) {
-        final Intent intent = new Intent(this, ExerciseChoosingActivity.class);
-        startActivityForResult(intent, 1);
+        adapter = new TrainingListAdapter(this, exercises, listView, true);
+        listView.setAdapter(adapter);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
+        ArrayList<Set> sets = (ArrayList<Set>) data.getExtras().getSerializable("exerciseSets");
+        exercises.add(sets);
+        adapter.notifyDataSetChanged();
     }
 }

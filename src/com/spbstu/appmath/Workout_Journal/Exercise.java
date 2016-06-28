@@ -8,24 +8,25 @@ import java.io.Serializable;
 
 public class Exercise implements Serializable {
     private final String name;
-    //private final String description;
     private boolean isChecked;
     private int id;
 
     public Exercise() {
         this.name = null;
-//        this.description = null;
     }
 
     public Exercise(final String name) {
         this.name = name;
-//        this.description = null;
     }
 
     public Exercise(final String name, final int id) {
         this.name = name;
-//        this.description = null;
         this.id = id;
+    }
+
+    public Exercise(final String name, final boolean isChecked) {
+        this.name = name;
+        this.isChecked = isChecked;
     }
 
     @Override
@@ -82,17 +83,6 @@ public class Exercise implements Serializable {
     public ViewHolder newViewHolder(final TextView name, final CheckBox isChecked) {
         return new ViewHolder(name, null, isChecked);
     }
-
-
-    public Exercise(final String name, /*final String description, */final boolean isChecked) {
-        //this.description = description;
-        this.name = name;
-        this.isChecked = isChecked;
-    }
-
-    /*public String getDescription() {
-        return description;
-    }*/
 
     public String getName() {
         return name;

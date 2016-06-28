@@ -12,6 +12,18 @@ public class Set implements Serializable {
     private final int times;
     private boolean checked;
 
+    public Set(final Exercise exercise, final Double weight, final int times) {
+        this.exercise = exercise;
+        this.times = times;
+        this.weight = weight;
+    }
+
+    public Set() {
+        exercise = null;
+        weight = 0.0;
+        times = 0;
+    }
+
     public ViewHolder newViewHolder(final TextView weight, final TextView times, final CheckBox checkBox) {
         return new ViewHolder(weight, times, checkBox);
     }
@@ -63,18 +75,6 @@ public class Set implements Serializable {
         public void setWeight(TextView weight) {
             this.weight = weight;
         }
-    }
-
-    public Set(final Exercise exercise, final Double weight, final int times) {
-        this.exercise = exercise;
-        this.times = times;
-        this.weight = weight;
-    }
-
-    public Set() {
-        exercise = null;
-        weight = 0.0;
-        times = 0;
     }
 
     public ViewHolder newViewHolder(final TextView weight, final TextView times) {

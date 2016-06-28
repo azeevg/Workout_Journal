@@ -1,5 +1,6 @@
 package com.spbstu.appmath.Workout_Journal;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class ExerciseListAdapter implements ListAdapter {
@@ -22,14 +24,10 @@ public class ExerciseListAdapter implements ListAdapter {
     }
 
     @Override
-    public void registerDataSetObserver(DataSetObserver observer) {
-
-    }
+    public void registerDataSetObserver(DataSetObserver observer) { }
 
     @Override
-    public void unregisterDataSetObserver(DataSetObserver observer) {
-
-    }
+    public void unregisterDataSetObserver(DataSetObserver observer) { }
 
     @Override
     public int getCount() {
@@ -74,8 +72,8 @@ public class ExerciseListAdapter implements ListAdapter {
             @Override
             public void onClick(View v) {
                 final Intent intent = new Intent(v.getContext(), SetsCreatingActivity.class);
-                intent.putExtra("exerciseName", exercises.get(pos).getName());
-                v.getContext().startActivity(intent);
+                intent.putExtra("exercise", (Serializable)exercises.get(pos));
+                ((Activity)context).startActivityForResult(intent, 1);
             }
         });
 
