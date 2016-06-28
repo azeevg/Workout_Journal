@@ -13,8 +13,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class TrainingCreatingActivity extends Activity {
 
-    List<List<Set>> exercises = new ArrayList<>();
-    TrainingListAdapter adapter;
+    private List<List<Set>> exercises = new ArrayList<>();
+    private TrainingListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

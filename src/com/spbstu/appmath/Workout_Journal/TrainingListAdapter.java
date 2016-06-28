@@ -86,6 +86,7 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
                         final CheckBox cb = (CheckBox) v;
                         cb.setChecked(cb.isChecked());
                         final Exercise exercise = (Exercise) cb.getTag();
+                        System.out.println("exercise == " + exercise);
                         exercise.setChecked(cb.isChecked());
 
                         if (cb.isChecked()) {
@@ -101,7 +102,7 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
                             @Override
                             public void onClick(View v) {
                                 for (Exercise e : exercises) {
-                                    if (e.isChecked()) {
+                                    if (e.getCheckBox()) {
                                         groups.remove(exercises.indexOf(e));
                                         exercises.remove(e);
                                         notifyDataSetChanged();
@@ -161,6 +162,8 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
                         set.setChecked(cb.isChecked());
 
                         // check if parent is needed to be checked
+                        System.out.println(exercises);
+                        System.out.println(set.getExercise());
                         final int pos = exercises.indexOf(set.getExercise());
                         if (areSame(groups.get(pos)) != 0) {
                             exercises.get(pos).setChecked(cb.isChecked());

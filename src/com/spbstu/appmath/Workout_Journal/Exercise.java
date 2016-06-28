@@ -59,7 +59,6 @@ public class Exercise implements Serializable {
         TextView name;
         TextView description;
         CheckBox isChecked;
-        private View checkBox;
 
         public ViewHolder(final TextView name, final TextView description, final CheckBox isChecked) {
             this.description = description;
@@ -67,8 +66,8 @@ public class Exercise implements Serializable {
             this.name = name;
         }
 
-        public View getCheckBox() {
-            return checkBox;
+        public CheckBox getCheckBox() {
+            return isChecked;
         }
 
         public TextView getName() {
@@ -88,7 +87,7 @@ public class Exercise implements Serializable {
         return name;
     }
 
-    public boolean isChecked() {
+    public boolean getCheckBox() {
         return isChecked;
     }
 }
