@@ -1,40 +1,105 @@
 package com.spbstu.appmath.Workout_Journal;
 
-import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
-public class Set {
-    private final int reps;
+import java.io.Serializable;
+
+public class Set implements Serializable {
+
+    private final Exercise exercise;
     private final double weight;
+    private final int times;
+    private boolean checked;
 
-    public Set() {
-        reps = 0;
-        weight = 0.0;
-    }
-    public Set (final int _reps, final double _weight) {
-        reps = _reps;
-        weight = _weight;
+    public ViewHolder newViewHolder(final TextView weight, final TextView times, final CheckBox checkBox) {
+        return new ViewHolder(weight, times, checkBox);
     }
 
-    public int getReps() {return reps;}
-    public double getWeight() {return weight;}
-
-    public ViewHolder getViewHolder(TextView _reps, TextView _weight) {
-        return new ViewHolder(_reps, _weight);
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 
-    public class ViewHolder {
-        TextView reps, weight;
-        public ViewHolder(final TextView _reps, final TextView _weight) {
-            reps = _reps;
-            weight = _weight;
+    public boolean isChecked() {
+        return checked;
+    }
+
+    class ViewHolder {
+        TextView weight;
+        TextView times;
+        CheckBox checkBox;
+
+        public ViewHolder(final TextView weight, final TextView times) {
+            this.times = times;
+            this.weight = weight;
         }
-        public TextView getReps() {
-            return reps;
+
+        public ViewHolder(final TextView weight, final TextView times, final CheckBox checkBox) {
+            this.checkBox = checkBox;
+            this.times = times;
+            this.weight = weight;
         }
+
+        public CheckBox getCheckBox() {
+            return checkBox;
+        }
+
+        public void setCheckBox(CheckBox checkBox) {
+            this.checkBox = checkBox;
+        }
+
+        public TextView getTimes() {
+            return times;
+        }
+
+        public void setTimes(TextView times) {
+            this.times = times;
+        }
+
         public TextView getWeight() {
             return weight;
         }
+
+        public void setWeight(TextView weight) {
+            this.weight = weight;
+        }
     }
 
+    public Set(final Exercise exercise, final Double weight, final int times) {
+        this.exercise = exercise;
+        this.times = times;
+        this.weight = weight;
+    }
+
+    public Set() {
+        exercise = null;
+        weight = 0.0;
+        times = 0;
+    }
+
+    public ViewHolder newViewHolder(final TextView weight, final TextView times) {
+        return new ViewHolder(weight, times);
+    }
+
+    public Exercise getExercise() {
+        return exercise;
+    }
+
+    public int getTimes() {
+        return times;
+    }
+
+    public Double getWeight() {
+        return weight;
+    }
+
+    @Override
+    public String toString() {
+        return "Set{" +
+                "checked=" + checked +
+                ", exercise=" + exercise.getName() +
+                ", weight=" + weight +
+                ", times=" + times +
+                '}';
+    }
 }

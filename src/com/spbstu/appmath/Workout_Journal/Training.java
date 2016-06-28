@@ -3,11 +3,13 @@ package com.spbstu.appmath.Workout_Journal;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-public class Training {
+import java.io.Serializable;
+
+public class Training implements Serializable {
  //    final int id;
     final String name;
     final String date;
-    boolean checked;
+    private boolean checked;
     private int id;
 
     public Training() {

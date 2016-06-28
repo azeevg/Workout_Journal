@@ -4,7 +4,9 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-public class Exercise {
+import java.io.Serializable;
+
+public class Exercise implements Serializable {
     private final String name;
     //private final String description;
     private boolean isChecked;

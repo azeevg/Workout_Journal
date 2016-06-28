@@ -11,12 +11,12 @@ import java.util.List;
 public class TrainingListAdapter extends BaseExpandableListAdapter {
 
     private final Context context;
-    private final List<List<Reiteration>> groups;
+    private final List<List<Set>> groups;
     private final ExpandableListView listView;
     private final boolean isRemovable;
     private final List<Exercise> exercises;
 
-    public TrainingListAdapter(final Context context, final List<List<Reiteration>> groups,
+    public TrainingListAdapter(final Context context, final List<List<Set>> groups,
                                final ExpandableListView listView, final boolean isRemovable) {
         this.context = context;
         this.groups = groups;
@@ -90,7 +90,7 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
 
                         if (cb.isChecked()) {
                             final int pos = exercises.indexOf(exercise);
-                            for (Reiteration r : groups.get(pos)) {
+                            for (Set r : groups.get(pos)) {
                                 r.setChecked(cb.isChecked());
                             }
                         }
@@ -130,18 +130,18 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(final int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        final Reiteration.ViewHolder holder;
+        final Set.ViewHolder holder;
 
         if (convertView == null) {
             final LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             if (isRemovable) {
                 convertView = inflater.inflate(R.layout.expandable_list_item_child_removable, null);
-                holder = new Reiteration().newViewHolder((TextView) convertView.findViewById(R.id.textViewWeight),
+                holder = new Set().newViewHolder((TextView) convertView.findViewById(R.id.textViewWeight),
                         (TextView) convertView.findViewById(R.id.textViewReiterations),
                         (CheckBox) convertView.findViewById(R.id.checkBox));
             } else {
                 convertView = inflater.inflate(R.layout.expandable_list_item_child, null);
-                holder = new Reiteration().newViewHolder((TextView) convertView.findViewById(R.id.textViewWeight),
+                holder = new Set().newViewHolder((TextView) convertView.findViewById(R.id.textViewWeight),
                         (TextView) convertView.findViewById(R.id.textViewReiterations));
             }
 
@@ -157,11 +157,11 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
                     public void onClick(View v) {
                         final CheckBox cb = (CheckBox) v;
                         cb.setChecked(cb.isChecked());
-                        final Reiteration reiteration = (Reiteration) cb.getTag();
-                        reiteration.setChecked(cb.isChecked());
+                        final Set set = (Set) cb.getTag();
+                        set.setChecked(cb.isChecked());
 
                         // check if parent is needed to be checked
-                        final int pos = exercises.indexOf(reiteration.getExercise());
+                        final int pos = exercises.indexOf(set.getExercise());
                         if (areSame(groups.get(pos)) != 0) {
                             exercises.get(pos).setChecked(cb.isChecked());
                         }
@@ -170,13 +170,13 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
                         deleteButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                final int pos = exercises.indexOf(reiteration.getExercise());
-                                final List<Reiteration> reiterationList = groups.get(pos);
-                                for (Reiteration r : reiterationList) {
+                                final int pos = exercises.indexOf(set.getExercise());
+                                final List<Set> setList = groups.get(pos);
+                                for (Set r : setList) {
                                     if (r.isChecked()) {
-                                        reiterationList.remove(r);
+                                        setList.remove(r);
 
-                                        if (reiterationList.isEmpty()) {
+                                        if (setList.isEmpty()) {
                                             exercises.remove(pos);
                                             groups.remove(pos);
                                         }
@@ -197,15 +197,15 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
                 });
             }
         } else {
-            holder = (Reiteration.ViewHolder) convertView.getTag();
+            holder = (Set.ViewHolder) convertView.getTag();
         }
 
-        final Reiteration reiteration = groups.get(groupPosition).get(childPosition);
-        holder.getWeight().setText(String.valueOf(reiteration.getWeight()));
-        holder.getTimes().setText(String.valueOf(reiteration.getTimes()));
+        final Set set = groups.get(groupPosition).get(childPosition);
+        holder.getWeight().setText(String.valueOf(set.getWeight()));
+        holder.getTimes().setText(String.valueOf(set.getTimes()));
         if (isRemovable) {
-            holder.getCheckBox().setChecked(reiteration.isChecked());
-            holder.getCheckBox().setTag(reiteration);
+            holder.getCheckBox().setChecked(set.isChecked());
+            holder.getCheckBox().setTag(set);
         }
 
         return convertView;
@@ -218,8 +218,8 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
 
 
     private void checkSelections(final ImageButton deleteButton) {
-        for (List<Reiteration> reiterationList : groups) {
-            for (Reiteration r : reiterationList) {
+        for (List<Set> setList : groups) {
+            for (Set r : setList) {
                 if (r.isChecked()) {
                     return;
                 }
@@ -228,11 +228,11 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
         deleteButton.setVisibility(View.INVISIBLE);
     }
 
-    private int areSame(List<Reiteration> list) {
+    private int areSame(List<Set> list) {
         boolean ors = list.get(0).isChecked();
         boolean ands = ors;
 
-        for (Reiteration r : list) {
+        for (Set r : list) {
             ors |= r.isChecked();
             ands &= r.isChecked();
         }

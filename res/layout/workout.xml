@@ -40,6 +40,20 @@
                 tools:listitem="@layout/exercise_list_item"
                 android:divider="#dedede"
                 android:dividerHeight="1dp"/>
+
+
+        <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:background="@drawable/button_end"
+                android:src="@drawable/ic_done_white_24dp"
+                android:id="@+id/finishButton"
+                android:layout_gravity="end|bottom"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:textSize="50sp"/>
+
         <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -65,6 +79,5 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
                 android:textSize="50sp"/>
-
     </FrameLayout>
 </LinearLayout>
