@@ -13,13 +13,18 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class MainActivity extends Activity {
 
-    public static final String EXTRA_MESSAGE = "com.spbstu.appmath.Workout_Journal";
+    public static final String TRAINING_NAME = "trainingName";
     public static final String TRAINING_ID = "training_id";
+
+    DBHelper db;
+    List<Training> plannedTrains;
+    MainListAdapter adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,14 +35,14 @@ public class MainActivity extends Activity {
         setContentView(R.layout.main);
 
         // create db in app's folder if not exist
-        DBHelper dbHelper = new DBHelper(this);
+        db = new DBHelper(this);
         try {
-            dbHelper.createDataBase();
+            db.createDataBase();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        final List<Training> trainingList = displayTrainings();
+        displayTrainings();
 
         final ImageButton addButton = (ImageButton) findViewById(R.id.button_add);
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -57,8 +62,6 @@ public class MainActivity extends Activity {
                         .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                /*final EditText editText = (EditText) dialogView.findViewById(R.id.editName);
-                                Toast.makeText(getApplicationContext(), editText.getText().toString(), Toast.LENGTH_SHORT).show();*/
                                 createNewTraining(dialogView);
                             }
                         });
@@ -96,13 +99,13 @@ public class MainActivity extends Activity {
         });
     }
 
-    private List<Training> displayTrainings() {
-        DBHelper db = new DBHelper(this);
-        final List<Training> plannedTrains = db.getAllPlannedTrainings();
+    private void displayTrainings() {
+        plannedTrains = db.getAllPlannedTrainings();
         ListView listView = (ListView) findViewById(R.id.trainList);
+        adapter = new MainListAdapter(this, R.layout.list_item, plannedTrains, listView, db);
 
         listView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
-        listView.setAdapter(new MainListAdapter(this, R.layout.list_item, plannedTrains, listView, db));
+        listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -111,14 +114,24 @@ public class MainActivity extends Activity {
                 startActivity(intent);
             }
         });
-
-        return plannedTrains;
     }
 
     private void createNewTraining(final View view) {
         final Intent intent = new Intent(this, TrainingCreatingActivity.class);
         final EditText editText = (EditText) view.findViewById(R.id.editName);
-        intent.putExtra(EXTRA_MESSAGE, editText.getText().toString());
-        startActivity(intent);
+        intent.putExtra(TRAINING_NAME, editText.getText().toString());
+        startActivityForResult(intent, 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            Training training = (Training)data.getExtras().getSerializable(TrainingCreatingActivity.TRAINING);
+            plannedTrains.add(training);
+            adapter.notifyDataSetChanged();
+            Toast.makeText(getApplicationContext(), "Тренировка создана", Toast.LENGTH_SHORT).show();
+        }
+        else
+            Toast.makeText(getApplicationContext(), "Тренировка не создана", Toast.LENGTH_SHORT).show();
     }
 }

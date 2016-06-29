@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.*;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class TrainingListAdapter extends BaseExpandableListAdapter {
@@ -88,37 +89,36 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
                         final CheckBox cb = (CheckBox) v;
                         cb.setChecked(cb.isChecked());
                         final Exercise exercise = groups.get(groupPosition).get(0).getExercise();
-                        //System.out.println("exercise == " + exercise);
                         exercise.setChecked(cb.isChecked());
 
-                        if (cb.isChecked()) {
+                        /*if (cb.isChecked()) {
                             final int pos = exercises.indexOf(exercise);
                             for (Set r : groups.get(pos)) {
                                 r.setChecked(cb.isChecked());
                             }
-                        }
+                        }*/
 
-                        final ImageButton deleteButton = (ImageButton) finalConvertView.getRootView().findViewById(R.id.button_delete);
-                        deleteButton.setVisibility(View.VISIBLE);
+                        final ImageButton endButton =
+                                (ImageButton) finalConvertView.getRootView().findViewById(R.id.button_end);
+
+                        final ImageButton deleteButton =
+                                (ImageButton) finalConvertView.getRootView().findViewById(R.id.button_delete);
+
+                        setButtonsVisibility(deleteButton, endButton);
+
                         deleteButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                for (Exercise e : exercises) {
-                                    if (e.getCheckBox()) {
-                                        groups.remove(exercises.indexOf(e));
-                                        exercises.remove(e);
-                                        notifyDataSetChanged();
-                                    }
+                                Iterator<Exercise> i = exercises.iterator();
+                                while(i.hasNext()) {
+                                    Exercise e = i.next();
+                                    groups.remove(exercises.indexOf(e));
+                                    i.remove();
                                 }
-                                checkSelections(deleteButton);
+                                notifyDataSetChanged();
+                                setButtonsVisibility(deleteButton, endButton);
                             }
                         });
-
-                        if (cb.isChecked()) {
-                            deleteButton.setVisibility(View.VISIBLE);
-                        } else {
-                            checkSelections(deleteButton);
-                        }
                     }
                 });
             }
@@ -137,20 +137,20 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
 
         if (convertView == null) {
             final LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            if (isRemovable) {
+            /*if (isRemovable) {
                 convertView = inflater.inflate(R.layout.expandable_list_item_child_removable, null);
                 holder = new Set().newViewHolder((TextView) convertView.findViewById(R.id.textViewWeight),
                         (TextView) convertView.findViewById(R.id.textViewReiterations),
                         (CheckBox) convertView.findViewById(R.id.checkBox));
-            } else {
+            } else {*/
                 convertView = inflater.inflate(R.layout.expandable_list_item_child, null);
                 holder = new Set().newViewHolder((TextView) convertView.findViewById(R.id.textViewWeight),
                         (TextView) convertView.findViewById(R.id.textViewReiterations));
-            }
+            //}
 
             convertView.setTag(holder);
 
-            if (isRemovable) {
+            /*if (isRemovable) {
                 final View finalConvertView = convertView;
                 final ImageButton deleteButton = (ImageButton) finalConvertView.getRootView().findViewById(R.id.button_delete);
 
@@ -200,7 +200,7 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
                         }
                     }
                 });
-            }
+            }*/
         } else {
             holder = (Set.ViewHolder) convertView.getTag();
         }
@@ -208,10 +208,10 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
         final Set set = groups.get(groupPosition).get(childPosition);
         holder.getWeight().setText(String.valueOf(set.getWeight()));
         holder.getTimes().setText(String.valueOf(set.getTimes()));
-        if (isRemovable) {
+        /*if (isRemovable) {
             holder.getCheckBox().setChecked(set.isChecked());
             holder.getCheckBox().setTag(set);
-        }
+        }*/
 
         return convertView;
     }
@@ -221,6 +221,18 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
         return true;
     }
 
+    private void setButtonsVisibility(final ImageButton deleteButton, final ImageButton endButton) {
+        for (List<Set> setList : groups) {
+            if (setList.get(0).getExercise().isChecked()) {
+                endButton.setVisibility(View.INVISIBLE);
+                deleteButton.setVisibility(View.VISIBLE);
+                return;
+            }
+        }
+        deleteButton.setVisibility(View.INVISIBLE);
+        if (groups.size() > 0)
+            endButton.setVisibility(View.VISIBLE);
+    }
 
     private void checkSelections(final ImageButton deleteButton) {
         for (List<Set> setList : groups) {

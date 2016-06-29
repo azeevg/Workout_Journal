@@ -1,5 +1,6 @@
 package com.spbstu.appmath.Workout_Journal;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -45,8 +46,8 @@ public class DBHelper {
         if(checkDB != null){
             checkDB.close();
         }
-        //return checkDB != null;
-        return false;
+        return checkDB != null;
+        //return false;
     }
 
     private void copyDataBase() throws IOException {
@@ -127,8 +128,7 @@ public class DBHelper {
         res.moveToFirst();
         while(!res.isAfterLast()) {
             String name = res.getString(res.getColumnIndex(DBContract.Exercises.COLUMN_NAME));
-            //String description = res.getString(res.getColumnIndex(DBContract.Exercises.COLUMN_DESCRIPTION));
-            exercises.add(new Exercise(name, /*description, */false));
+            exercises.add(new Exercise(name, false));
             res.moveToNext();
         }
         res.close();
@@ -145,5 +145,35 @@ public class DBHelper {
         String description = res.getString(res.getColumnIndex(DBContract.Exercises.COLUMN_DESCRIPTION));
         res.close();
         return description;
+    }
+
+
+    public void writePlannedTrainingAndSets(Training training, List<List<Set>> sets) {
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_PATH_NAME, null, SQLiteDatabase.OPEN_READWRITE);
+
+        // training
+        ContentValues newTraining = new ContentValues();
+        newTraining.put(DBContract.WorkoutsPlan.COLUMN_NAME, training.getName());
+        int workoutId = (int)db.insert(DBContract.WorkoutsPlan.TABLE, null, newTraining);
+
+        // sets
+        for (List<Set> listSet : sets) {
+            String exerciseName = listSet.get(0).getExercise().getName();
+            Cursor res = db.query(DBContract.Exercises.TABLE,
+                    new String[]{DBContract.Exercises.COLUMN_ID},
+                    DBContract.Exercises.COLUMN_NAME + "='" + exerciseName + "'",
+                    null, null, null, null);
+            res.moveToFirst();
+            String exerciseId = res.getString(res.getColumnIndex(DBContract.Exercises.COLUMN_ID));
+            res.close();
+            for (Set set : listSet) {
+                ContentValues newSet = new ContentValues();
+                newSet.put(DBContract.SetsPlan.COLUMN_EXERCISE_ID, exerciseId);
+                newSet.put(DBContract.SetsPlan.COLUMN_WORKOUT_ID, workoutId);
+                newSet.put(DBContract.SetsPlan.COLUMN_WEIGHT, set.getWeight());
+                newSet.put(DBContract.SetsPlan.COLUMN_REPS, set.getTimes());
+                db.insert(DBContract.SetsPlan.TABLE, null, newSet);
+            }
+        }
     }
 }

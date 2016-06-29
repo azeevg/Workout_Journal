@@ -17,6 +17,22 @@ public class Training implements Serializable {
         date = null;
     }
 
+    public Training(final String name, final String date, final boolean checked) {
+        this.name = name;
+        this.date = date;
+        this.checked = checked;
+    }
+
+    public Training(final String name, final String date) {
+        this.name = name;
+        this.date = date;
+    }
+
+    public Training(final String name) {
+        this.name = name;
+        this.date = null;
+    }
+
     public ViewHolder getViewHolder(final TextView name, final TextView date, final CheckBox checkBox) {
         return new ViewHolder(name, date, checkBox);
     }
@@ -63,28 +79,12 @@ public class Training implements Serializable {
         }
     }
 
-    public Training(final String name, final String date, final boolean checked) {
-        this.name = name;
-        this.date = date;
-        this.checked = checked;
-    }
-
-    public boolean isChecked() {
+        public boolean isChecked() {
         return checked;
     }
 
     public void setChecked(final boolean checked) {
         this.checked = checked;
-    }
-
-    public Training(final String name, final String date) {
-        this.name = name;
-        this.date = date;
-    }
-
-    public Training(final String name) {
-        this.name = name;
-        this.date = null;
     }
 
     @Override

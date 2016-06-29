@@ -59,6 +59,7 @@ public class SetsCreatingActivity extends Activity {
                                 ImageButton buttonEnd = (ImageButton) findViewById(R.id.button_end);
                                 if (buttonEnd.getVisibility() == View.INVISIBLE)
                                     buttonEnd.setVisibility(View.VISIBLE);
+                                Toast.makeText(getApplicationContext(), "Подход добавлен", Toast.LENGTH_SHORT).show();
                             }
                         });
                 builder.setCancelable(true);
@@ -80,13 +81,13 @@ public class SetsCreatingActivity extends Activity {
         buttonEnd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent();
                 if (sets.size() > 0) {
-                    Intent intent = new Intent();
                     intent.putExtra("exerciseSets", (Serializable) sets);
                     setResult(RESULT_OK, intent);
                 }
                 else
-                    setResult(RESULT_CANCELED);
+                    setResult(RESULT_CANCELED, intent);
                 finish();
             }
         });

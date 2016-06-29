@@ -51,6 +51,8 @@ public class Exercise implements Serializable {
         this.isChecked = checked;
     }
 
+    public boolean isChecked() { return isChecked; }
+
     public ViewHolder newViewHolder(final TextView name) {
         return new ViewHolder(name, null, null);
     }

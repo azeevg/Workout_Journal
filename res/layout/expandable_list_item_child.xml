@@ -1,66 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:orientation="horizontal"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:paddingBottom="5dp"
-             android:paddingTop="5dp"
-             android:textColor="#000"
-             android:paddingStart="50dp"
-             android:background="@color/light_gray_2">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:paddingBottom="5dp"
+              android:paddingTop="5dp"
+              android:textColor="#000"
+              android:paddingStart="40dp"
+              android:paddingEnd="10dp"
+              android:background="@color/light_gray_2">
 
-    <LinearLayout
+    <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left">
+            android:text="@string/weight"
+            android:textSize="18sp"
+            android:textColor="#000"
+    />
 
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/weight"
-                android:textSize="15sp"
-                android:textColor="#000"
-                />
+    <TextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewWeight"
+            android:hint="@string/kg"
+            android:layout_marginStart="5dp"
+            android:textSize="18sp"
+            android:textColor="#000"/>
 
-        <TextView
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/textViewWeight"
-                android:hint="@string/kg"
-                android:layout_marginStart="5dp"
-                android:textSize="15sp"
-                android:textColor="#000"/>
-
-    </LinearLayout>
-
-
-    <LinearLayout
+    <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center">
+            android:text="@string/reiterations"
+            android:textSize="18sp"
+            android:textColor="#000"
 
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/reiterations"
-                android:textSize="15sp"
-                android:textColor="#000"
+    />
 
-                />
+    <TextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewReiterations"
+            android:hint="@string/times"
+            android:text="@string/empty_string"
+            android:layout_marginStart="5dp"
+            android:textSize="18sp"
+            android:textColor="#000"/>
 
-
-        <TextView
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/textViewReiterations"
-                android:hint="@string/times"
-                android:text="@string/empty_string"
-                android:layout_marginStart="5dp"
-                android:textSize="15sp"
-                android:textColor="#000"/>
-    </LinearLayout>
-
-
-
-
-</FrameLayout>
+</LinearLayout>

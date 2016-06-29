@@ -70,6 +70,19 @@
                 android:layout_marginBottom="20dp"
                 android:textSize="50sp"
                 android:visibility="invisible"/>
+
+        <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:background="@drawable/button_end"
+                android:src="@drawable/ic_done_white_24dp"
+                android:id="@+id/button_end"
+                android:layout_gravity="start|bottom"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="20dp"
+                android:visibility="invisible"
+                android:textSize="50sp"/>
     </FrameLayout>
 </LinearLayout>
 
