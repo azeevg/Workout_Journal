@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TrainingListAdapter extends BaseExpandableListAdapter {
@@ -14,7 +15,7 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
     private final List<List<Set>> groups;
     private final ExpandableListView listView;
     private final boolean isRemovable;
-    private final List<Exercise> exercises;
+    private List<Exercise> exercises;
 
     public TrainingListAdapter(final Context context, final List<List<Set>> groups,
                                final ExpandableListView listView, final boolean isRemovable) {
@@ -63,6 +64,7 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
     @Override
     public View getGroupView(final int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         final Exercise.ViewHolder holder;
+        exercises = TrainingPreviewActivity.getExerciseList(groups);
 
         if (convertView == null) {
             final LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -85,8 +87,8 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
                     public void onClick(View v) {
                         final CheckBox cb = (CheckBox) v;
                         cb.setChecked(cb.isChecked());
-                        final Exercise exercise = (Exercise) cb.getTag();
-                        System.out.println("exercise == " + exercise);
+                        final Exercise exercise = groups.get(groupPosition).get(0).getExercise();
+                        //System.out.println("exercise == " + exercise);
                         exercise.setChecked(cb.isChecked());
 
                         if (cb.isChecked()) {

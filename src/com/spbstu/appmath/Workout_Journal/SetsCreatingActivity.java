@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.*;
 
 import java.io.Serializable;
@@ -62,6 +63,7 @@ public class SetsCreatingActivity extends Activity {
                         });
                 builder.setCancelable(true);
                 final AlertDialog dialog = builder.create();
+                dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
                 dialog.setView(dialogView, 0, 0, 0, 0);
                 dialog.setOnShowListener(new DialogInterface.OnShowListener() {
                     @Override

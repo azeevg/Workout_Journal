@@ -86,7 +86,7 @@ public class TrainingPreviewActivity extends Activity {
 
         for (List<Set> group : groups) {
             for (Set set : group) {
-                if (!exerciseList.isEmpty() && !exerciseList.contains(set.getExercise())) {
+                if (!exerciseList.contains(set.getExercise())) {
                     exerciseList.add(set.getExercise());
                     System.out.println(set.getExercise().getName());
                 }

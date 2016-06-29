@@ -29,15 +29,15 @@ public class SetsListAdapter extends ArrayAdapter<Set> {
         final Set.ViewHolder holder;
         if (convertView == null) {
             convertView = vi.inflate(R.layout.set_list_item, null);
-            holder = new Set().newViewHolder((TextView) convertView.findViewById(R.id.textViewReps),
-                    (TextView) convertView.findViewById(R.id.textViewWeight));
+            holder = new Set().newViewHolder((TextView) convertView.findViewById(R.id.textViewWeight),
+                    (TextView) convertView.findViewById(R.id.textViewReps));
             convertView.setTag(holder);
         }
         else
             holder = (Set.ViewHolder) convertView.getTag();
 
         Set set = sets.get(position);
-        holder.getWeight().setText(((Double)set.getWeight()).toString() + " кг");
+        holder.getWeight().setText(set.getWeight().toString());
         holder.getTimes().setText(((Integer)set.getTimes()).toString());
 
         return convertView;
