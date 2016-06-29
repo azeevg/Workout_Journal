@@ -91,16 +91,8 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
                         final Exercise exercise = groups.get(groupPosition).get(0).getExercise();
                         exercise.setChecked(cb.isChecked());
 
-                        /*if (cb.isChecked()) {
-                            final int pos = exercises.indexOf(exercise);
-                            for (Set r : groups.get(pos)) {
-                                r.setChecked(cb.isChecked());
-                            }
-                        }*/
-
                         final ImageButton endButton =
                                 (ImageButton) finalConvertView.getRootView().findViewById(R.id.button_end);
-
                         final ImageButton deleteButton =
                                 (ImageButton) finalConvertView.getRootView().findViewById(R.id.button_delete);
 
@@ -137,70 +129,11 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
 
         if (convertView == null) {
             final LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            /*if (isRemovable) {
-                convertView = inflater.inflate(R.layout.expandable_list_item_child_removable, null);
-                holder = new Set().newViewHolder((TextView) convertView.findViewById(R.id.textViewWeight),
-                        (TextView) convertView.findViewById(R.id.textViewReiterations),
-                        (CheckBox) convertView.findViewById(R.id.checkBox));
-            } else {*/
-                convertView = inflater.inflate(R.layout.expandable_list_item_child, null);
-                holder = new Set().newViewHolder((TextView) convertView.findViewById(R.id.textViewWeight),
+            convertView = inflater.inflate(R.layout.expandable_list_item_child, null);
+            holder = new Set().newViewHolder((TextView) convertView.findViewById(R.id.textViewWeight),
                         (TextView) convertView.findViewById(R.id.textViewReiterations));
-            //}
 
             convertView.setTag(holder);
-
-            /*if (isRemovable) {
-                final View finalConvertView = convertView;
-                final ImageButton deleteButton = (ImageButton) finalConvertView.getRootView().findViewById(R.id.button_delete);
-
-                holder.getCheckBox().setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-                        final CheckBox cb = (CheckBox) v;
-                        cb.setChecked(cb.isChecked());
-                        final Set set = (Set) cb.getTag();
-                        set.setChecked(cb.isChecked());
-
-                        // check if parent is needed to be checked
-                        System.out.println(exercises);
-                        System.out.println(set.getExercise());
-                        final int pos = exercises.indexOf(set.getExercise());
-                        if (areSame(groups.get(pos)) != 0) {
-                            exercises.get(pos).setChecked(cb.isChecked());
-                        }
-
-                        deleteButton.setVisibility(View.VISIBLE);
-                        deleteButton.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                final int pos = exercises.indexOf(set.getExercise());
-                                final List<Set> setList = groups.get(pos);
-                                for (Set r : setList) {
-                                    if (r.isChecked()) {
-                                        setList.remove(r);
-
-                                        if (setList.isEmpty()) {
-                                            exercises.remove(pos);
-                                            groups.remove(pos);
-                                        }
-
-                                        notifyDataSetChanged();
-                                    }
-                                }
-                                checkSelections(deleteButton);
-                            }
-                        });
-
-                        if (cb.isChecked()) {
-                            deleteButton.setVisibility(View.VISIBLE);
-                        } else {
-                            checkSelections(deleteButton);
-                        }
-                    }
-                });
-            }*/
         } else {
             holder = (Set.ViewHolder) convertView.getTag();
         }
@@ -208,10 +141,6 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
         final Set set = groups.get(groupPosition).get(childPosition);
         holder.getWeight().setText(String.valueOf(set.getWeight()));
         holder.getTimes().setText(String.valueOf(set.getTimes()));
-        /*if (isRemovable) {
-            holder.getCheckBox().setChecked(set.isChecked());
-            holder.getCheckBox().setTag(set);
-        }*/
 
         return convertView;
     }
@@ -232,33 +161,5 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
         deleteButton.setVisibility(View.INVISIBLE);
         if (groups.size() > 0)
             endButton.setVisibility(View.VISIBLE);
-    }
-
-    private void checkSelections(final ImageButton deleteButton) {
-        for (List<Set> setList : groups) {
-            for (Set r : setList) {
-                if (r.isChecked()) {
-                    return;
-                }
-            }
-        }
-        deleteButton.setVisibility(View.INVISIBLE);
-    }
-
-    private int areSame(List<Set> list) {
-        boolean ors = list.get(0).isChecked();
-        boolean ands = ors;
-
-        for (Set r : list) {
-            ors |= r.isChecked();
-            ands &= r.isChecked();
-        }
-
-        if (ands)
-            return 1;
-        else if (ors)
-            return -1;
-        else
-            return 0;
     }
 }

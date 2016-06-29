@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:background="@drawable/button_delete"
-                android:src="@drawable/ic_delete_red_24dp"
+                android:src="@drawable/ic_delete_white_24dp_xxhdpi"
                 android:id="@+id/button_delete"
                 android:layout_gravity="start|bottom"
                 android:layout_marginStart="20dp"

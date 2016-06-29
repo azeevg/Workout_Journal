@@ -8,12 +8,8 @@ import android.view.ViewGroup;
 import android.widget.*;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class TrainingCreatingActivity extends Activity {
 
@@ -57,7 +53,6 @@ public class TrainingCreatingActivity extends Activity {
         });
     }
 
-
     private void displayExpandableList() {
         final ExpandableListView listView = (ExpandableListView) findViewById(R.id.workoutExpandableListView);
         listView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
@@ -67,11 +62,21 @@ public class TrainingCreatingActivity extends Activity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        ArrayList<Set> sets = (ArrayList<Set>) data.getExtras().getSerializable("exerciseSets");
-        exercises.add(sets);
-        adapter.notifyDataSetChanged();
-        final ImageButton endButton = (ImageButton) findViewById(R.id.button_end);
-        if (endButton.getVisibility() == View.INVISIBLE)
-            endButton.setVisibility(View.VISIBLE);
+        if (resultCode == RESULT_OK) {
+            ArrayList<Set> sets = (ArrayList<Set>) data.getExtras().getSerializable("exerciseSets");
+            exercises.add(sets);
+            adapter.notifyDataSetChanged();
+            final ImageButton endButton = (ImageButton) findViewById(R.id.button_end);
+            if (endButton.getVisibility() == View.INVISIBLE)
+                endButton.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        setResult(RESULT_CANCELED, intent);
+        finish();
+        //moveTaskToBack(true);
     }
 }

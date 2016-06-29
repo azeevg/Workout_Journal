@@ -46,9 +46,20 @@ public class ExerciseChoosingActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Intent intent = new Intent();
-        intent.putExtra("exerciseSets", data.getExtras().getSerializable("exerciseSets"));
-        setResult(RESULT_OK, intent);
+        if (requestCode == RESULT_OK) {
+            intent.putExtra("exerciseSets", data.getExtras().getSerializable("exerciseSets"));
+            setResult(RESULT_OK, intent);
+        }
+        else
+            setResult(RESULT_CANCELED, intent);
         finish();
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        setResult(RESULT_CANCELED, intent);
+        finish();
+        //moveTaskToBack(true);
+    }
 }
