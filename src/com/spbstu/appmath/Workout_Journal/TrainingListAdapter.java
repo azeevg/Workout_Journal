@@ -104,7 +104,7 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
                             @Override
                             public void onClick(View v) {
                                 for (Exercise e : exercises) {
-                                    if (e.getCheckBox()) {
+                                    if (e.isChecked()) {
                                         groups.remove(exercises.indexOf(e));
                                         exercises.remove(e);
                                         notifyDataSetChanged();

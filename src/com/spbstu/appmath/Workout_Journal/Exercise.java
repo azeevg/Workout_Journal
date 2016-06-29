@@ -1,6 +1,5 @@
 package com.spbstu.appmath.Workout_Journal;
 
-import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
@@ -11,13 +10,30 @@ public class Exercise implements Serializable {
     private boolean isChecked;
     private int id;
 
+    class ViewHolder {
+        TextView name;
+        CheckBox checkBox;
+        private int id;
+
+        public ViewHolder(final TextView name, final CheckBox checkBox) {
+            this.checkBox = checkBox;
+            this.name = name;
+        }
+
+        public CheckBox getCheckBox() {
+            return checkBox;
+        }
+
+        public TextView getName() {
+            return name;
+        }
+    }
+
+
     public Exercise() {
         this.name = null;
     }
 
-    public Exercise(final String name) {
-        this.name = name;
-    }
 
     public Exercise(final String name, final int id) {
         this.name = name;
@@ -27,6 +43,26 @@ public class Exercise implements Serializable {
     public Exercise(final String name, final boolean isChecked) {
         this.name = name;
         this.isChecked = isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.isChecked = checked;
+    }
+
+    public ViewHolder newViewHolder(final TextView name) {
+        return new ViewHolder(name, null);
+    }
+
+    public ViewHolder newViewHolder(final TextView name, final CheckBox checkBox) {
+        return new ViewHolder(name, checkBox);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean isChecked() {
+        return isChecked;
     }
 
     @Override
@@ -45,49 +81,5 @@ public class Exercise implements Serializable {
         int result = name.hashCode();
         result = 31 * result + id;
         return result;
-    }
-
-    public void setChecked(boolean checked) {
-        this.isChecked = checked;
-    }
-
-    public ViewHolder newViewHolder(final TextView name) {
-        return new ViewHolder(name, null, null);
-    }
-
-    class ViewHolder {
-        TextView name;
-        TextView description;
-        CheckBox isChecked;
-
-        public ViewHolder(final TextView name, final TextView description, final CheckBox isChecked) {
-            this.description = description;
-            this.isChecked = isChecked;
-            this.name = name;
-        }
-
-        public CheckBox getCheckBox() {
-            return isChecked;
-        }
-
-        public TextView getName() {
-            return name;
-        }
-    }
-
-    public ViewHolder newViewHolder(final TextView name, final TextView description, final CheckBox isChecked) {
-        return new ViewHolder(name, description, isChecked);
-    }
-
-    public ViewHolder newViewHolder(final TextView name, final CheckBox isChecked) {
-        return new ViewHolder(name, null, isChecked);
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public boolean getCheckBox() {
-        return isChecked;
     }
 }
