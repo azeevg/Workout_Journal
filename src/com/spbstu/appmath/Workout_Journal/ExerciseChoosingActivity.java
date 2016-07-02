@@ -46,7 +46,7 @@ public class ExerciseChoosingActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Intent intent = new Intent();
-        if (requestCode == RESULT_OK) {
+        if (resultCode == RESULT_OK) {
             intent.putExtra("exerciseSets", data.getExtras().getSerializable("exerciseSets"));
             setResult(RESULT_OK, intent);
         }

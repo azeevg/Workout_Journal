@@ -130,6 +130,7 @@ public class MainActivity extends Activity {
         if (resultCode == RESULT_OK) {
             Training training = (Training)data.getExtras().getSerializable(TrainingCreatingActivity.TRAINING);
             plannedTrains.add(training);
+            //plannedTrains = db.getAllPlannedTrainings();
             adapter.notifyDataSetChanged();
             Toast.makeText(getApplicationContext(), "Тренировка создана", Toast.LENGTH_SHORT).show();
         }

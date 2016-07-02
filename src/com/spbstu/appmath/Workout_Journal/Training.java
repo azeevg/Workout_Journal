@@ -6,31 +6,39 @@ import android.widget.TextView;
 import java.io.Serializable;
 
 public class Training implements Serializable {
- //    final int id;
-    final String name;
-    final String date;
+    private final String name;
+    private final String date;
     private boolean checked;
-    private int id;
+    private final int id;
 
     public Training() {
         name = null;
         date = null;
+        id = 0;
     }
 
-    public Training(final String name, final String date, final boolean checked) {
+    public Training(final int id, final String name) {
+        this.id = id;
+        this.name = name;
+        this.date = null;
+    }
+
+    public Training(final int id, final String name, final String date) {
+        this.id = id;
+        this.name = name;
+        this.date = date;
+    }
+
+    /*public Training(final String name) {
+        this.name = name;
+        this.date = null;
+    }*/
+
+    public Training(final int id, final String name, final String date, final boolean checked) {
+        this.id = id;
         this.name = name;
         this.date = date;
         this.checked = checked;
-    }
-
-    public Training(final String name, final String date) {
-        this.name = name;
-        this.date = date;
-    }
-
-    public Training(final String name) {
-        this.name = name;
-        this.date = null;
     }
 
     public ViewHolder getViewHolder(final TextView name, final TextView date, final CheckBox checkBox) {

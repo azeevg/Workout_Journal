@@ -68,11 +68,14 @@ public class DBHelper {
     public List<Training> getAllPlannedTrainings() {
         final List<Training> trainings = new CopyOnWriteArrayList<>();
         SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_PATH_NAME, null, SQLiteDatabase.OPEN_READONLY);
-        Cursor res = db.rawQuery("SELECT * FROM " + DBContract.WorkoutsPlan.TABLE, null);
+        Cursor res = db.query(DBContract.WorkoutsPlan.TABLE,
+                new String[]{DBContract.WorkoutsPlan.COLUMN_ID, DBContract.WorkoutsPlan.COLUMN_NAME},
+                null, null, null, null, null);
         res.moveToFirst();
         while(!res.isAfterLast()) {
             String name = res.getString(res.getColumnIndex(DBContract.WorkoutsPlan.COLUMN_NAME));
-            trainings.add(new Training(name));
+            int id = res.getInt(res.getColumnIndex(DBContract.WorkoutsPlan.COLUMN_ID));
+            trainings.add(new Training(id, name));
             res.moveToNext();
         }
         res.close();
@@ -82,12 +85,16 @@ public class DBHelper {
     public List<Training> getAllDoneTrainings() {
         final List<Training> trainings = new CopyOnWriteArrayList<>();
         SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_PATH_NAME, null, SQLiteDatabase.OPEN_READONLY);
-        Cursor res = db.rawQuery("SELECT * FROM " + DBContract.WorkoutsDone.TABLE, null);
+        Cursor res = db.query(DBContract.WorkoutsDone.TABLE,
+                new String[]{DBContract.WorkoutsDone.COLUMN_ID, DBContract.WorkoutsDone.COLUMN_NAME,
+                        DBContract.WorkoutsDone.COLUMN_DATE},
+                null, null, null, null, null);
         res.moveToFirst();
         while(!res.isAfterLast()) {
             String name = res.getString(res.getColumnIndex(DBContract.WorkoutsDone.COLUMN_NAME));
             String date = res.getString(res.getColumnIndex(DBContract.WorkoutsDone.COLUMN_DATE));
-            trainings.add(new Training(name, date));
+            int id = res.getInt(res.getColumnIndex(DBContract.WorkoutsDone.COLUMN_ID));
+            trainings.add(new Training(id, name, date));
             res.moveToNext();
         }
         res.close();
@@ -96,9 +103,11 @@ public class DBHelper {
 
     public boolean deletePlannedTraining(final Training training) {
         SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_PATH_NAME, null, SQLiteDatabase.OPEN_READWRITE);
-        if (training.date == null) {
+        if (training.getDate() == null) {
             db.delete(DBContract.WorkoutsPlan.TABLE,
-                    DBContract.WorkoutsPlan.COLUMN_NAME + " = '" + training.name + "'", null);
+                    DBContract.WorkoutsPlan.COLUMN_ID + " = '" + training.getId() + "'", null);
+            db.delete(DBContract.SetsPlan.TABLE,
+                    DBContract.SetsPlan.COLUMN_WORKOUT_ID + " = '" + training.getId() + "'", null);
             db.close();
             return true;
         }
@@ -108,10 +117,12 @@ public class DBHelper {
 
     public boolean deleteDoneTraining(final Training training) {
         SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_PATH_NAME, null, SQLiteDatabase.OPEN_READWRITE);
-        if (training.date != null) {
+        if (training.getDate() != null) {
             db.delete(DBContract.WorkoutsDone.TABLE,
-                    DBContract.WorkoutsDone.COLUMN_NAME + " = '" + training.name + "' AND " +
-                    DBContract.WorkoutsDone.COLUMN_DATE + " = '" + training.date + "'", null);
+                    DBContract.WorkoutsDone.COLUMN_NAME + " = '" + training.getName() + "' AND " +
+                    DBContract.WorkoutsDone.COLUMN_DATE + " = '" + training.getDate() + "'", null);
+            db.delete(DBContract.SetsDone.TABLE,
+                    DBContract.SetsDone.COLUMN_WORKOUT_ID + " = '" + training.getId() + "'", null);
             db.close();
             return true;
         }
@@ -147,14 +158,42 @@ public class DBHelper {
         return description;
     }
 
+    public List<Set> getPlannedSets(int workoutId) {
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_PATH_NAME, null, SQLiteDatabase.OPEN_READONLY);
+        Cursor res = db.query(DBContract.SetsPlan.TABLE, null,
+                DBContract.SetsPlan.COLUMN_WORKOUT_ID + "='" + workoutId + "'",
+                null, null, null, null);
+        res.moveToFirst();
+        List<Set> sets = new ArrayList<>();
+        while(!res.isAfterLast()) {
+            int exerciseId = res.getInt(res.getColumnIndex(DBContract.SetsPlan.COLUMN_EXERCISE_ID));
+            Cursor exerciseNameResult = db.query(DBContract.Exercises.TABLE,
+                    new String[]{DBContract.Exercises.COLUMN_NAME},
+                    DBContract.Exercises.COLUMN_ID + "=" + exerciseId,
+                    null, null, null, null);
+            exerciseNameResult.moveToFirst();
+            String exerciseName = exerciseNameResult.getString(
+                    exerciseNameResult.getColumnIndex(DBContract.Exercises.COLUMN_NAME));
+            exerciseNameResult.close();
+            Exercise exercise = new Exercise(exerciseName, exerciseId);
+            double weight = res.getDouble(res.getColumnIndex(DBContract.SetsPlan.COLUMN_WEIGHT));
+            int times = res.getInt(res.getColumnIndex(DBContract.SetsPlan.COLUMN_REPS));
+            sets.add(new Set(exercise, weight, times));
+            res.moveToNext();
+        }
+        res.close();
+        return sets;
+    }
 
-    public void writePlannedTrainingAndSets(Training training, List<List<Set>> sets) {
+
+    public Training writePlannedTrainingAndSets(String trainingName, List<List<Set>> sets) {
         SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_PATH_NAME, null, SQLiteDatabase.OPEN_READWRITE);
 
         // training
         ContentValues newTraining = new ContentValues();
-        newTraining.put(DBContract.WorkoutsPlan.COLUMN_NAME, training.getName());
+        newTraining.put(DBContract.WorkoutsPlan.COLUMN_NAME, trainingName);
         int workoutId = (int)db.insert(DBContract.WorkoutsPlan.TABLE, null, newTraining);
+        Training training = new Training(workoutId, trainingName);
 
         // sets
         for (List<Set> listSet : sets) {
@@ -175,5 +214,7 @@ public class DBHelper {
                 db.insert(DBContract.SetsPlan.TABLE, null, newSet);
             }
         }
+
+        return training;
     }
 }

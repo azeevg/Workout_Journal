@@ -121,8 +121,9 @@ public class SetsCreatingActivity extends Activity {
                     intent.putExtra("exerciseSets", (Serializable) sets);
                     setResult(RESULT_OK, intent);
                 }
-                else
+                else {
                     setResult(RESULT_CANCELED, intent);
+                }
                 finish();
             }
         });

@@ -42,11 +42,11 @@ public class TrainingCreatingActivity extends Activity {
                 /*Calendar c = Calendar.getInstance();
                 SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy");
                 String date = df.format(c.getTime());*/
-                Training training = new Training(getIntent().getStringExtra(MainActivity.TRAINING_NAME));
+                String trainingName =  getIntent().getStringExtra(MainActivity.TRAINING_NAME);
                 DBHelper db = new DBHelper(TrainingCreatingActivity.this);
-                db.writePlannedTrainingAndSets(training, exercises);
+                Training training = db.writePlannedTrainingAndSets(trainingName, exercises);
                 Intent intent = new Intent();
-                intent.putExtra(TRAINING, (Serializable) training);
+                intent.putExtra(TRAINING, training);
                 setResult(RESULT_OK, intent);
                 finish();
             }
@@ -69,7 +69,10 @@ public class TrainingCreatingActivity extends Activity {
             final ImageButton endButton = (ImageButton) findViewById(R.id.button_end);
             if (endButton.getVisibility() == View.INVISIBLE)
                 endButton.setVisibility(View.VISIBLE);
+            Toast.makeText(getApplicationContext(), "Упражнение добавлено", Toast.LENGTH_SHORT).show();
         }
+        else
+            Toast.makeText(getApplicationContext(), "Упражнение не добавлено", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -77,6 +80,5 @@ public class TrainingCreatingActivity extends Activity {
         Intent intent = new Intent();
         setResult(RESULT_CANCELED, intent);
         finish();
-        //moveTaskToBack(true);
     }
 }
