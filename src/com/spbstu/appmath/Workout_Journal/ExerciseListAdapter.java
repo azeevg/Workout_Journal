@@ -55,7 +55,7 @@ public class ExerciseListAdapter implements ListAdapter {
 
         if (convertView == null) {
             final LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.list_item_exercises_full_list, null);
+            convertView = inflater.inflate(R.layout.exercises_full_list_list_item, null);
 
             holder = new Exercise().newViewHolder((TextView) convertView.findViewById(R.id.listItem));
             convertView.setTag(holder);

@@ -18,8 +18,6 @@ public class MainListAdapter extends ArrayAdapter<Training> {
     MainListAdapter(Context context, int resource, List<Training> trains,
                     final ListView listView, final DBHelper db) {
         super(context, resource, trains);
-//        this.trainings = new CopyOnWriteArrayList<>();
-//        this.trainings.addAll(trains);
         this.trainings = trains;
         this.listView = listView;
         this.db = db;
@@ -32,7 +30,7 @@ public class MainListAdapter extends ArrayAdapter<Training> {
 
         if (convertView == null) {
             LayoutInflater vi = (LayoutInflater) super.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = vi.inflate(R.layout.list_item, null);
+            convertView = vi.inflate(R.layout.main_list_item, null);
 
             holder = new Training().getViewHolder((CheckBox) convertView.findViewById(R.id.checkBox),
                     (TextView) convertView.findViewById(R.id.listItem));
@@ -49,7 +47,6 @@ public class MainListAdapter extends ArrayAdapter<Training> {
                     training.setChecked(cb.isChecked());
 
                     final ImageButton deleteButton = (ImageButton) finalConvertView.getRootView().findViewById(R.id.button_delete);
-                    deleteButton.setVisibility(View.VISIBLE);
                     deleteButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -59,17 +56,10 @@ public class MainListAdapter extends ArrayAdapter<Training> {
                                     notifyDataSetChanged();
                                 }
                             }
-                            checkSelections(deleteButton);
+                            setButtonsVisibility(deleteButton);
                         }
                     });
-
-                    if (cb.isChecked()) {
-                        deleteButton.setVisibility(View.VISIBLE);
-                    } else {
-                        checkSelections(deleteButton);
-                    }
-
-
+                    setButtonsVisibility(deleteButton);
                 }
             });
         } else {
@@ -84,13 +74,13 @@ public class MainListAdapter extends ArrayAdapter<Training> {
         return convertView;
     }
 
-    private void checkSelections(final ImageButton deleteButton) {
+    private void setButtonsVisibility(final ImageButton deleteButton) {
         for (Training t : trainings) {
             if (t.isChecked()) {
+                deleteButton.setVisibility(View.VISIBLE);
                 return;
             }
         }
         deleteButton.setVisibility(View.INVISIBLE);
-
     }
 }

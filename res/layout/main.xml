@@ -31,7 +31,6 @@
                 android:layout_gravity="end|center_vertical"
                 >
 
-
             <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -56,13 +55,12 @@
             android:layout_height="match_parent"
             android:background="#f6f9fb">
 
-
         <ListView
                 android:id="@+id/trainList"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="start|top"
-                tools:listitem="@layout/list_item"
+                tools:listitem="@layout/main_list_item"
                 android:divider="#dedede"
                 android:dividerHeight="1dp"/>
 

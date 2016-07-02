@@ -19,17 +19,16 @@
                 android:layout_height="40dp"
                 android:text="@string/history_title"
                 android:id="@+id/textView"
-                android:layout_gravity="left|center_vertical"
+                android:layout_gravity="start|center_vertical"
                 android:textColor="#ffffff"
-                android:textSize="30dp"
-                android:layout_marginLeft="20dp"/>
+                android:textSize="30sp"
+                android:layout_marginStart="20dp"/>
     </FrameLayout>
 
     <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#f6f9fb">
-
 
         <ListView
                 android:id="@+id/historyListView"

@@ -5,20 +5,18 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputFilter;
-import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Activity with list of planned trainings
+ */
 public class MainActivity extends Activity {
 
     public static final String TRAINING_NAME = "trainingName";
@@ -44,7 +42,7 @@ public class MainActivity extends Activity {
             e.printStackTrace();
         }
 
-        displayTrainings();
+        displayPlannedTrainings();
 
         final ImageButton addButton = (ImageButton) findViewById(R.id.button_add);
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -101,10 +99,10 @@ public class MainActivity extends Activity {
         });
     }
 
-    private void displayTrainings() {
+    private void displayPlannedTrainings() {
         plannedTrains = db.getAllPlannedTrainings();
         ListView listView = (ListView) findViewById(R.id.trainList);
-        adapter = new MainListAdapter(this, R.layout.list_item, plannedTrains, listView, db);
+        adapter = new MainListAdapter(this, R.layout.main_list_item, plannedTrains, listView, db);
 
         listView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
         listView.setAdapter(adapter);

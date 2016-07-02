@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Дневник тренировок</string>
+    <string name="app_label">Workout Journal</string>
     <string name="main_window_title">Тренировки</string>
     <string name="history_title">История</string>
     <string name="history_list_item_name">Название тренировки</string>

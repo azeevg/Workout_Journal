@@ -1,6 +1,7 @@
 package com.spbstu.appmath.Workout_Journal;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Activity with list of done trainings
+ */
 public class HistoryActivity extends Activity {
 
     @Override
@@ -31,13 +36,10 @@ public class HistoryActivity extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // TODO: 19.06.2016 HistoryTrainingActivity
-
-                Toast.makeText(getApplicationContext(),
-                        "Clicked on Row: " + position,
-                        Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(HistoryActivity.this, HistoryTrainingActivity.class);
+                intent.putExtra(MainActivity.TRAINING_ID, historyTrains.get(position).getId());
+                startActivity(intent);
             }
         });
-        //return historyTrains;
     }
 }

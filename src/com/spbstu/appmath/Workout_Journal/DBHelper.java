@@ -134,12 +134,13 @@ public class DBHelper {
         List<Exercise> exercises = new ArrayList<>();
         SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_PATH_NAME, null, SQLiteDatabase.OPEN_READONLY);
         Cursor res = db.query(DBContract.Exercises.TABLE,
-                new String[]{DBContract.Exercises.COLUMN_NAME},
+                new String[]{DBContract.Exercises.COLUMN_NAME, DBContract.Exercises.COLUMN_ID},
                 null, null, null, null, null);
         res.moveToFirst();
         while(!res.isAfterLast()) {
             String name = res.getString(res.getColumnIndex(DBContract.Exercises.COLUMN_NAME));
-            exercises.add(new Exercise(name, false));
+            int id = res.getInt(res.getColumnIndex(DBContract.Exercises.COLUMN_ID));
+            exercises.add(new Exercise(id, name, false));
             res.moveToNext();
         }
         res.close();
@@ -175,9 +176,36 @@ public class DBHelper {
             String exerciseName = exerciseNameResult.getString(
                     exerciseNameResult.getColumnIndex(DBContract.Exercises.COLUMN_NAME));
             exerciseNameResult.close();
-            Exercise exercise = new Exercise(exerciseName, exerciseId);
+            Exercise exercise = new Exercise(exerciseId, exerciseName);
             double weight = res.getDouble(res.getColumnIndex(DBContract.SetsPlan.COLUMN_WEIGHT));
             int times = res.getInt(res.getColumnIndex(DBContract.SetsPlan.COLUMN_REPS));
+            sets.add(new Set(exercise, weight, times));
+            res.moveToNext();
+        }
+        res.close();
+        return sets;
+    }
+
+    public List<Set> getDoneSets(int workoutId) {
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_PATH_NAME, null, SQLiteDatabase.OPEN_READONLY);
+        Cursor res = db.query(DBContract.SetsDone.TABLE, null,
+                DBContract.SetsDone.COLUMN_WORKOUT_ID + "='" + workoutId + "'",
+                null, null, null, null);
+        res.moveToFirst();
+        List<Set> sets = new ArrayList<>();
+        while(!res.isAfterLast()) {
+            int exerciseId = res.getInt(res.getColumnIndex(DBContract.SetsDone.COLUMN_EXERCISE_ID));
+            Cursor exerciseNameResult = db.query(DBContract.Exercises.TABLE,
+                    new String[]{DBContract.Exercises.COLUMN_NAME},
+                    DBContract.Exercises.COLUMN_ID + "=" + exerciseId,
+                    null, null, null, null);
+            exerciseNameResult.moveToFirst();
+            String exerciseName = exerciseNameResult.getString(
+                    exerciseNameResult.getColumnIndex(DBContract.Exercises.COLUMN_NAME));
+            exerciseNameResult.close();
+            Exercise exercise = new Exercise(exerciseId, exerciseName);
+            double weight = res.getDouble(res.getColumnIndex(DBContract.SetsDone.COLUMN_WEIGHT));
+            int times = res.getInt(res.getColumnIndex(DBContract.SetsDone.COLUMN_REPS));
             sets.add(new Set(exercise, weight, times));
             res.moveToNext();
         }

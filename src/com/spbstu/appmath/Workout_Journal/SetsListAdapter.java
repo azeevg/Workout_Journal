@@ -1,8 +1,6 @@
 package com.spbstu.appmath.Workout_Journal;
 
 import android.content.Context;
-import android.database.DataSetObserver;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +26,7 @@ public class SetsListAdapter extends ArrayAdapter<Set> {
         final Set.ViewHolder holder;
 
         if (convertView == null) {
-            convertView = vi.inflate(R.layout.set_list_item, null);
+            convertView = vi.inflate(R.layout.sets_creating_list_item, null);
             holder = new Set().newViewHolder((TextView) convertView.findViewById(R.id.textViewWeight),
                     (TextView) convertView.findViewById(R.id.textViewReps),
                     (CheckBox) convertView.findViewById(R.id.checkBox));
@@ -70,7 +68,7 @@ public class SetsListAdapter extends ArrayAdapter<Set> {
             holder = (Set.ViewHolder) convertView.getTag();
 
         Set set = sets.get(position);
-        holder.getWeight().setText(set.getWeight().toString());
+        holder.getWeight().setText(((Double)set.getWeight()).toString());
         holder.getTimes().setText(((Integer)set.getTimes()).toString());
         holder.getCheckBox().setChecked(set.isChecked());
 

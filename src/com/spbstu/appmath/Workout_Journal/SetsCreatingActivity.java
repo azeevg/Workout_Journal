@@ -18,11 +18,10 @@ import android.widget.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 public class SetsCreatingActivity extends Activity {
 
-    private ArrayList<Set> sets = new ArrayList<Set>();
+    private ArrayList<Set> sets = new ArrayList<>();
     ArrayAdapter<Set> adapter;
 
     @Override
@@ -31,7 +30,7 @@ public class SetsCreatingActivity extends Activity {
         setContentView(R.layout.sets_creating);
 
         ListView listView = (ListView) findViewById(R.id.setsListView);
-        adapter = new SetsListAdapter(this, R.layout.set_list_item, sets, listView);
+        adapter = new SetsListAdapter(this, R.layout.sets_creating_list_item, sets, listView);
         listView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
         listView.setAdapter(adapter);
 
@@ -118,7 +117,7 @@ public class SetsCreatingActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent();
                 if (sets.size() > 0) {
-                    intent.putExtra("exerciseSets", (Serializable) sets);
+                    intent.putExtra("exerciseSets", sets);
                     setResult(RESULT_OK, intent);
                 }
                 else {

@@ -29,11 +29,6 @@ public class Training implements Serializable {
         this.date = date;
     }
 
-    /*public Training(final String name) {
-        this.name = name;
-        this.date = null;
-    }*/
-
     public Training(final int id, final String name, final String date, final boolean checked) {
         this.id = id;
         this.name = name;

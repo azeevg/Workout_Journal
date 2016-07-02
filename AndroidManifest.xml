@@ -5,7 +5,8 @@
           android:versionName="1.0">
     <uses-sdk android:minSdkVersion="22"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <application android:theme="@android:style/Theme.NoTitleBar">
+    <application android:label="@string/app_label" android:icon="@drawable/wj_icon"
+            android:theme="@android:style/Theme.NoTitleBar">
         <activity android:name=".MainActivity"
                   android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
@@ -26,6 +27,13 @@
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".MainActivity"/>
+        </activity>
+
+        <activity android:name=".HistoryTrainingActivity"
+                  android:theme="@android:style/Theme.NoTitleBar">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".HistoryActivity"/>
         </activity>
 
         <activity android:name=".ExerciseChoosingActivity"

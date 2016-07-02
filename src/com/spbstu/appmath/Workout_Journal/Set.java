@@ -12,7 +12,7 @@ public class Set implements Serializable {
     private final int times;
     private boolean checked;
 
-    public Set(final Exercise exercise, final Double weight, final int times) {
+    public Set(final Exercise exercise, final double weight, final int times) {
         this.exercise = exercise;
         this.times = times;
         this.weight = weight;
@@ -24,54 +24,54 @@ public class Set implements Serializable {
         times = 0;
     }
 
-    public ViewHolder newViewHolder(final TextView weight, final TextView times, final CheckBox checkBox) {
-        return new ViewHolder(weight, times, checkBox);
+    public Exercise getExercise() {
+        return exercise;
     }
-
+    public int getTimes() {
+        return times;
+    }
+    public double getWeight() {
+        return weight;
+    }
     public void setChecked(boolean checked) {
         this.checked = checked;
     }
-
     public boolean isChecked() {
         return checked;
+    }
+
+    public ViewHolder newViewHolder(final TextView weight, final TextView times, final CheckBox checkBox) {
+        return new ViewHolder(weight, times, checkBox);
     }
 
     class ViewHolder {
         TextView weight;
         TextView times;
         CheckBox checkBox;
-
         public ViewHolder(final TextView weight, final TextView times) {
             this.times = times;
             this.weight = weight;
         }
-
         public ViewHolder(final TextView weight, final TextView times, final CheckBox checkBox) {
             this.checkBox = checkBox;
             this.times = times;
             this.weight = weight;
         }
-
         public CheckBox getCheckBox() {
             return checkBox;
         }
-
         public void setCheckBox(CheckBox checkBox) {
             this.checkBox = checkBox;
         }
-
         public TextView getTimes() {
             return times;
         }
-
         public void setTimes(TextView times) {
             this.times = times;
         }
-
         public TextView getWeight() {
             return weight;
         }
-
         public void setWeight(TextView weight) {
             this.weight = weight;
         }
@@ -79,18 +79,6 @@ public class Set implements Serializable {
 
     public ViewHolder newViewHolder(final TextView weight, final TextView times) {
         return new ViewHolder(weight, times);
-    }
-
-    public Exercise getExercise() {
-        return exercise;
-    }
-
-    public int getTimes() {
-        return times;
-    }
-
-    public Double getWeight() {
-        return weight;
     }
 
     @Override
