@@ -23,6 +23,7 @@ public class SetsCreatingActivity extends Activity {
 
     private ArrayList<Set> sets = new ArrayList<>();
     ArrayAdapter<Set> adapter;
+    public static final int maxSetsAmount = 20;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +68,11 @@ public class SetsCreatingActivity extends Activity {
                                 ImageButton buttonEnd = (ImageButton) findViewById(R.id.button_end);
                                 if (buttonEnd.getVisibility() == View.INVISIBLE)
                                     buttonEnd.setVisibility(View.VISIBLE);
+
+                                if (sets.size() >= maxSetsAmount)
+                                    buttonAdd.setVisibility(View.INVISIBLE);
+                                else
+                                    buttonAdd.setVisibility(View.VISIBLE);
 
                                 Toast.makeText(getApplicationContext(), "Подход добавлен", Toast.LENGTH_SHORT).show();
                             }

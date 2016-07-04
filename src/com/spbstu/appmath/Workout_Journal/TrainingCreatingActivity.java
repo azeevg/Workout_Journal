@@ -17,6 +17,7 @@ public class TrainingCreatingActivity extends Activity {
     private TrainingListAdapter adapter;
 
     public static final String TRAINING = "trainingResult";
+    public static final int maxExercisesAmount = 20;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,11 @@ public class TrainingCreatingActivity extends Activity {
                 final Intent intent = new Intent(TrainingCreatingActivity.this,
                         ExerciseChoosingActivity.class);
                 startActivityForResult(intent, 1);
+
+                if (exercises.size() >= maxExercisesAmount)
+                    addButton.setVisibility(View.INVISIBLE);
+                else
+                    addButton.setVisibility(View.VISIBLE);
             }
         });
 

@@ -46,8 +46,10 @@ public class SetsListAdapter extends ArrayAdapter<Set> {
                             (ImageButton) finalConvertView.getRootView().findViewById(R.id.button_delete);
                     final ImageButton endButton =
                             (ImageButton) finalConvertView.getRootView().findViewById(R.id.button_end);
+                    final ImageButton addButton =
+                            (ImageButton) finalConvertView.getRootView().findViewById(R.id.button_add);
 
-                    setButtonsVisibility(deleteButton, endButton);
+                    setButtonsVisibility(deleteButton, endButton, addButton);
 
                     deleteButton.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -58,7 +60,7 @@ public class SetsListAdapter extends ArrayAdapter<Set> {
                                 }
                             }
                             notifyDataSetChanged();
-                            setButtonsVisibility(deleteButton, endButton);
+                            setButtonsVisibility(deleteButton, endButton, addButton);
                         }
                     });
                 }
@@ -75,7 +77,8 @@ public class SetsListAdapter extends ArrayAdapter<Set> {
         return convertView;
     }
 
-    private void setButtonsVisibility(final ImageButton deleteButton, final ImageButton endButton) {
+    private void setButtonsVisibility(final ImageButton deleteButton, final ImageButton endButton,
+                                      final ImageButton addButton) {
         for (Set set : sets) {
             if (set.isChecked()) {
                 endButton.setVisibility(View.INVISIBLE);
@@ -86,5 +89,9 @@ public class SetsListAdapter extends ArrayAdapter<Set> {
         deleteButton.setVisibility(View.INVISIBLE);
         if (sets.size() > 0)
             endButton.setVisibility(View.VISIBLE);
+        if (sets.size() >= SetsCreatingActivity.maxSetsAmount)
+            addButton.setVisibility(View.INVISIBLE);
+        else
+            addButton.setVisibility(View.VISIBLE);
     }
 }
