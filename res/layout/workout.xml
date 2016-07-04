@@ -1,17 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/content"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="@color/light_gray_1"
-            android:weightSum="1">
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                   xmlns:tools="http://schemas.android.com/tools"
                   android:orientation="vertical"
-                  android:layout_width="fill_parent"
-                  android:layout_height="wrap_content"
-
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
                   android:background="@color/light_gray_1">
 
         <FrameLayout
@@ -72,7 +64,8 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginBottom="20dp"
                     android:textSize="50sp"
-                    android:textColor="#fff"/>
+                    android:textColor="#fff"
+                    android:onClick="jumpToPrevPage"/>
 
 
             <ImageButton
@@ -85,7 +78,7 @@
                     android:layout_gravity="end|bottom"
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="20dp"
-                    android:textSize="50sp"/>
+                    android:textSize="50sp"
+                    android:onClick="jumpToNextPage"/>
         </FrameLayout>
-    </LinearLayout>
-</ScrollView>
+</LinearLayout>
