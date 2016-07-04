@@ -34,6 +34,7 @@ public class TrainingCreatingActivity extends Activity {
                         ExerciseChoosingActivity.class);
                 startActivityForResult(intent, 1);
 
+                // Disable add button if maximum amount of exercises is reached
                 if (exercises.size() >= maxExercisesAmount)
                     addButton.setVisibility(View.INVISIBLE);
                 else

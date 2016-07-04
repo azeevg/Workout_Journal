@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.*;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class SetsCreatingActivity extends Activity {
@@ -31,7 +30,7 @@ public class SetsCreatingActivity extends Activity {
         setContentView(R.layout.sets_creating);
 
         ListView listView = (ListView) findViewById(R.id.setsListView);
-        adapter = new SetsListAdapter(this, R.layout.sets_creating_list_item, sets, listView);
+        adapter = new SetsCreatingListAdapter(this, R.layout.sets_creating_list_item, sets, listView);
         listView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
         listView.setAdapter(adapter);
 

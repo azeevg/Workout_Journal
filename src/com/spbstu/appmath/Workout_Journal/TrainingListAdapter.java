@@ -141,8 +141,8 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
         }
 
         final Set set = groups.get(groupPosition).get(childPosition);
-        holder.getWeight().setText(String.valueOf(set.getWeight()));
-        holder.getTimes().setText(String.valueOf(set.getTimes()));
+        holder.getTvWeight().setText(String.valueOf(set.getWeight()));
+        holder.getTvTimes().setText(String.valueOf(set.getTimes()));
 
         return convertView;
     }

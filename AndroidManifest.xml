@@ -72,7 +72,7 @@
         </activity>
 
 
-        <activity android:name=".TrainingStartingActivity"
+        <activity android:name=".ActiveTrainingActivity"
                   android:theme="@android:style/Theme.NoTitleBar">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"

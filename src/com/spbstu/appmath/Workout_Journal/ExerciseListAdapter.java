@@ -72,7 +72,7 @@ public class ExerciseListAdapter implements ListAdapter {
             @Override
             public void onClick(View v) {
                 final Intent intent = new Intent(v.getContext(), SetsCreatingActivity.class);
-                intent.putExtra("exercise", (Serializable)exercises.get(pos));
+                intent.putExtra("exercise", exercises.get(pos));
                 ((Activity)context).startActivityForResult(intent, 1);
             }
         });
