@@ -30,6 +30,8 @@
     <string name="training_name">Название тренировки</string>
     <string name="training_creating">Создание тренировки</string>
     <string name="sets_creating">Добавление подходов</string>
+    <string name="finish_training">Окончание тренировки</string>
+    <string name="finish_training_question">Закончить тренировку?</string>
 
 
     <string-array name="trainings">
