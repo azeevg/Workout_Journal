@@ -16,8 +16,8 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
-                    android:text="Название упражнения"
                     android:id="@+id/textView"
+                    android:text="@string/exercise_name"
                     android:layout_gravity="start|center_vertical"
                     android:textColor="#ffffff"
                     android:textSize="30sp"
@@ -32,11 +32,11 @@
 
 
             <ListView
-                    android:id="@+id/exercisesList"
+                        android:id="@+id/exercisesList"
                     android:layout_width="match_parent"
                     android:layout_height="fill_parent"
                     android:layout_gravity="start|top"
-                    tools:listitem="@layout/exercise_list_item"
+                    tools:listitem="@layout/workout_list_item"
                     android:divider="#dedede"
                     android:dividerHeight="1dp"/>
 

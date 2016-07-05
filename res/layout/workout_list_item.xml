@@ -1,32 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="horizontal"
-              android:layout_width="fill_parent"
+              android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:paddingBottom="10dp"
               android:paddingTop="10dp"
               android:gravity="center">
-
 
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/weight"
             android:textSize="20sp"
-            android:textColor="#000"
-            />
+            android:textColor="#000"/>
 
     <EditText
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:id="@+id/editWeight"
-            android:hint=""
-            android:imeOptions="flagNoExtractUi"
+            android:maxLength="6"
             android:layout_marginStart="5dp"
             style="@style/EditTextAppTheme"
-            android:gravity="top|center"
-            />
+            android:gravity="top|center"/>
 
     <TextView
             android:layout_width="wrap_content"
@@ -34,23 +30,16 @@
             android:text="@string/reiterations"
             android:textSize="20sp"
             android:layout_marginStart="30dp"
-            android:textColor="#000"
-
-            />
-
+            android:textColor="#000"/>
 
     <EditText
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:id="@+id/editReiterations"
-            android:hint=""
+            android:id="@+id/editReps"
             android:inputType="numberDecimal"
             android:layout_gravity="start"
-            android:imeOptions="flagNoExtractUi"
-            android:clickable="false"
             android:layout_marginStart="5dp"
             android:gravity="top|center"
-
             style="@style/EditTextAppTheme"/>
 
 </LinearLayout>

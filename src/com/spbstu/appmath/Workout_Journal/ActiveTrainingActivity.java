@@ -8,11 +8,14 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.widget.ImageButton;
 
 import java.util.List;
 
-public class TrainingStartingActivity extends FragmentActivity {
+/**
+ * Slider with a list of sets of an exercise which user planned to do and
+ * with fields for inserting user's results.
+ */
+public class ActiveTrainingActivity extends FragmentActivity {
     /**
      * The number of pages (wizard steps) to show in this demo.
      */
@@ -29,14 +32,19 @@ public class TrainingStartingActivity extends FragmentActivity {
      */
     private PagerAdapter mPagerAdapter;
 
+    /**
+     * List of sets grouped in sublists by their exercises
+     */
+    private List<List<Set>> groupedSets;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.workout_pager);
 
-        final List<List<Set>> list = (List<List<Set>>)
+        groupedSets = (List<List<Set>>)
                 getIntent().getExtras().getSerializable(TrainingPreviewActivity.TRAINING);
-        numPages = list.size();
+        numPages = groupedSets.size();
 
         // Instantiate a ViewPager and a PagerAdapter.
         mPager = (ViewPager) findViewById(R.id.pager);
@@ -56,18 +64,21 @@ public class TrainingStartingActivity extends FragmentActivity {
         }
     }
 
+    /**
+     * prevButton handler
+     */
     public void jumpToPrevPage(View view) {
         mPager.setCurrentItem(mPager.getCurrentItem() - 1, true);
     }
 
+    /**
+     * nextButton handler
+     */
     public void jumpToNextPage(View view) {
         mPager.setCurrentItem(mPager.getCurrentItem() + 1, true);
     }
 
-    /**
-     * A simple pager adapter that represents 5 ScreenSlidePageFragment objects, in
-     * sequence.
-     */
+
     private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
         public ScreenSlidePagerAdapter(FragmentManager fm) {
             super(fm);
@@ -75,7 +86,7 @@ public class TrainingStartingActivity extends FragmentActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return ScreenSlidePageFragment.newInstance(position, numPages);
+            return ActiveTrainingPageFragment.newInstance(position, numPages, groupedSets.get(position));
         }
 
         @Override
@@ -85,21 +96,3 @@ public class TrainingStartingActivity extends FragmentActivity {
 
     }
 }
-/*
-    public class TrainingStartingActivity extends Activity {
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.workout);
-
-        System.out.println("final List<List<Set>> list ");
-        final List<List<Set>> list = (List<List<Set>>) getIntent().getExtras().getSerializable(TrainingPreviewActivity.TRAINING);
-
-        for (List<Set> sets : list) {
-            for (Set set : sets) {
-                System.out.println(set);
-            }
-        }
-    }
-}
-*/

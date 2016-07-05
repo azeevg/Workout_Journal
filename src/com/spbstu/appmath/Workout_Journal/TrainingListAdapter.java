@@ -95,8 +95,10 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
                                 (ImageButton) finalConvertView.getRootView().findViewById(R.id.button_end);
                         final ImageButton deleteButton =
                                 (ImageButton) finalConvertView.getRootView().findViewById(R.id.button_delete);
+                        final ImageButton addButton =
+                                (ImageButton) finalConvertView.getRootView().findViewById(R.id.button_add);
 
-                        setButtonsVisibility(deleteButton, endButton);
+                        setButtonsVisibility(deleteButton, endButton, addButton);
 
                         deleteButton.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -108,7 +110,7 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
                                     i.remove();
                                 }
                                 notifyDataSetChanged();
-                                setButtonsVisibility(deleteButton, endButton);
+                                setButtonsVisibility(deleteButton, endButton, addButton);
                             }
                         });
                     }
@@ -139,8 +141,8 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
         }
 
         final Set set = groups.get(groupPosition).get(childPosition);
-        holder.getWeight().setText(String.valueOf(set.getWeight()));
-        holder.getTimes().setText(String.valueOf(set.getTimes()));
+        holder.getTvWeight().setText(String.valueOf(set.getWeight()));
+        holder.getTvTimes().setText(String.valueOf(set.getTimes()));
 
         return convertView;
     }
@@ -150,7 +152,8 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
         return true;
     }
 
-    private void setButtonsVisibility(final ImageButton deleteButton, final ImageButton endButton) {
+    private void setButtonsVisibility(final ImageButton deleteButton, final ImageButton endButton,
+                                      final ImageButton addButton) {
         for (List<Set> setList : groups) {
             if (setList.get(0).getExercise().isChecked()) {
                 endButton.setVisibility(View.INVISIBLE);
@@ -161,5 +164,9 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
         deleteButton.setVisibility(View.INVISIBLE);
         if (groups.size() > 0)
             endButton.setVisibility(View.VISIBLE);
+        if (groups.size() >= TrainingCreatingActivity.maxExercisesAmount)
+            addButton.setVisibility(View.INVISIBLE);
+        else
+            addButton.setVisibility(View.VISIBLE);
     }
 }

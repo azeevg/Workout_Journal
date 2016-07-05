@@ -32,7 +32,7 @@ public class TrainingPreviewActivity extends Activity {
             startButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    final Intent intent = new Intent(TrainingPreviewActivity.this, TrainingStartingActivity.class);
+                    final Intent intent = new Intent(TrainingPreviewActivity.this, ActiveTrainingActivity.class);
                     intent.putExtra(TRAINING, (Serializable) groupedSets);
                     startActivity(intent);
                 }

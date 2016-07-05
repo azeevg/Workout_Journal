@@ -8,13 +8,13 @@ import android.widget.*;
 
 import java.util.List;
 
-public class SetsListAdapter extends ArrayAdapter<Set> {
+public class SetsCreatingListAdapter extends ArrayAdapter<Set> {
 
     private final List<Set> sets;
     private final ListView listView;
 
-    public SetsListAdapter(Context context, int resource, List<Set> _sets,
-                           final ListView _listView) {
+    public SetsCreatingListAdapter(Context context, int resource, List<Set> _sets,
+                                   final ListView _listView) {
         super(context, resource, _sets);
         sets = _sets;
         listView = _listView;
@@ -46,8 +46,10 @@ public class SetsListAdapter extends ArrayAdapter<Set> {
                             (ImageButton) finalConvertView.getRootView().findViewById(R.id.button_delete);
                     final ImageButton endButton =
                             (ImageButton) finalConvertView.getRootView().findViewById(R.id.button_end);
+                    final ImageButton addButton =
+                            (ImageButton) finalConvertView.getRootView().findViewById(R.id.button_add);
 
-                    setButtonsVisibility(deleteButton, endButton);
+                    setButtonsVisibility(deleteButton, endButton, addButton);
 
                     deleteButton.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -58,7 +60,7 @@ public class SetsListAdapter extends ArrayAdapter<Set> {
                                 }
                             }
                             notifyDataSetChanged();
-                            setButtonsVisibility(deleteButton, endButton);
+                            setButtonsVisibility(deleteButton, endButton, addButton);
                         }
                     });
                 }
@@ -68,14 +70,15 @@ public class SetsListAdapter extends ArrayAdapter<Set> {
             holder = (Set.ViewHolder) convertView.getTag();
 
         Set set = sets.get(position);
-        holder.getWeight().setText(((Double)set.getWeight()).toString());
-        holder.getTimes().setText(((Integer)set.getTimes()).toString());
+        holder.getTvWeight().setText(((Double)set.getWeight()).toString());
+        holder.getTvTimes().setText(((Integer)set.getTimes()).toString());
         holder.getCheckBox().setChecked(set.isChecked());
 
         return convertView;
     }
 
-    private void setButtonsVisibility(final ImageButton deleteButton, final ImageButton endButton) {
+    private void setButtonsVisibility(final ImageButton deleteButton, final ImageButton endButton,
+                                      final ImageButton addButton) {
         for (Set set : sets) {
             if (set.isChecked()) {
                 endButton.setVisibility(View.INVISIBLE);
@@ -86,5 +89,9 @@ public class SetsListAdapter extends ArrayAdapter<Set> {
         deleteButton.setVisibility(View.INVISIBLE);
         if (sets.size() > 0)
             endButton.setVisibility(View.VISIBLE);
+        if (sets.size() >= SetsCreatingActivity.maxSetsAmount)
+            addButton.setVisibility(View.INVISIBLE);
+        else
+            addButton.setVisibility(View.VISIBLE);
     }
 }

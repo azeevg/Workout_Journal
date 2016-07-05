@@ -1,6 +1,8 @@
 package com.spbstu.appmath.Workout_Journal;
 
+import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.Serializable;
@@ -43,38 +45,40 @@ public class Set implements Serializable {
     public ViewHolder newViewHolder(final TextView weight, final TextView times, final CheckBox checkBox) {
         return new ViewHolder(weight, times, checkBox);
     }
+    public ViewHolder newViewHolder(final EditText etWeight, final EditText etTimes) {
+        return new ViewHolder(etWeight, etTimes);
+    }
 
     class ViewHolder {
-        TextView weight;
-        TextView times;
+        TextView tvWeight;
+        EditText etWeight;
+        TextView tvTimes;
+        EditText etTimes;
         CheckBox checkBox;
         public ViewHolder(final TextView weight, final TextView times) {
-            this.times = times;
-            this.weight = weight;
+            this.tvTimes = times;
+            this.tvWeight = weight;
         }
         public ViewHolder(final TextView weight, final TextView times, final CheckBox checkBox) {
             this.checkBox = checkBox;
-            this.times = times;
-            this.weight = weight;
+            this.tvTimes = times;
+            this.tvWeight = weight;
+        }
+        public ViewHolder(final EditText etWeight, final EditText etTimes) {
+            this.etTimes = etTimes;
+            this.etWeight = etWeight;
         }
         public CheckBox getCheckBox() {
             return checkBox;
         }
-        public void setCheckBox(CheckBox checkBox) {
-            this.checkBox = checkBox;
+        public TextView getTvTimes() {
+            return tvTimes;
         }
-        public TextView getTimes() {
-            return times;
+        public TextView getTvWeight() {
+            return tvWeight;
         }
-        public void setTimes(TextView times) {
-            this.times = times;
-        }
-        public TextView getWeight() {
-            return weight;
-        }
-        public void setWeight(TextView weight) {
-            this.weight = weight;
-        }
+        public EditText getEtWeight() { return etWeight; }
+        public EditText getEtTimes() { return etTimes; }
     }
 
     public ViewHolder newViewHolder(final TextView weight, final TextView times) {
