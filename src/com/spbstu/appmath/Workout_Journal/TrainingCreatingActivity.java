@@ -46,9 +46,6 @@ public class TrainingCreatingActivity extends Activity {
         endButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Calendar c = Calendar.getInstance();
-                SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy");
-                String date = df.format(c.getTime());*/
                 String trainingName =  getIntent().getStringExtra(MainActivity.TRAINING_NAME);
                 DBHelper db = new DBHelper(TrainingCreatingActivity.this);
                 Training training = db.writePlannedTrainingAndSets(trainingName, exercises);

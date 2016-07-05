@@ -1,17 +1,17 @@
 package com.spbstu.appmath.Workout_Journal;
 
 import android.content.Context;
+import android.content.Intent;
+import android.media.Image;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
-import android.widget.ListView;
+import android.widget.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ActiveTrainingPageFragment extends Fragment {
@@ -23,7 +23,6 @@ public class ActiveTrainingPageFragment extends Fragment {
     private int pageNumber;
     private int pageAmount;
     private List<Set> sets;
-    //private Context context;
 
     static ActiveTrainingPageFragment newInstance(int pageNumber, int pageAmount, List<Set> sets) {
         ActiveTrainingPageFragment pageFragment = new ActiveTrainingPageFragment();
@@ -41,20 +40,23 @@ public class ActiveTrainingPageFragment extends Fragment {
         pageNumber = getArguments().getInt(PAGE_NUMBER);
         pageAmount = getArguments().getInt(PAGE_AMOUNT);
         sets = (List<Set>) getArguments().getSerializable(SETS);
-        //context = getContext();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.workout, container, false);
+
+        TextView title = (TextView) rootView.findViewById(R.id.textView);
+        title.setText(sets.get(0).getExercise().getName());
+
         displaySets(rootView);
         setButtonsVisibility(rootView);
+
         return rootView;
     }
 
     private void displaySets(ViewGroup rootView) {
         final ListView listView = (ListView) rootView.findViewById(R.id.exercisesList);
-        listView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
         ArrayAdapter<Set> adapter =
                 new ActiveTrainingPageAdapter(getContext(), R.layout.workout_list_item, sets, listView);
         listView.setAdapter(adapter);
@@ -86,4 +88,17 @@ public class ActiveTrainingPageFragment extends Fragment {
             finishButton.setVisibility(View.INVISIBLE);
         }
     }
+
+    public List<Set> getSetsDone() {
+        List<Set> setsDone = new ArrayList<>();
+        for (Set set : sets) {
+            if (set.isChecked())
+                setsDone.add(set);
+        }
+        if (setsDone.size() == 0) {
+            setsDone.add(new Set(sets.get(0).getExercise(), 0, 0, false));
+        }
+        return setsDone;
+    }
+
 }

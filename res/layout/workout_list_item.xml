@@ -5,6 +5,8 @@
               android:layout_height="wrap_content"
               android:paddingBottom="10dp"
               android:paddingTop="10dp"
+              android:paddingStart="10dp"
+              android:paddingEnd="10dp"
               android:gravity="center">
 
     <TextView
@@ -15,31 +17,29 @@
             android:textColor="#000"/>
 
     <EditText
-            android:layout_width="80dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:id="@+id/editWeight"
             android:maxLength="6"
             android:layout_marginStart="5dp"
-            style="@style/EditTextAppTheme"
-            android:gravity="top|center"/>
+            style="@style/EditTextAppTheme"/>
 
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/reiterations"
             android:textSize="20sp"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="25dp"
             android:textColor="#000"/>
 
     <EditText
-            android:layout_width="80dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:id="@+id/editReps"
             android:inputType="numberDecimal"
-            android:layout_gravity="start"
+            android:maxLength="3"
             android:layout_marginStart="5dp"
-            android:gravity="top|center"
             style="@style/EditTextAppTheme"/>
 
 </LinearLayout>

@@ -60,14 +60,14 @@ public class HistoryListAdapter extends ArrayAdapter<Training> {
                                     notifyDataSetChanged();
                                 }
                             }
-                            checkSelections(deleteButton);
+                            setButtonsVisibility(deleteButton);
                         }
                     });
 
                     if (cb.isChecked()) {
                         deleteButton.setVisibility(View.VISIBLE);
                     } else {
-                        checkSelections(deleteButton);
+                        setButtonsVisibility(deleteButton);
                     }
                 }
             });
@@ -84,7 +84,7 @@ public class HistoryListAdapter extends ArrayAdapter<Training> {
         return convertView;
     }
 
-    private void checkSelections(final ImageButton deleteButton) {
+    private void setButtonsVisibility(final ImageButton deleteButton) {
         for (Training t : trainings) {
             if (t.isChecked()) {
                 return;

@@ -21,6 +21,8 @@ public class MainActivity extends Activity {
 
     public static final String TRAINING_NAME = "trainingName";
     public static final String TRAINING_ID = "training_id";
+    public static final int TRAINING_CREATING = 0;
+    public static final int TRAINING_PREVIEW = 1;
 
     DBHelper db;
     List<Training> plannedTrains;
@@ -110,8 +112,9 @@ public class MainActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final Intent intent = new Intent(getApplicationContext(), TrainingPreviewActivity.class);
+                intent.putExtra(TRAINING_NAME, plannedTrains.get(position).getName());
                 intent.putExtra(TRAINING_ID, plannedTrains.get(position).getId());
-                startActivity(intent);
+                startActivityForResult(intent, TRAINING_PREVIEW);
             }
         });
     }
@@ -120,19 +123,22 @@ public class MainActivity extends Activity {
         final Intent intent = new Intent(this, TrainingCreatingActivity.class);
         final EditText editText = (EditText) view.findViewById(R.id.editName);
         intent.putExtra(TRAINING_NAME, editText.getText().toString());
-        startActivityForResult(intent, 1);
+        startActivityForResult(intent, TRAINING_CREATING);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK) {
-            Training training = (Training)data.getExtras().getSerializable(TrainingCreatingActivity.TRAINING);
-            plannedTrains.add(training);
-            //plannedTrains = db.getAllPlannedTrainings();
-            adapter.notifyDataSetChanged();
-            Toast.makeText(getApplicationContext(), "Тренировка создана", Toast.LENGTH_SHORT).show();
+        if (requestCode == TRAINING_CREATING) {
+            if (resultCode == RESULT_OK) {
+                Training training = (Training) data.getExtras().getSerializable(TrainingCreatingActivity.TRAINING);
+                plannedTrains.add(training);
+                adapter.notifyDataSetChanged();
+                Toast.makeText(getApplicationContext(), "Тренировка создана", Toast.LENGTH_SHORT).show();
+            } else
+                Toast.makeText(getApplicationContext(), "Тренировка не создана", Toast.LENGTH_SHORT).show();
         }
-        else
-            Toast.makeText(getApplicationContext(), "Тренировка не создана", Toast.LENGTH_SHORT).show();
+        if (requestCode == TRAINING_PREVIEW && resultCode == RESULT_OK) {
+            Toast.makeText(getApplicationContext(), "Тренировка завершена", Toast.LENGTH_SHORT).show();
+        }
     }
 }

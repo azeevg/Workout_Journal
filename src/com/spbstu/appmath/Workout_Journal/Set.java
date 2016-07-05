@@ -10,31 +10,48 @@ import java.io.Serializable;
 public class Set implements Serializable {
 
     private final Exercise exercise;
-    private final double weight;
-    private final int times;
+    private double weight;
+    private int times;
     private boolean checked;
 
     public Set(final Exercise exercise, final double weight, final int times) {
         this.exercise = exercise;
         this.times = times;
         this.weight = weight;
+        this.checked = false;
+    }
+    public Set(final Exercise exercise, final double weight, final int times, final boolean checked) {
+        this.exercise = exercise;
+        this.times = times;
+        this.weight = weight;
+        this.checked = checked;
     }
 
     public Set() {
         exercise = null;
         weight = 0.0;
         times = 0;
+        this.checked = false;
     }
 
     public Exercise getExercise() {
         return exercise;
     }
+
     public int getTimes() {
         return times;
     }
+    public void setTimes(int times) {
+        this.times = times;
+    }
+
     public double getWeight() {
         return weight;
     }
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
     public void setChecked(boolean checked) {
         this.checked = checked;
     }

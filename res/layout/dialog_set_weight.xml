@@ -19,7 +19,7 @@
                 android:text="@string/dlg_set"
                 android:id="@+id/textView2"
                 android:layout_gravity="center"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 />
     </FrameLayout>
 
@@ -54,6 +54,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal"
                     android:ems="10"
+                    android:maxLength="3"
                     android:id="@+id/editReps"
                     style="@style/EditTextAppTheme"
                     android:layout_marginStart="10dp"/>
@@ -83,7 +84,6 @@
                     android:ems="10"
                     android:id="@+id/editWeight"
                     android:maxLength="6"
-                    android:maxWidth="100dp"
                     android:numeric="decimal"
                     style="@style/EditTextAppTheme"
                     android:layout_gravity="start|center_vertical"

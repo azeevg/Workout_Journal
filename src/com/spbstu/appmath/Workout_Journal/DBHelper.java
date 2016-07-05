@@ -46,8 +46,8 @@ public class DBHelper {
         if(checkDB != null){
             checkDB.close();
         }
-        return checkDB != null;
-        //return false;
+        //return checkDB != null;
+        return false;
     }
 
     private void copyDataBase() throws IOException {
@@ -245,4 +245,38 @@ public class DBHelper {
 
         return training;
     }
+
+
+    public void writeDoneTrainingAndSets(String trainingName, String date, List<List<Set>> sets) {
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_PATH_NAME, null, SQLiteDatabase.OPEN_READWRITE);
+
+        // training
+        ContentValues newTraining = new ContentValues();
+        newTraining.put(DBContract.WorkoutsDone.COLUMN_NAME, trainingName);
+        newTraining.put(DBContract.WorkoutsDone.COLUMN_DATE, date);
+        int workoutId = (int)db.insert(DBContract.WorkoutsDone.TABLE, null, newTraining);
+
+        // sets
+        for (List<Set> listSet : sets) {
+            String exerciseName = listSet.get(0).getExercise().getName();
+            Cursor res = db.query(DBContract.Exercises.TABLE,
+                    new String[]{DBContract.Exercises.COLUMN_ID},
+                    DBContract.Exercises.COLUMN_NAME + "='" + exerciseName + "'",
+                    null, null, null, null);
+            res.moveToFirst();
+            String exerciseId = res.getString(res.getColumnIndex(DBContract.Exercises.COLUMN_ID));
+            res.close();
+            for (Set set : listSet) {
+                if (set.isChecked()) {
+                    ContentValues newSet = new ContentValues();
+                    newSet.put(DBContract.SetsDone.COLUMN_EXERCISE_ID, exerciseId);
+                    newSet.put(DBContract.SetsDone.COLUMN_WORKOUT_ID, workoutId);
+                    newSet.put(DBContract.SetsDone.COLUMN_WEIGHT, set.getWeight());
+                    newSet.put(DBContract.SetsDone.COLUMN_REPS, set.getTimes());
+                    db.insert(DBContract.SetsDone.TABLE, null, newSet);
+                }
+            }
+        }
+    }
+
 }

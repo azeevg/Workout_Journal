@@ -60,6 +60,5 @@ public class ExerciseChoosingActivity extends Activity {
         Intent intent = new Intent();
         setResult(RESULT_CANCELED, intent);
         finish();
-        //moveTaskToBack(true);
     }
 }

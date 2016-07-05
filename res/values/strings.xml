@@ -27,6 +27,8 @@
     <string name="help_text">Приходит из самых неожиданных источников.</string>
     <string name="ok">OK</string>
     <string name="cancel">Отмена</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
     <string name="training_name">Название тренировки</string>
     <string name="training_creating">Создание тренировки</string>
     <string name="sets_creating">Добавление подходов</string>

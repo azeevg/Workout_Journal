@@ -9,13 +9,14 @@ import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 
 public class TrainingPreviewActivity extends Activity {
 
-    public static final String TRAINING = "training";
+    public static final String SETS_PLANNED = "setsPlanned";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +34,39 @@ public class TrainingPreviewActivity extends Activity {
                 @Override
                 public void onClick(View v) {
                     final Intent intent = new Intent(TrainingPreviewActivity.this, ActiveTrainingActivity.class);
-                    intent.putExtra(TRAINING, (Serializable) groupedSets);
-                    startActivity(intent);
+                    intent.putExtra(SETS_PLANNED, (Serializable) groupedSets);
+                    startActivityForResult(intent, 1);
                 }
             });
         } catch (InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        List<List<Set>> groupedSetsDone =
+                (List<List<Set>>) data.getSerializableExtra(ActiveTrainingActivity.SETS_DONE);
+
+        String trainingName = getIntent().getStringExtra(MainActivity.TRAINING_NAME);
+
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+        String date = df.format(c.getTime());
+
+        DBHelper db = new DBHelper(this);
+        db.writeDoneTrainingAndSets(trainingName, date, groupedSetsDone);
+
+        Intent intent = new Intent();
+        setResult(RESULT_OK, intent);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        setResult(RESULT_CANCELED, intent);
+        finish();
     }
 
     private List<List<Set>> displayGroupedSets(final int id) throws InstantiationException, IllegalAccessException {

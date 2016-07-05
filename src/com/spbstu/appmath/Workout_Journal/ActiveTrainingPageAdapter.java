@@ -1,12 +1,17 @@
 package com.spbstu.appmath.Workout_Journal;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.spbstu.appmath.Workout_Journal.Set.*;
@@ -37,9 +42,62 @@ public class ActiveTrainingPageAdapter extends ArrayAdapter<Set> {
         else
             holder = (Set.ViewHolder) convertView.getTag();
 
-        Set set = sets.get(position);
-        holder.getEtWeight().setHint(((Double)set.getWeight()).toString());
-        holder.getEtTimes().setHint(((Integer)set.getTimes()).toString());
+        final Set set = sets.get(position);
+        final EditText etWeight = holder.getEtWeight();
+        final EditText etTimes = holder.getEtTimes();
+
+        if (set.isChecked()) {
+            etWeight.setText(((Double)set.getWeight()).toString());
+            etTimes.setText(((Integer)set.getTimes()).toString());
+        }
+        else {
+            etWeight.setHint(((Double)set.getWeight()).toString());
+            etTimes.setHint(((Integer)set.getTimes()).toString());
+        }
+
+        etWeight.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void afterTextChanged(Editable s) {
+                String timesStr = etTimes.getText().toString();
+                if (!timesStr.equals("")) {
+                    set.setChecked(true);
+                    int times = Integer.parseInt(timesStr);
+                    double weight = Double.parseDouble(s.toString());
+                    if (position < sets.size()) {
+                        sets.get(position).setWeight(weight);
+                        sets.get(position).setTimes(times);
+                    }
+                    else
+                        sets.add(new Set(set.getExercise(), weight, times));
+                }
+            }
+        });
+
+        etTimes.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void afterTextChanged(Editable s) {
+                String weightStr = etWeight.getText().toString();
+                set.setChecked(true);
+                int times = Integer.parseInt(s.toString());
+                double weight = 0.0;
+                if (!weightStr.equals(""))
+                    weight = Double.parseDouble(weightStr);
+                if (position < sets.size()) {
+                    sets.get(position).setWeight(weight);
+                    sets.get(position).setTimes(times);
+                }
+                else
+                    sets.add(new Set(set.getExercise(), weight, times));
+            }
+        });
 
         return convertView;
     }
