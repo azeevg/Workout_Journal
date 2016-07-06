@@ -54,7 +54,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal"
                     android:ems="10"
-                    android:maxLength="3"
+                    android:maxLength="4"
                     android:id="@+id/editReps"
                     style="@style/EditTextAppTheme"
                     android:layout_marginStart="10dp"/>

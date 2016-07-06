@@ -1,6 +1,7 @@
 package com.spbstu.appmath.Workout_Journal;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -73,6 +75,9 @@ public class ActiveTrainingActivity extends FragmentActivity {
                     @Override
                     public void onPageSelected(int position) {
                         onPageChange(prevPosition);
+                        final InputMethodManager imm = (InputMethodManager)getSystemService(
+                                Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(mPager.getWindowToken(), 0);
                     }
                     @Override
                     public void onPageScrollStateChanged(int state) {
@@ -87,6 +92,10 @@ public class ActiveTrainingActivity extends FragmentActivity {
         finishTraining(null);
     }
 
+    /**
+     * Saves all done sets in gropedSetsDone
+     * @param prevIndex - index of previous active page
+     */
     private void onPageChange(int prevIndex) {
         ActiveTrainingPageFragment page = mPagerAdapter.getItem(prevIndex);
         List<Set> setsDone = page.getSetsDone();
@@ -118,6 +127,7 @@ public class ActiveTrainingActivity extends FragmentActivity {
 
     /**
      * finishButton handler
+     * Shows dialog offering to finish training.
      */
     public void finishTraining(View view) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(ActiveTrainingActivity.this);
@@ -141,7 +151,6 @@ public class ActiveTrainingActivity extends FragmentActivity {
                 });
         builder.setCancelable(true);
         final AlertDialog dialog = builder.create();
-        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         dialog.setView(dialogView, 0, 0, 0, 0);
         dialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override

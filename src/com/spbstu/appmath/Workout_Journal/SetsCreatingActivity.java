@@ -138,6 +138,5 @@ public class SetsCreatingActivity extends Activity {
         Intent intent = new Intent();
         setResult(RESULT_CANCELED, intent);
         finish();
-        //moveTaskToBack(true);
     }
 }

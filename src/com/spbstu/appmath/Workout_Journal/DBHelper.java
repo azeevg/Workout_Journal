@@ -46,8 +46,8 @@ public class DBHelper {
         if(checkDB != null){
             checkDB.close();
         }
-        //return checkDB != null;
-        return false;
+        return checkDB != null;
+        //return false;
     }
 
     private void copyDataBase() throws IOException {
