@@ -19,7 +19,7 @@ import static com.spbstu.appmath.Workout_Journal.Set.*;
 
 public class ActiveTrainingPageAdapter extends ArrayAdapter<Set> {
 
-    private final static int MAX_SETS_AMOUNT = 5;
+    private final static int MAX_SETS_AMOUNT = 20;
 
     private final List<Set> sets;
     private final List<Set> setsPlanned = new ArrayList<>();
