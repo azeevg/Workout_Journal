@@ -130,6 +130,8 @@ public class ActiveTrainingActivity extends FragmentActivity {
      * Shows dialog offering to finish training.
      */
     public void finishTraining(View view) {
+        onPageChange(mPager.getCurrentItem());
+
         final AlertDialog.Builder builder = new AlertDialog.Builder(ActiveTrainingActivity.this);
         final LayoutInflater inflater = getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.dialog_finish_training, null);
