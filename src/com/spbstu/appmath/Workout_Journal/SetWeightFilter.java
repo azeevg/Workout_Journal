@@ -11,10 +11,11 @@ public class SetWeightFilter implements InputFilter {
         int dotIndex = -1;
         for (int i = start; i < end; ++i) {
             if (!Character.isDigit(source.charAt(i))) {
-                if (source.charAt(i) != '.')
+                if (source.charAt(i) != '.' || dest.toString().indexOf('.') >= 0)
                     return "";
-                else
+                else {
                     dotIndex = dend + i;
+                }
             }
         }
         if (dotIndex == -1)
