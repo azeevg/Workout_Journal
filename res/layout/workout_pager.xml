@@ -1,6 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.view.ViewPager
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/light_gray_1">
+
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/frameLayout"
+            android:background="#ffa500">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:id="@+id/textView"
+                android:text="@string/workout_name"
+                android:layout_gravity="start|center_vertical"
+                android:textColor="#ffffff"
+                android:textSize="30sp"
+                android:layout_marginStart="20dp"/>
+
+    </FrameLayout>
+
+    <android.support.v4.view.ViewPager
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <android.support.v4.view.PagerTabStrip
+                android:id="@+id/pagerTabStrip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:textColor="#000">
+        </android.support.v4.view.PagerTabStrip>
+    </android.support.v4.view.ViewPager>
+
+</LinearLayout>

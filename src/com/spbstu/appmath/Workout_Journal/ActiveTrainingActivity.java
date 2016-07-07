@@ -186,5 +186,10 @@ public class ActiveTrainingActivity extends FragmentActivity {
             return numPages;
         }
 
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return groupedSetsPlanned.get(position).get(0).getExercise().getName();
+        }
+
     }
 }
