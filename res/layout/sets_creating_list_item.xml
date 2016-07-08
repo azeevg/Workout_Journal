@@ -4,27 +4,29 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:paddingTop="10dp"
-              android:paddingBottom="10dp">
+              android:paddingBottom="10dp"
+              android:paddingStart="20dp"
+              android:paddingEnd="15dp">
 
         <TextView
+                android:theme="@style/TextTheme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/weight"
-                android:textSize="20sp"
                 android:textColor="#000"/>
         <TextView
+                android:theme="@style/TextTheme"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/textViewWeight"
                 android:hint="@string/kg"
                 android:layout_marginStart="5dp" android:layout_marginEnd="20dp"
-                android:textSize="20sp"
                 android:textColor="#000"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/sets_short"
-            android:textSize="20sp"
+            android:theme="@style/TextTheme"
             android:textColor="#000"/>
         <TextView
             android:layout_width="70dp"
@@ -32,7 +34,7 @@
             android:id="@+id/textViewReps"
             android:hint="@string/times"
             android:layout_marginStart="5dp"
-            android:textSize="20sp"
+            android:theme="@style/TextTheme"
             android:textColor="#000"/>
 
 

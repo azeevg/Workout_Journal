@@ -13,7 +13,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/weight"
-            android:textSize="20sp"
+            android:theme="@style/TextTheme"
             android:textColor="#000"/>
 
     <EditText
@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/reiterations"
-            android:textSize="20sp"
+            android:theme="@style/TextTheme"
             android:layout_marginStart="25dp"
             android:textColor="#000"/>
 

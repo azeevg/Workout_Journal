@@ -28,7 +28,7 @@ public class SetWeightFilter implements InputFilter {
         }
 
         double weight = Double.parseDouble(dest.toString() + source.toString());
-        if (weight > 1000 || weight < 0)
+        if (weight > 1000 || weight < 1)
             return "";
         return null;
     }

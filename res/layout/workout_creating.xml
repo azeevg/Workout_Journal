@@ -9,19 +9,19 @@
 
     <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="60dp"
             android:layout_gravity="center_horizontal"
             android:id="@+id/frameLayout"
             android:background="#ffa500">
 
         <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:text="@string/training_creating"
                 android:id="@+id/textView"
                 android:layout_gravity="start|center_vertical"
                 android:textColor="#ffffff"
-                android:textSize="30sp"
+                android:theme="@style/TitleTheme"
                 android:layout_marginStart="20dp"/>
     </FrameLayout>
 

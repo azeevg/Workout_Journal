@@ -8,13 +8,16 @@
               android:baselineAligned="false">
 
     <FrameLayout
-            android:layout_width="300dp"
+            android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:background="#ffa500">
 
         <TextView
+                android:theme="@style/TitleTheme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingRight="15dp"
+                android:paddingLeft="15dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/dlg_set"
                 android:id="@+id/textView2"
@@ -41,7 +44,8 @@
                 android:layout_gravity="center_vertical">
 
             <TextView
-                    android:layout_width="130dp"
+                    android:theme="@style/TextTheme"
+                    android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/dlg_reps"
@@ -68,7 +72,8 @@
                 android:layout_marginTop="10dp">
 
             <TextView
-                    android:layout_width="130dp"
+                    android:theme="@style/TextTheme"
+                    android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/dlg_kg"

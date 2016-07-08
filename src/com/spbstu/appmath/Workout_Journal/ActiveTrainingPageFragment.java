@@ -46,8 +46,8 @@ public class ActiveTrainingPageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.workout, container, false);
 
-        /*TextView title = (TextView) rootView.findViewById(R.id.textView);
-        title.setText(sets.get(0).getExercise().getName());*/
+        TextView title = (TextView) rootView.findViewById(R.id.textView);
+        title.setText(sets.get(0).getExercise().getName());
 
         displaySets(rootView);
         setButtonsVisibility(rootView);

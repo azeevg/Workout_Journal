@@ -13,6 +13,7 @@
             android:background="#ffa500">
 
         <TextView
+                android:theme="@style/TitleTheme"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceLarge"

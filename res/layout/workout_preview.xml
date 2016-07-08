@@ -9,20 +9,20 @@
 
     <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="60dp"
             android:layout_gravity="center_horizontal"
             android:id="@+id/frameLayout"
             android:background="#ffa500">
 
         <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:text="@string/workout_name"
                 android:id="@+id/textView"
-                android:layout_gravity="left|center_vertical"
+                android:layout_gravity="start|center_vertical"
                 android:textColor="#ffffff"
-                android:textSize="30dp"
-                android:layout_marginLeft="20dp"/>
+                android:theme="@style/TitleTheme"
+                android:layout_marginStart="20dp"/>
     </FrameLayout>
 
     <FrameLayout

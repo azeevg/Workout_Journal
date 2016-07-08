@@ -6,7 +6,26 @@
                   android:layout_height="match_parent"
                   android:background="@color/light_gray_1">
 
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/frameLayout"
+            android:background="#ffa500">
 
+        <TextView
+                android:theme="@style/TitleTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView"
+                android:text="@string/workout_name"
+                android:layout_gravity="start|center_vertical"
+                android:textColor="#ffffff"
+                android:maxLines="2"
+                android:ellipsize="marquee"
+                android:layout_marginStart="20dp"/>
+
+    </FrameLayout>
 
         <FrameLayout
                 android:layout_width="match_parent"
@@ -15,7 +34,7 @@
 
 
             <ListView
-                        android:id="@+id/exercisesList"
+                    android:id="@+id/exercisesList"
                     android:layout_width="match_parent"
                     android:layout_height="fill_parent"
                     android:layout_gravity="start|top"

@@ -6,6 +6,8 @@
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:paddingBottom="5dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="10dp"
         android:orientation="horizontal"
         >
 
@@ -16,24 +18,23 @@
             android:layout_gravity="start|center_vertical">
 
         <TextView
+                android:theme="@style/TextTheme"
                 android:id="@+id/historyItemName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:textSize="20sp"
                 android:textColor="#000"
                 android:ellipsize="start"
                 android:text="@string/history_list_item_name"
                 />
 
         <TextView
+                android:theme="@style/SubTextTheme"
                 android:id="@+id/historyItemDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:textSize="18sp"
                 android:textAlignment="center"
                 android:textColor="#000"
                 android:text="@string/history_list_item_date"
