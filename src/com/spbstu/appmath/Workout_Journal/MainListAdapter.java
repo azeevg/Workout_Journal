@@ -46,7 +46,12 @@ public class MainListAdapter extends ArrayAdapter<Training> {
                     final Training training = (Training) cb.getTag();
                     training.setChecked(cb.isChecked());
 
-                    final ImageButton deleteButton = (ImageButton) finalConvertView.getRootView().findViewById(R.id.button_delete);
+                    final ImageButton deleteButton =
+                            (ImageButton) finalConvertView.getRootView().findViewById(R.id.button_delete);
+                    final ImageButton addButton =
+                            (ImageButton) finalConvertView.getRootView().findViewById(R.id.button_add);
+                    setButtonsVisibility(deleteButton, addButton);
+
                     deleteButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -56,10 +61,9 @@ public class MainListAdapter extends ArrayAdapter<Training> {
                                     notifyDataSetChanged();
                                 }
                             }
-                            setButtonsVisibility(deleteButton);
+                            setButtonsVisibility(deleteButton, addButton);
                         }
                     });
-                    setButtonsVisibility(deleteButton);
                 }
             });
         } else {
@@ -74,7 +78,11 @@ public class MainListAdapter extends ArrayAdapter<Training> {
         return convertView;
     }
 
-    private void setButtonsVisibility(final ImageButton deleteButton) {
+    private void setButtonsVisibility(final ImageButton deleteButton, final ImageButton addButton) {
+        if (trainings.size() >= MainActivity.maxTrainingsAmount)
+            addButton.setVisibility(View.INVISIBLE);
+        else
+            addButton.setVisibility(View.VISIBLE);
         for (Training t : trainings) {
             if (t.isChecked()) {
                 deleteButton.setVisibility(View.VISIBLE);

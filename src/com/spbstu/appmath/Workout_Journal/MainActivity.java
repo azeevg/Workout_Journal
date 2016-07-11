@@ -23,6 +23,7 @@ public class MainActivity extends Activity {
     public static final String TRAINING_ID = "training_id";
     public static final int TRAINING_CREATING = 0;
     public static final int TRAINING_PREVIEW = 1;
+    public static final int maxTrainingsAmount = 20;
 
     DBHelper db;
     List<Training> plannedTrains;
@@ -117,6 +118,12 @@ public class MainActivity extends Activity {
                 startActivityForResult(intent, TRAINING_PREVIEW);
             }
         });
+
+        ImageButton addButton = (ImageButton) findViewById(R.id.button_add);
+        if (plannedTrains.size() >= maxTrainingsAmount)
+            addButton.setVisibility(View.INVISIBLE);
+        else
+            addButton.setVisibility(View.VISIBLE);
     }
 
     private void createNewTraining(final View view) {
@@ -132,6 +139,9 @@ public class MainActivity extends Activity {
             if (resultCode == RESULT_OK) {
                 Training training = (Training) data.getExtras().getSerializable(TrainingCreatingActivity.TRAINING);
                 plannedTrains.add(training);
+                ImageButton addButton = (ImageButton) findViewById(R.id.button_add);
+                if (plannedTrains.size() >= maxTrainingsAmount)
+                    addButton.setVisibility(View.INVISIBLE);
                 adapter.notifyDataSetChanged();
                 Toast.makeText(getApplicationContext(), "Тренировка создана", Toast.LENGTH_SHORT).show();
             } else
