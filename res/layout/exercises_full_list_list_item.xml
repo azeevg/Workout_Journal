@@ -26,20 +26,4 @@
             android:textColor="#000"
             android:gravity="center_vertical|start"/>
 
-    <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:background="@drawable/round_button_small"
-            android:src="@drawable/ic_add_orange_36dp"
-            android:id="@+id/button_add"
-            android:layout_gravity="end|center"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="0dp"
-            android:textSize="30sp"
-            android:textColor="#ffffff"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:layout_marginStart="20dp"/>
-
 </LinearLayout>

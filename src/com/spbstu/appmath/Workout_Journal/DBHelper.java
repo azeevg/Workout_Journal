@@ -147,18 +147,6 @@ public class DBHelper {
         return exercises;
     }
 
-    public String getExerciseInfo(Exercise exercise) {
-        SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_PATH_NAME, null, SQLiteDatabase.OPEN_READONLY);
-        Cursor res = db.query(DBContract.Exercises.TABLE,
-                new String[]{DBContract.Exercises.COLUMN_DESCRIPTION},
-                DBContract.Exercises.COLUMN_NAME + "='" + exercise.getName() + "'",
-                null, null, null, null);
-        res.moveToFirst();
-        String description = res.getString(res.getColumnIndex(DBContract.Exercises.COLUMN_DESCRIPTION));
-        res.close();
-        return description;
-    }
-
     public List<Set> getPlannedSets(int workoutId) {
         SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_PATH_NAME, null, SQLiteDatabase.OPEN_READONLY);
         Cursor res = db.query(DBContract.SetsPlan.TABLE, null,
@@ -178,7 +166,7 @@ public class DBHelper {
             exerciseNameResult.close();
             Exercise exercise = new Exercise(exerciseId, exerciseName);
             double weight = res.getDouble(res.getColumnIndex(DBContract.SetsPlan.COLUMN_WEIGHT));
-            int times = res.getInt(res.getColumnIndex(DBContract.SetsPlan.COLUMN_REPS));
+            int times = res.getInt(res.getColumnIndex(DBContract.SetsPlan.COLUMN_TIMES));
             sets.add(new Set(exercise, weight, times));
             res.moveToNext();
         }
@@ -205,7 +193,7 @@ public class DBHelper {
             exerciseNameResult.close();
             Exercise exercise = new Exercise(exerciseId, exerciseName);
             double weight = res.getDouble(res.getColumnIndex(DBContract.SetsDone.COLUMN_WEIGHT));
-            int times = res.getInt(res.getColumnIndex(DBContract.SetsDone.COLUMN_REPS));
+            int times = res.getInt(res.getColumnIndex(DBContract.SetsDone.COLUMN_TIMES));
             sets.add(new Set(exercise, weight, times));
             res.moveToNext();
         }
@@ -238,7 +226,7 @@ public class DBHelper {
                 newSet.put(DBContract.SetsPlan.COLUMN_EXERCISE_ID, exerciseId);
                 newSet.put(DBContract.SetsPlan.COLUMN_WORKOUT_ID, workoutId);
                 newSet.put(DBContract.SetsPlan.COLUMN_WEIGHT, set.getWeight());
-                newSet.put(DBContract.SetsPlan.COLUMN_REPS, set.getTimes());
+                newSet.put(DBContract.SetsPlan.COLUMN_TIMES, set.getTimes());
                 db.insert(DBContract.SetsPlan.TABLE, null, newSet);
             }
         }
@@ -272,7 +260,7 @@ public class DBHelper {
                     newSet.put(DBContract.SetsDone.COLUMN_EXERCISE_ID, exerciseId);
                     newSet.put(DBContract.SetsDone.COLUMN_WORKOUT_ID, workoutId);
                     newSet.put(DBContract.SetsDone.COLUMN_WEIGHT, set.getWeight());
-                    newSet.put(DBContract.SetsDone.COLUMN_REPS, set.getTimes());
+                    newSet.put(DBContract.SetsDone.COLUMN_TIMES, set.getTimes());
                     db.insert(DBContract.SetsDone.TABLE, null, newSet);
                 }
             }

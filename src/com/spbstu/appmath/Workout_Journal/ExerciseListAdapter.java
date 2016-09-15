@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 
-import java.io.Serializable;
 import java.util.List;
 
 public class ExerciseListAdapter implements ListAdapter {
@@ -65,17 +64,6 @@ public class ExerciseListAdapter implements ListAdapter {
 
         final Exercise exercise = exercises.get(position);
         holder.getName().setText(exercise.getName());
-
-        final int pos = position;
-        ImageButton addExercise = (ImageButton) convertView.findViewById(R.id.button_add);
-        addExercise.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Intent intent = new Intent(v.getContext(), SetsCreatingActivity.class);
-                intent.putExtra("exercise", exercises.get(pos));
-                ((Activity)context).startActivityForResult(intent, 1);
-            }
-        });
 
         return convertView;
     }

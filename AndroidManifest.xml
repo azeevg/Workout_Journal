@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application android:label="@string/app_label" android:icon="@drawable/wj_icon"
-            android:theme="@android:style/Theme.NoTitleBar">
+                 android:theme="@android:style/Theme.NoTitleBar">
 
         <activity android:name=".MainActivity"
                   android:theme="@android:style/Theme.NoTitleBar">
@@ -43,13 +43,6 @@
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".WorkoutCreatingActivity"/>
-        </activity>
-
-        <activity android:name=".ExerciseInfoActivity"
-                  android:theme="@android:style/Theme.NoTitleBar">
-            <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".ExerciseChoosingActivity"/>
         </activity>
 
         <activity android:name=".SetsCreatingActivity"

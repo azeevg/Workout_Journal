@@ -12,7 +12,6 @@ public class DBContract {
         public static final String TABLE = "exercises";
         public static final String COLUMN_ID = "rowid";
         public static final String COLUMN_NAME = "name";
-        public static final String COLUMN_DESCRIPTION = "description";
     }
 
     /* planned sets table */
@@ -22,7 +21,7 @@ public class DBContract {
         public static final String COLUMN_EXERCISE_ID = "id_exercise";
         public static final String COLUMN_WORKOUT_ID = "id_workout";
         public static final String COLUMN_WEIGHT = "weight";
-        public static final String COLUMN_REPS = "reps";
+        public static final String COLUMN_TIMES = "times";
     }
 
     /* done sets table */
@@ -32,7 +31,7 @@ public class DBContract {
         public static final String COLUMN_EXERCISE_ID = "id_exercise";
         public static final String COLUMN_WORKOUT_ID = "id_workout";
         public static final String COLUMN_WEIGHT = "weight";
-        public static final String COLUMN_REPS = "reps";
+        public static final String COLUMN_TIMES = "times";
     }
 
     /* planned workouts table */

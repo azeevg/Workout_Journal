@@ -7,8 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ExerciseChoosingActivity extends Activity {
@@ -27,17 +25,10 @@ public class ExerciseChoosingActivity extends Activity {
 
         listView.setAdapter(new ExerciseListAdapter(this, exercises, listView));
         listView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(ExerciseChoosingActivity.this, ExerciseInfoActivity.class);
-                Exercise exercise = (Exercise) listView.getAdapter().getItem(position);
-                String description = dbHelper.getExerciseInfo(exercise);
-                String name = exercise.getName();
-                intent.putExtra("name", name);
-                intent.putExtra("description", description);
-                startActivity(intent);
-            }
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            final Intent intent = new Intent(ExerciseChoosingActivity.this, SetsCreatingActivity.class);
+            intent.putExtra("exercise", exercises.get(position));
+            startActivityForResult(intent, 1);
         });
     }
 
