@@ -17,7 +17,7 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/training_creating"
+                android:text="@string/workout_creating"
                 android:id="@+id/textView"
                 android:layout_gravity="start|center_vertical"
                 android:textColor="#ffffff"

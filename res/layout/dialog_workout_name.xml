@@ -51,7 +51,7 @@
                     android:inputType="text"
                     android:id="@+id/editName"
                     style="@style/EditTextAppTheme"
-                    android:hint="@string/training_name"
+                    android:hint="@string/workout_name_2"
                     android:textAlignment="center"
                     android:maxLength="50"
                     android:gravity="center_horizontal"/>

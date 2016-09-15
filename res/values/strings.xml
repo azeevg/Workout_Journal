@@ -29,57 +29,9 @@
     <string name="cancel">Отмена</string>
     <string name="yes">Да</string>
     <string name="no">Нет</string>
-    <string name="training_name">Название тренировки</string>
-    <string name="training_creating">Создание тренировки</string>
+    <string name="workout_name_2">Название тренировки</string>
+    <string name="workout_creating">Создание тренировки</string>
     <string name="sets_creating">Добавление подходов</string>
-    <string name="finish_training">Окончание тренировки</string>
-    <string name="finish_training_question">Закончить тренировку?</string>
-
-
-    <string-array name="workouts">
-        <item>Тренировка 1</item>
-        <item>Тренировка 2</item>
-        <item>Тренировка 3</item>
-        <item>Тренировка 4</item>
-        <item>Тренировка 5</item>
-        <item>Тренировка 6</item>
-        <item>Тренировка 7</item>
-        <item>Тренировка 8</item>
-        <item>Тренировка 9</item>
-        <item>Тренировка 10</item>
-        <item>Тренировка 11</item>
-        <item>Тренировка 12</item>
-    </string-array>
-    <string-array name="trainings_part1">
-        <item>Тренировка 1</item>
-        <item>Тренировка 2</item>
-        <item>Тренировка 3</item>
-        <item>Тренировка 4</item>
-        <item>Тренировка 5</item>
-    </string-array>
-
-    <string-array name="trainings_part2">
-        <item>Тренировка 1</item>
-        <item>Тренировка 2</item>
-        <item>Тренировка 3</item>
-        <item>Тренировка 4</item>
-        <item>Тренировка 5</item>
-    </string-array>
-
-    <string-array name="exercises">
-        <item>Упражнение 1</item>
-        <item>Упражнение 2</item>
-        <item>Упражнение 3</item>
-        <item>Упражнение 4</item>
-        <item>Упражнение 5</item>
-        <item>Упражнение 6</item>
-        <item>Упражнение 7</item>
-        <item>Упражнение 8</item>
-        <item>Упражнение 9</item>
-        <item>Упражнение 10</item>
-        <item>Упражнение 11</item>
-        <item>Упражнение 12</item>
-        <item>Упражнение 13</item>
-    </string-array>
-
+    <string name="finish_workout">Окончание тренировки</string>
+    <string name="finish_workout_question">Закончить тренировку?</string>
 </resources>

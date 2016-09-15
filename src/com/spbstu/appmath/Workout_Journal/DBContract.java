@@ -48,4 +48,10 @@ public class DBContract {
         public static final String COLUMN_NAME = "name";
         public static final String COLUMN_DATE = "date";
     }
+
+    /* help table */
+    public static abstract class Help implements BaseColumns {
+        public static final String TABLE = "help";
+        public static final String COLUMN_HELP_TEXT = "help_text";
+    }
 }

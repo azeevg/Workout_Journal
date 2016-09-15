@@ -267,4 +267,13 @@ public class DBHelper {
         }
     }
 
+    public String GetHelp() {
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_PATH_NAME, null, SQLiteDatabase.OPEN_READONLY);
+        Cursor res = db.query(DBContract.Help.TABLE, null, null, null, null, null, null);
+        res.moveToFirst();
+        String help = res.getString(res.getColumnIndex(DBContract.Help.COLUMN_HELP_TEXT));
+        res.close();
+        return help;
+    }
+
 }
