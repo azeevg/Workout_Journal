@@ -6,14 +6,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.*;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -23,7 +19,7 @@ import java.util.List;
  * Slider with a list of sets of an exercise which user planned to do and
  * with fields for inserting user's results.
  */
-public class ActiveTrainingActivity extends FragmentActivity {
+public class ActiveWorkoutActivity extends FragmentActivity {
 
     public static final String SETS_DONE = "setsDone";
 
@@ -59,7 +55,7 @@ public class ActiveTrainingActivity extends FragmentActivity {
         setContentView(R.layout.workout_pager);
 
         groupedSetsPlanned = (List<List<Set>>)
-                getIntent().getExtras().getSerializable(TrainingPreviewActivity.SETS_PLANNED);
+                getIntent().getExtras().getSerializable(WorkoutPreviewActivity.SETS_PLANNED);
         gropedSetsDone = new ArrayList<>();
         numPages = groupedSetsPlanned.size();
 
@@ -132,7 +128,7 @@ public class ActiveTrainingActivity extends FragmentActivity {
     public void finishTraining(View view) {
         onPageChange(mPager.getCurrentItem());
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(ActiveTrainingActivity.this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(ActiveWorkoutActivity.this);
         final LayoutInflater inflater = getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.dialog_finish_training, null);
 

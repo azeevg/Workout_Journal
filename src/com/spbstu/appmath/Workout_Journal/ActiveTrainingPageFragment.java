@@ -1,8 +1,5 @@
 package com.spbstu.appmath.Workout_Journal;
 
-import android.content.Context;
-import android.content.Intent;
-import android.media.Image;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -58,7 +55,7 @@ public class ActiveTrainingPageFragment extends Fragment {
     private void displaySets(ViewGroup rootView) {
         final ListView listView = (ListView) rootView.findViewById(R.id.exercisesList);
         ArrayAdapter<Set> adapter =
-                new ActiveTrainingPageAdapter(getContext(), R.layout.workout_list_item, sets, listView);
+                new ActiveWorkoutPageAdapter(getContext(), R.layout.workout_list_item, sets, listView);
         listView.setAdapter(adapter);
     }
 

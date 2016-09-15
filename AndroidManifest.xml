@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".TrainingCreatingActivity"
+        <activity android:name=".WorkoutCreatingActivity"
                   android:theme="@android:style/Theme.NoTitleBar">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
@@ -31,7 +31,7 @@
                     android:value=".MainActivity"/>
         </activity>
 
-        <activity android:name=".HistoryTrainingActivity"
+        <activity android:name=".HistoryWorkoutActivity"
                   android:theme="@android:style/Theme.NoTitleBar">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
@@ -42,7 +42,7 @@
                   android:theme="@android:style/Theme.NoTitleBar">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".TrainingCreatingActivity"/>
+                    android:value=".WorkoutCreatingActivity"/>
         </activity>
 
         <activity android:name=".ExerciseInfoActivity"
@@ -66,7 +66,7 @@
                     android:value=".MainActivity"/>
         </activity>
 
-        <activity android:name=".TrainingPreviewActivity"
+        <activity android:name=".WorkoutPreviewActivity"
                   android:theme="@android:style/Theme.NoTitleBar">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
@@ -74,11 +74,11 @@
         </activity>
 
 
-        <activity android:name=".ActiveTrainingActivity"
+        <activity android:name=".ActiveWorkoutActivity"
                   android:theme="@android:style/Theme.NoTitleBar">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".TrainingPreviewActivity"/>
+                    android:value=".WorkoutPreviewActivity"/>
         </activity>
 
     </application>

@@ -13,7 +13,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 /**
  * Activity with list of done sets grouped in sublists by their exercises
  */
-public class HistoryTrainingActivity extends Activity {
+public class HistoryWorkoutActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +26,7 @@ public class HistoryTrainingActivity extends Activity {
 
         final ExpandableListView listView = (ExpandableListView) findViewById(R.id.historyExpandableListView);
         listView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
-        listView.setAdapter(new TrainingListAdapter(this, groupedSets, listView, false));
+        listView.setAdapter(new WorkoutListAdapter(this, groupedSets, listView, false));
     }
 
     private List<List<Set>> getGroupedSets(final List<Set> sets) {

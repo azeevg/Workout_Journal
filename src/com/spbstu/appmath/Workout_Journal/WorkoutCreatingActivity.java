@@ -7,14 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrainingCreatingActivity extends Activity {
+public class WorkoutCreatingActivity extends Activity {
 
     private List<List<Set>> exercises = new ArrayList<>();
-    private TrainingListAdapter adapter;
+    private WorkoutListAdapter adapter;
 
     public static final String TRAINING = "trainingResult";
     public static final int maxExercisesAmount = 20;
@@ -30,7 +29,7 @@ public class TrainingCreatingActivity extends Activity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Intent intent = new Intent(TrainingCreatingActivity.this,
+                final Intent intent = new Intent(WorkoutCreatingActivity.this,
                         ExerciseChoosingActivity.class);
                 startActivityForResult(intent, 1);
 
@@ -47,10 +46,10 @@ public class TrainingCreatingActivity extends Activity {
             @Override
             public void onClick(View v) {
                 String trainingName =  getIntent().getStringExtra(MainActivity.TRAINING_NAME);
-                DBHelper db = new DBHelper(TrainingCreatingActivity.this);
-                Training training = db.writePlannedTrainingAndSets(trainingName, exercises);
+                DBHelper db = new DBHelper(WorkoutCreatingActivity.this);
+                Workout workout = db.writePlannedWorkoutAndSets(trainingName, exercises);
                 Intent intent = new Intent();
-                intent.putExtra(TRAINING, training);
+                intent.putExtra(TRAINING, workout);
                 setResult(RESULT_OK, intent);
                 finish();
             }
@@ -60,7 +59,7 @@ public class TrainingCreatingActivity extends Activity {
     private void displayExpandableList() {
         final ExpandableListView listView = (ExpandableListView) findViewById(R.id.workoutExpandableListView);
         listView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
-        adapter = new TrainingListAdapter(this, exercises, listView, true);
+        adapter = new WorkoutListAdapter(this, exercises, listView, true);
         listView.setAdapter(adapter);
     }
 

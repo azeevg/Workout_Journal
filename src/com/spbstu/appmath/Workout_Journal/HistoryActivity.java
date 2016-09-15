@@ -7,10 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -28,7 +25,7 @@ public class HistoryActivity extends Activity {
 
     private void displayHistoryTrainings() {
         DBHelper db = new DBHelper(this);
-        final List<Training> historyTrains = db.getAllDoneTrainings();
+        final List<Workout> historyTrains = db.getAllDoneWorkouts();
         ListView listView = (ListView) findViewById(R.id.historyListView);
 
         listView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
@@ -36,7 +33,7 @@ public class HistoryActivity extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(HistoryActivity.this, HistoryTrainingActivity.class);
+                Intent intent = new Intent(HistoryActivity.this, HistoryWorkoutActivity.class);
                 intent.putExtra(MainActivity.TRAINING_ID, historyTrains.get(position).getId());
                 startActivity(intent);
             }

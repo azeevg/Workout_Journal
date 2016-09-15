@@ -6,11 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class TrainingListAdapter extends BaseExpandableListAdapter {
+public class WorkoutListAdapter extends BaseExpandableListAdapter {
 
     private final Context context;
     private final List<List<Set>> groups;
@@ -18,13 +17,13 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
     private final boolean isRemovable;
     private List<Exercise> exercises;
 
-    public TrainingListAdapter(final Context context, final List<List<Set>> groups,
-                               final ExpandableListView listView, final boolean isRemovable) {
+    public WorkoutListAdapter(final Context context, final List<List<Set>> groups,
+                              final ExpandableListView listView, final boolean isRemovable) {
         this.context = context;
         this.groups = groups;
         this.listView = listView;
         this.isRemovable = isRemovable;
-        this.exercises = TrainingPreviewActivity.getExerciseList(groups);
+        this.exercises = WorkoutPreviewActivity.getExerciseList(groups);
     }
 
     @Override
@@ -65,7 +64,7 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
     @Override
     public View getGroupView(final int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         final Exercise.ViewHolder holder;
-        exercises = TrainingPreviewActivity.getExerciseList(groups);
+        exercises = WorkoutPreviewActivity.getExerciseList(groups);
 
         if (convertView == null) {
             final LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -164,7 +163,7 @@ public class TrainingListAdapter extends BaseExpandableListAdapter {
         deleteButton.setVisibility(View.INVISIBLE);
         if (groups.size() > 0)
             endButton.setVisibility(View.VISIBLE);
-        if (groups.size() >= TrainingCreatingActivity.maxExercisesAmount)
+        if (groups.size() >= WorkoutCreatingActivity.maxExercisesAmount)
             addButton.setVisibility(View.INVISIBLE);
         else
             addButton.setVisibility(View.VISIBLE);

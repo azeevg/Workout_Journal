@@ -13,8 +13,6 @@ import java.util.List;
 
 public class ExerciseChoosingActivity extends Activity {
 
-    private String chosenExerciseName;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

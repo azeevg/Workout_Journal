@@ -14,7 +14,7 @@ import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 
-public class TrainingPreviewActivity extends Activity {
+public class WorkoutPreviewActivity extends Activity {
 
     public static final String SETS_PLANNED = "setsPlanned";
 
@@ -33,7 +33,7 @@ public class TrainingPreviewActivity extends Activity {
             startButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    final Intent intent = new Intent(TrainingPreviewActivity.this, ActiveTrainingActivity.class);
+                    final Intent intent = new Intent(WorkoutPreviewActivity.this, ActiveWorkoutActivity.class);
                     intent.putExtra(SETS_PLANNED, (Serializable) groupedSets);
                     startActivityForResult(intent, 1);
                 }
@@ -46,7 +46,7 @@ public class TrainingPreviewActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         List<List<Set>> groupedSetsDone =
-                (List<List<Set>>) data.getSerializableExtra(ActiveTrainingActivity.SETS_DONE);
+                (List<List<Set>>) data.getSerializableExtra(ActiveWorkoutActivity.SETS_DONE);
 
         String trainingName = getIntent().getStringExtra(MainActivity.TRAINING_NAME);
 
@@ -55,7 +55,7 @@ public class TrainingPreviewActivity extends Activity {
         String date = df.format(c.getTime());
 
         DBHelper db = new DBHelper(this);
-        db.writeDoneTrainingAndSets(trainingName, date, groupedSetsDone);
+        db.writeDoneWorkoutAndSets(trainingName, date, groupedSetsDone);
 
         Intent intent = new Intent();
         setResult(RESULT_OK, intent);
@@ -76,7 +76,7 @@ public class TrainingPreviewActivity extends Activity {
 
         final ExpandableListView listView = (ExpandableListView) findViewById(R.id.previewExpandableListView);
         listView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
-        listView.setAdapter(new TrainingListAdapter(this, groupedSets, listView, false));
+        listView.setAdapter(new WorkoutListAdapter(this, groupedSets, listView, false));
 
         return groupedSets;
     }

@@ -1,7 +1,5 @@
 package com.spbstu.appmath.Workout_Journal;
 
-
-import android.app.AlertDialog;
 import android.content.Context;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -15,9 +13,8 @@ import android.widget.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.spbstu.appmath.Workout_Journal.Set.*;
 
-public class ActiveTrainingPageAdapter extends ArrayAdapter<Set> {
+public class ActiveWorkoutPageAdapter extends ArrayAdapter<Set> {
 
     private final static int MAX_SETS_AMOUNT = 20;
 
@@ -25,8 +22,8 @@ public class ActiveTrainingPageAdapter extends ArrayAdapter<Set> {
     private final List<Set> setsPlanned = new ArrayList<>();
     private final ListView listView;
 
-    public ActiveTrainingPageAdapter(Context context, int resource, List<Set> sets,
-                                     final ListView listView) {
+    public ActiveWorkoutPageAdapter(Context context, int resource, List<Set> sets,
+                                    final ListView listView) {
         super(context, resource, sets);
         this.sets = sets;
         this.setsPlanned.addAll(sets);

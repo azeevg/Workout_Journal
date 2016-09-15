@@ -9,30 +9,30 @@ import android.widget.*;
 
 import java.util.List;
 
-public class MainListAdapter extends ArrayAdapter<Training> {
+public class MainListAdapter extends ArrayAdapter<Workout> {
 
-    final private List<Training> trainings;
+    final private List<Workout> workouts;
     private final ListView listView;
     private final DBHelper db;
 
-    MainListAdapter(Context context, int resource, List<Training> trains,
+    MainListAdapter(Context context, int resource, List<Workout> trains,
                     final ListView listView, final DBHelper db) {
         super(context, resource, trains);
-        this.trainings = trains;
+        this.workouts = trains;
         this.listView = listView;
         this.db = db;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final Training.ViewHolder holder;
+        final Workout.ViewHolder holder;
         Log.v("ConvertView", String.valueOf(position));
 
         if (convertView == null) {
             LayoutInflater vi = (LayoutInflater) super.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = vi.inflate(R.layout.main_list_item, null);
 
-            holder = new Training().getViewHolder((CheckBox) convertView.findViewById(R.id.checkBox),
+            holder = new Workout().getViewHolder((CheckBox) convertView.findViewById(R.id.checkBox),
                     (TextView) convertView.findViewById(R.id.listItem));
 
             convertView.setTag(holder);
@@ -43,8 +43,8 @@ public class MainListAdapter extends ArrayAdapter<Training> {
                 public void onClick(View v) {
                     CheckBox cb = (CheckBox) v;
                     cb.setChecked(cb.isChecked());
-                    final Training training = (Training) cb.getTag();
-                    training.setChecked(cb.isChecked());
+                    final Workout workout = (Workout) cb.getTag();
+                    workout.setChecked(cb.isChecked());
 
                     final ImageButton deleteButton =
                             (ImageButton) finalConvertView.getRootView().findViewById(R.id.button_delete);
@@ -55,9 +55,9 @@ public class MainListAdapter extends ArrayAdapter<Training> {
                     deleteButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            for (Training t : trainings) {
-                                if (t.isChecked() && db.deletePlannedTraining(t)) {
-                                    trainings.remove(t);
+                            for (Workout t : workouts) {
+                                if (t.isChecked() && db.deletePlannedWorkout(t)) {
+                                    workouts.remove(t);
                                     notifyDataSetChanged();
                                 }
                             }
@@ -67,23 +67,23 @@ public class MainListAdapter extends ArrayAdapter<Training> {
                 }
             });
         } else {
-            holder = (Training.ViewHolder) convertView.getTag();
+            holder = (Workout.ViewHolder) convertView.getTag();
         }
 
-        Training training = trainings.get(position);
-        holder.getName().setText(training.getName());
-        holder.getCheckBox().setChecked(training.isChecked());
-        holder.getCheckBox().setTag(training);
+        Workout workout = workouts.get(position);
+        holder.getName().setText(workout.getName());
+        holder.getCheckBox().setChecked(workout.isChecked());
+        holder.getCheckBox().setTag(workout);
 
         return convertView;
     }
 
     private void setButtonsVisibility(final ImageButton deleteButton, final ImageButton addButton) {
-        if (trainings.size() >= MainActivity.maxTrainingsAmount)
+        if (workouts.size() >= MainActivity.maxTrainingsAmount)
             addButton.setVisibility(View.INVISIBLE);
         else
             addButton.setVisibility(View.VISIBLE);
-        for (Training t : trainings) {
+        for (Workout t : workouts) {
             if (t.isChecked()) {
                 deleteButton.setVisibility(View.VISIBLE);
                 return;

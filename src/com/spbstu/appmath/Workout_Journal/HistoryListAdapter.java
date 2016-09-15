@@ -9,32 +9,32 @@ import android.widget.*;
 
 import java.util.List;
 
-public class HistoryListAdapter extends ArrayAdapter<Training> {
+public class HistoryListAdapter extends ArrayAdapter<Workout> {
 
-    final private List<Training> trainings;
+    final private List<Workout> workouts;
     private final ListView listView;
     private final DBHelper db;
 
-    HistoryListAdapter(Context context, int resource, List<Training> trains,
+    HistoryListAdapter(Context context, int resource, List<Workout> trains,
                     final ListView listView, final DBHelper db) {
         super(context, resource, trains);
-//        this.trainings = new CopyOnWriteArrayList<>();
-//        this.trainings.addAll(trains);
-        this.trainings = trains;
+//        this.workouts = new CopyOnWriteArrayList<>();
+//        this.workouts.addAll(trains);
+        this.workouts = trains;
         this.listView = listView;
         this.db = db;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final Training.ViewHolder holder;
+        final Workout.ViewHolder holder;
         Log.v("ConvertView", String.valueOf(position));
 
         if (convertView == null) {
             LayoutInflater vi = (LayoutInflater) super.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = vi.inflate(R.layout.history_list_item, null);
 
-            holder = new Training().getViewHolder((TextView) convertView.findViewById(R.id.historyItemName),
+            holder = new Workout().getViewHolder((TextView) convertView.findViewById(R.id.historyItemName),
                     (TextView) convertView.findViewById(R.id.historyItemDate),
                     (CheckBox) convertView.findViewById(R.id.historyCheckBox));
 
@@ -46,17 +46,17 @@ public class HistoryListAdapter extends ArrayAdapter<Training> {
                 public void onClick(View v) {
                     CheckBox cb = (CheckBox) v;
                     cb.setChecked(cb.isChecked());
-                    final Training training = (Training) cb.getTag();
-                    training.setChecked(cb.isChecked());
+                    final Workout workout = (Workout) cb.getTag();
+                    workout.setChecked(cb.isChecked());
 
                     final ImageButton deleteButton = (ImageButton) finalConvertView.getRootView().findViewById(R.id.button_delete);
                     deleteButton.setVisibility(View.VISIBLE);
                     deleteButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            for (Training t : trainings) {
-                                if (t.isChecked() && db.deleteDoneTraining(t)) {
-                                    trainings.remove(t);
+                            for (Workout t : workouts) {
+                                if (t.isChecked() && db.deleteDoneWorkout(t)) {
+                                    workouts.remove(t);
                                     notifyDataSetChanged();
                                 }
                             }
@@ -72,20 +72,20 @@ public class HistoryListAdapter extends ArrayAdapter<Training> {
                 }
             });
         } else {
-            holder = (Training.ViewHolder) convertView.getTag();
+            holder = (Workout.ViewHolder) convertView.getTag();
         }
 
-        Training training = trainings.get(position);
-        holder.getName().setText(training.getName());
-        holder.getDate().setText(training.getDate());
-        holder.getCheckBox().setChecked(training.isChecked());
-        holder.getCheckBox().setTag(training);
+        Workout workout = workouts.get(position);
+        holder.getName().setText(workout.getName());
+        holder.getDate().setText(workout.getDate());
+        holder.getCheckBox().setChecked(workout.isChecked());
+        holder.getCheckBox().setTag(workout);
 
         return convertView;
     }
 
     private void setButtonsVisibility(final ImageButton deleteButton) {
-        for (Training t : trainings) {
+        for (Workout t : workouts) {
             if (t.isChecked()) {
                 return;
             }

@@ -26,7 +26,7 @@ public class MainActivity extends Activity {
     public static final int maxTrainingsAmount = 20;
 
     DBHelper db;
-    List<Training> plannedTrains;
+    List<Workout> plannedWorkouts;
     MainListAdapter adapter;
 
     @Override
@@ -103,31 +103,31 @@ public class MainActivity extends Activity {
     }
 
     private void displayPlannedTrainings() {
-        plannedTrains = db.getAllPlannedTrainings();
+        plannedWorkouts = db.getAllPlannedWorkouts();
         ListView listView = (ListView) findViewById(R.id.trainList);
-        adapter = new MainListAdapter(this, R.layout.main_list_item, plannedTrains, listView, db);
+        adapter = new MainListAdapter(this, R.layout.main_list_item, plannedWorkouts, listView, db);
 
         listView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                final Intent intent = new Intent(getApplicationContext(), TrainingPreviewActivity.class);
-                intent.putExtra(TRAINING_NAME, plannedTrains.get(position).getName());
-                intent.putExtra(TRAINING_ID, plannedTrains.get(position).getId());
+                final Intent intent = new Intent(getApplicationContext(), WorkoutPreviewActivity.class);
+                intent.putExtra(TRAINING_NAME, plannedWorkouts.get(position).getName());
+                intent.putExtra(TRAINING_ID, plannedWorkouts.get(position).getId());
                 startActivityForResult(intent, TRAINING_PREVIEW);
             }
         });
 
         ImageButton addButton = (ImageButton) findViewById(R.id.button_add);
-        if (plannedTrains.size() >= maxTrainingsAmount)
+        if (plannedWorkouts.size() >= maxTrainingsAmount)
             addButton.setVisibility(View.INVISIBLE);
         else
             addButton.setVisibility(View.VISIBLE);
     }
 
     private void createNewTraining(final View view) {
-        final Intent intent = new Intent(this, TrainingCreatingActivity.class);
+        final Intent intent = new Intent(this, WorkoutCreatingActivity.class);
         final EditText editText = (EditText) view.findViewById(R.id.editName);
         intent.putExtra(TRAINING_NAME, editText.getText().toString());
         startActivityForResult(intent, TRAINING_CREATING);
@@ -137,10 +137,10 @@ public class MainActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == TRAINING_CREATING) {
             if (resultCode == RESULT_OK) {
-                Training training = (Training) data.getExtras().getSerializable(TrainingCreatingActivity.TRAINING);
-                plannedTrains.add(training);
+                Workout workout = (Workout) data.getExtras().getSerializable(WorkoutCreatingActivity.TRAINING);
+                plannedWorkouts.add(workout);
                 ImageButton addButton = (ImageButton) findViewById(R.id.button_add);
-                if (plannedTrains.size() >= maxTrainingsAmount)
+                if (plannedWorkouts.size() >= maxTrainingsAmount)
                     addButton.setVisibility(View.INVISIBLE);
                 adapter.notifyDataSetChanged();
                 Toast.makeText(getApplicationContext(), "Тренировка создана", Toast.LENGTH_SHORT).show();

@@ -5,31 +5,31 @@ import android.widget.TextView;
 
 import java.io.Serializable;
 
-public class Training implements Serializable {
+public class Workout implements Serializable {
     private final String name;
     private final String date;
     private boolean checked;
     private final int id;
 
-    public Training() {
+    public Workout() {
         name = null;
         date = null;
         id = 0;
     }
 
-    public Training(final int id, final String name) {
+    public Workout(final int id, final String name) {
         this.id = id;
         this.name = name;
         this.date = null;
     }
 
-    public Training(final int id, final String name, final String date) {
+    public Workout(final int id, final String name, final String date) {
         this.id = id;
         this.name = name;
         this.date = date;
     }
 
-    public Training(final int id, final String name, final String date, final boolean checked) {
+    public Workout(final int id, final String name, final String date, final boolean checked) {
         this.id = id;
         this.name = name;
         this.date = date;

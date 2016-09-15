@@ -36,7 +36,7 @@
     <string name="finish_training_question">Закончить тренировку?</string>
 
 
-    <string-array name="trainings">
+    <string-array name="workouts">
         <item>Тренировка 1</item>
         <item>Тренировка 2</item>
         <item>Тренировка 3</item>

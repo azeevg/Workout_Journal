@@ -65,8 +65,8 @@ public class DBHelper {
         input.close();
     }
 
-    public List<Training> getAllPlannedTrainings() {
-        final List<Training> trainings = new CopyOnWriteArrayList<>();
+    public List<Workout> getAllPlannedWorkouts() {
+        final List<Workout> workouts = new CopyOnWriteArrayList<>();
         SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_PATH_NAME, null, SQLiteDatabase.OPEN_READONLY);
         Cursor res = db.query(DBContract.WorkoutsPlan.TABLE,
                 new String[]{DBContract.WorkoutsPlan.COLUMN_ID, DBContract.WorkoutsPlan.COLUMN_NAME},
@@ -75,15 +75,15 @@ public class DBHelper {
         while(!res.isAfterLast()) {
             String name = res.getString(res.getColumnIndex(DBContract.WorkoutsPlan.COLUMN_NAME));
             int id = res.getInt(res.getColumnIndex(DBContract.WorkoutsPlan.COLUMN_ID));
-            trainings.add(new Training(id, name));
+            workouts.add(new Workout(id, name));
             res.moveToNext();
         }
         res.close();
-        return trainings;
+        return workouts;
     }
 
-    public List<Training> getAllDoneTrainings() {
-        final List<Training> trainings = new CopyOnWriteArrayList<>();
+    public List<Workout> getAllDoneWorkouts() {
+        final List<Workout> workouts = new CopyOnWriteArrayList<>();
         SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_PATH_NAME, null, SQLiteDatabase.OPEN_READONLY);
         Cursor res = db.query(DBContract.WorkoutsDone.TABLE,
                 new String[]{DBContract.WorkoutsDone.COLUMN_ID, DBContract.WorkoutsDone.COLUMN_NAME,
@@ -94,20 +94,20 @@ public class DBHelper {
             String name = res.getString(res.getColumnIndex(DBContract.WorkoutsDone.COLUMN_NAME));
             String date = res.getString(res.getColumnIndex(DBContract.WorkoutsDone.COLUMN_DATE));
             int id = res.getInt(res.getColumnIndex(DBContract.WorkoutsDone.COLUMN_ID));
-            trainings.add(new Training(id, name, date));
+            workouts.add(new Workout(id, name, date));
             res.moveToNext();
         }
         res.close();
-        return trainings;
+        return workouts;
     }
 
-    public boolean deletePlannedTraining(final Training training) {
+    public boolean deletePlannedWorkout(final Workout workout) {
         SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_PATH_NAME, null, SQLiteDatabase.OPEN_READWRITE);
-        if (training.getDate() == null) {
+        if (workout.getDate() == null) {
             db.delete(DBContract.WorkoutsPlan.TABLE,
-                    DBContract.WorkoutsPlan.COLUMN_ID + " = '" + training.getId() + "'", null);
+                    DBContract.WorkoutsPlan.COLUMN_ID + " = '" + workout.getId() + "'", null);
             db.delete(DBContract.SetsPlan.TABLE,
-                    DBContract.SetsPlan.COLUMN_WORKOUT_ID + " = '" + training.getId() + "'", null);
+                    DBContract.SetsPlan.COLUMN_WORKOUT_ID + " = '" + workout.getId() + "'", null);
             db.close();
             return true;
         }
@@ -115,14 +115,14 @@ public class DBHelper {
         return false;
     }
 
-    public boolean deleteDoneTraining(final Training training) {
+    public boolean deleteDoneWorkout(final Workout workout) {
         SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_PATH_NAME, null, SQLiteDatabase.OPEN_READWRITE);
-        if (training.getDate() != null) {
+        if (workout.getDate() != null) {
             db.delete(DBContract.WorkoutsDone.TABLE,
-                    DBContract.WorkoutsDone.COLUMN_NAME + " = '" + training.getName() + "' AND " +
-                    DBContract.WorkoutsDone.COLUMN_DATE + " = '" + training.getDate() + "'", null);
+                    DBContract.WorkoutsDone.COLUMN_NAME + " = '" + workout.getName() + "' AND " +
+                    DBContract.WorkoutsDone.COLUMN_DATE + " = '" + workout.getDate() + "'", null);
             db.delete(DBContract.SetsDone.TABLE,
-                    DBContract.SetsDone.COLUMN_WORKOUT_ID + " = '" + training.getId() + "'", null);
+                    DBContract.SetsDone.COLUMN_WORKOUT_ID + " = '" + workout.getId() + "'", null);
             db.close();
             return true;
         }
@@ -214,14 +214,14 @@ public class DBHelper {
     }
 
 
-    public Training writePlannedTrainingAndSets(String trainingName, List<List<Set>> sets) {
+    public Workout writePlannedWorkoutAndSets(String trainingName, List<List<Set>> sets) {
         SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_PATH_NAME, null, SQLiteDatabase.OPEN_READWRITE);
 
-        // training
+        // workout
         ContentValues newTraining = new ContentValues();
         newTraining.put(DBContract.WorkoutsPlan.COLUMN_NAME, trainingName);
         int workoutId = (int)db.insert(DBContract.WorkoutsPlan.TABLE, null, newTraining);
-        Training training = new Training(workoutId, trainingName);
+        Workout workout = new Workout(workoutId, trainingName);
 
         // sets
         for (List<Set> listSet : sets) {
@@ -243,11 +243,11 @@ public class DBHelper {
             }
         }
 
-        return training;
+        return workout;
     }
 
 
-    public void writeDoneTrainingAndSets(String trainingName, String date, List<List<Set>> sets) {
+    public void writeDoneWorkoutAndSets(String trainingName, String date, List<List<Set>> sets) {
         SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_PATH_NAME, null, SQLiteDatabase.OPEN_READWRITE);
 
         // training
