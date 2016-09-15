@@ -25,10 +25,13 @@ public class ExerciseChoosingActivity extends Activity {
 
         listView.setAdapter(new ExerciseListAdapter(this, exercises, listView));
         listView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
-        listView.setOnItemClickListener((parent, view, position, id) -> {
-            final Intent intent = new Intent(ExerciseChoosingActivity.this, SetsCreatingActivity.class);
-            intent.putExtra("exercise", exercises.get(position));
-            startActivityForResult(intent, 1);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                final Intent intent = new Intent(ExerciseChoosingActivity.this, SetsCreatingActivity.class);
+                intent.putExtra("exercise", exercises.get(position));
+                startActivityForResult(intent, 1);
+            }
         });
     }
 
