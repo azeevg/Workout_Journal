@@ -85,8 +85,7 @@ public class WorkoutListAdapter extends BaseExpandableListAdapter {
                 holder.getCheckBox().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        final CheckBox cb = (CheckBox) v;
-                        cb.setChecked(cb.isChecked());
+                        CheckBox cb = (CheckBox) v;
                         final Exercise exercise = groups.get(groupPosition).get(0).getExercise();
                         exercise.setChecked(cb.isChecked());
 
@@ -102,12 +101,18 @@ public class WorkoutListAdapter extends BaseExpandableListAdapter {
                         deleteButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+                                //List<Exercise> exercisesForRemove = new ArrayList<Exercise>();
                                 Iterator<Exercise> i = exercises.iterator();
                                 while(i.hasNext()) {
                                     Exercise e = i.next();
-                                    groups.remove(exercises.indexOf(e));
-                                    i.remove();
+                                    if (e.isChecked()) {
+                                        groups.remove(exercises.indexOf(e));
+                                        i.remove();
+                                    }
                                 }
+                                /*for (Exercise e : exercisesForRemove) {
+                                    exercises.remove(e);
+                                }*/
                                 notifyDataSetChanged();
                                 setButtonsVisibility(deleteButton, endButton, addButton);
                             }
@@ -119,7 +124,11 @@ public class WorkoutListAdapter extends BaseExpandableListAdapter {
             holder = (Exercise.ViewHolder) convertView.getTag();
         }
 
-        holder.getName().setText(groups.get(groupPosition).get(0).getExercise().getName());
+        Exercise e = groups.get(groupPosition).get(0).getExercise();
+        holder.getName().setText(e.getName());
+        if (isRemovable) {
+            holder.getCheckBox().setChecked(e.isChecked());
+        }
 
         return convertView;
     }

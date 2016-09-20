@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SetsCreatingListAdapter extends ArrayAdapter<Set> {
@@ -38,7 +39,6 @@ public class SetsCreatingListAdapter extends ArrayAdapter<Set> {
 
                 public void onClick(View v) {
                     CheckBox cb = (CheckBox) v;
-                    cb.setChecked(cb.isChecked());
                     final Set set = sets.get(position);
                     set.setChecked(cb.isChecked());
 
@@ -54,10 +54,14 @@ public class SetsCreatingListAdapter extends ArrayAdapter<Set> {
                     deleteButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            List<Set> setsForRemove = new ArrayList<Set>();
                             for (Set set : sets) {
                                 if (set.isChecked()) {
-                                    sets.remove(set);
+                                    setsForRemove.add(set);
                                 }
+                            }
+                            for (Set set : setsForRemove) {
+                                sets.remove(set);
                             }
                             notifyDataSetChanged();
                             setButtonsVisibility(deleteButton, endButton, addButton);
